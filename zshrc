@@ -11,6 +11,7 @@ export PATH=${PATH}:/usr/local/mysql/bin:/usr/local/git/bin:/opt/php/bin
 source ~/rcfiles/colors          # load color vars
 source ~/rcfiles/config          # load base config
 source ~/rcfiles/aliases         # load aliases 
+source ~/rcfiles/my_aliases      # load mysql db aliases (private with passwords)
 source ~/rcfiles/zsh_options     # load zsh options
 source ~/rcfiles/sh_functions    # load sh functions
 
