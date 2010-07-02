@@ -11,11 +11,10 @@ alias lt='ls -lth'   #long list,sorted by date,show type,human readable
 alias lsd='ls -ld *(-/DN)'                                                                    
 
 ##### cd, because typing the backslash is ALOT of work!!                                          
-alias .='cd ../'
-alias ..='cd ../../'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
-
+#alias .='cd ../'  # removed b/c .. already does 'cd ../" and b/c '.' => 'source'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
 
 ##### Screen aliases #####
 # - add a new screen , or entire session, name it, then ssh to
