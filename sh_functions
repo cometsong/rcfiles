@@ -50,4 +50,16 @@ function guom() {
 
 
 ##### MISC #####
+# chmod functions
+
+# group-writable
+function chmod-all-rw() {
+  find . -type d -exec chmod 775 {} \;
+  find . -type f -exec chmod 664 {} \;
+}
+# not group-writable
+function chmod-all-r() {
+  find . -type d -exec chmod 755 {} \;
+  find . -type f -exec chmod 644 {} \;
+}
 
