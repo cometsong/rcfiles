@@ -37,7 +37,7 @@ function gpo() {
   gp origin $current_branch
 }
 function guo() {
-  # pushes the current branch; whatever that is
+  # pulls the current branch; whatever that is
   gbranch
   gu origin $current_branch
 }
