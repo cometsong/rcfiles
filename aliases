@@ -34,7 +34,7 @@ alias htr="sudo /etc/init.d/apache2 restart"
 
 alias dmesg="sudo dmesg"
 
-alias su="su -s /bin/zsh"                                                                     
+alias su="su -s /bin/zsh"
 
 # top on Ubuntu has minimal command-line options
 # top alias below works on OsX
@@ -45,5 +45,6 @@ alias su="su -s /bin/zsh"
 alias errcode='grep -e"$1" /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Headers/MacErrors.h | more'
 
 alias e="$EDITOR"
+alias vi="gvim"
 alias h="history"
 

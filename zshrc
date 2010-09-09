@@ -7,14 +7,15 @@
 export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/libexec:${HOME}/bin
 export PATH=${PATH}:/usr/local/mysql/bin:/usr/local/git/bin:/opt/php/bin
 
-# multi-dotfile setup
-source ~/rcfiles/colors          # load color vars
-source ~/rcfiles/config          # load base config
-source ~/rcfiles/aliases         # load aliases 
-source ~/rcfiles/my_aliases      # load mysql db aliases (private with passwords)
-source ~/rcfiles/zsh_options     # load zsh options
-source ~/rcfiles/sh_functions    # load sh functions
+# Set path to rcfiles git repository
+RCPATH=~/code/rcfiles
 
+# multi-dotfile setup
+source $RCPATH/colors          # load color vars
+source $RCPATH/config          # load base config
+source $RCPATH/aliases         # load aliases 
+source $RCPATH/zsh_options     # load zsh options
+source $RCPATH/sh_functions    # load sh functions
 
 echo "Welcome to $HOSTNAME"!
 
