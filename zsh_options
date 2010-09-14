@@ -64,6 +64,14 @@ bindkey "^[[4~" end-of-line
 bindkey ' ' magic-space    # also do history expansion on space
 bindkey '^I' complete-word # complete on tab, leave expansion to _expand
 
+# ctrl-arrows#
+bindkey "\E[1;5D" backward-word #ctrl-left  ^[[1;5D ^[[1;5C ^[[1;5A ^[[1;5B
+bindkey "\E[1;5C" forward-word #ctrl-right
+bindkey "\E[1;5A" history-incremental-search-backward #ctrl-up
+bindkey "\E[1;5B" history-incremental-search-forward #ctrl-down
+#bindkey "\E[1;7f" backward-kill-word #ctrl-backspace
+
+
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 
