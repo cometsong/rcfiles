@@ -1,17 +1,18 @@
 ##### Aliases #####
 
 ##### ls, the common ones I use a lot shortened for rapid fire usage
-#alias ls='ls -G'          #I like color (on Mac OsX)                                               
+#alias ls='ls -G'          #I like color (on Mac OsX)
 alias ls='ls --color=auto' #I like color (on Ubuntu)
 alias ll='ls -lh'          #size,show type,human readable
-alias l.='ls -d .[^.]*'    #size,show type,.dotfiles only                                        
-alias ll.='ls -ld .[^.]*'  #long,size,show type,.dotfiles only                                
-alias la='ls -lAh'         #long list,show almost all,show type,human readable                      
-alias lr='ls -tRh'         #sorted by date,recursive,show type,human readable                       
-alias lt='ls -lth'         #long list,sorted by date,show type,human readable                       
-alias lsd='ls -ld *(-/DN)'                                                                    
+alias l.='ls -d .[^.]*'    #size,show type,.dotfiles only
+alias ll.='ls -ld .[^.]*'  #long,size,show type,.dotfiles only
+alias la='ls -lAh'         #long list,show almost all,show type,human readable
+alias lsa='ls -Ah'         #short list,show almost all,show type,human readable
+alias lr='ls -tRh'         #sorted by date,recursive,show type,human readable
+alias lt='ls -lth'         #long list,sorted by date,show type,human readable
+alias lsd='ls -ld *(-/DN)'
 
-##### cd, because typing the backslash is ALOT of work!!                                          
+##### cd, because typing the backslash is ALOT of work!!
 #alias .='cd ../'  # removed b/c .. already does 'cd ../" and b/c '.' => 'source'
 alias ...='cd ../../'
 alias ....='cd ../../../'
