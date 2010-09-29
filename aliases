@@ -7,9 +7,10 @@ alias ll='ls -lh'          #size,show type,human readable
 alias l.='ls -d .[^.]*'    #size,show type,.dotfiles only
 alias ll.='ls -ld .[^.]*'  #long,size,show type,.dotfiles only
 alias la='ls -lAh'         #long list,show almost all,show type,human readable
+alias lsa='ls -Ah'         #short list,show almost all,show type,human readable
 alias lr='ls -tRh'         #sorted by date,recursive,show type,human readable
 alias lt='ls -lth'         #long list,sorted by date,show type,human readable
-alias lsd='ls -ld *(-/DN)'                                                                    
+alias lsd='ls -ld *(-/DN)' #ls long, dirs only
 
 ##### cd, because typing the backslash is ALOT of work!!
 #alias .='cd ../'  # removed b/c .. already does 'cd ../" and b/c '.' => 'source'
@@ -46,5 +47,5 @@ alias e="$EDITOR"
 alias h="history"
 
 #gvim is installed on my linux... change the below as you see fit
-#if [[ $LINUX ]] { alias vi="gvim" } else { alias vi='vim' }  
+if [[ -n $LINUX ]] { alias vi="gvim" } else { alias vi='vim' }  
 
