@@ -1,12 +1,28 @@
 ##### Functions #####
 mdc() { mkdir -p "$1" && cd "$1" }
 
+##### chmod functions #####
+# group-writable
+function chmod-all-rw() {
+  find . -type d -exec chmod 775 {} \;
+  find . -type f -exec chmod 664 {} \;
+}
+# not group-writable
+function chmod-all-r() {
+  find . -type d -exec chmod 755 {} \;
+  find . -type f -exec chmod 644 {} \;
+}
+
+
 ##### Ruby/Rails/Rake ##### 
 alias rsrv="./script/server -u"
 alias rsrvp="ss -p"
 alias rcon="./script/console"
 alias rmig="rake db:migrate db:test:clone"
 alias rdbf="rake db:recreate db:fixtures:load RAILS_ENV=development"
+# setup rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
 
 ##### git ##### 
 alias g="git checkout"
@@ -48,18 +64,4 @@ function guom() {
   gu origin master
 }
 
-
-##### MISC #####
-# chmod functions
-
-# group-writable
-function chmod-all-rw() {
-  find . -type d -exec chmod 775 {} \;
-  find . -type f -exec chmod 664 {} \;
-}
-# not group-writable
-function chmod-all-r() {
-  find . -type d -exec chmod 755 {} \;
-  find . -type f -exec chmod 644 {} \;
-}
 
