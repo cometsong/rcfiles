@@ -21,13 +21,20 @@ for LName in ${lnkRCs[@]} ; do {
   };
 done
 
+#the next two if's show my love for different distribs of unix, and sed.
+  if [ `uname -s` = "Darwin" ]; then 
+    i_str="-i '' " #space after -i needed on mac
+  fi
+  if [ `uname -s` = "Linux" ];  then 
+    i_str="-i'' " #space after -i disallowed on ubuntu
+  fi
 
 # Sed the RCPATH entries in the shrc files to find all the others
 edRCs=(zshrc bash_profile profile)
 #echo "rcpath: $RCPATH."
 for fName in ${edRCs[@]} ; do {
-  echo "    Editing filepath in $fName...."
-  sed -e s\%RCPATH=.*%RCPATH=$RCPATH% -i '' $RCPATH/$fName
+    echo "    Editing filepath in $fName...."
+    sed -e s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName  # $i_str from current os, sed
   };
 done
 

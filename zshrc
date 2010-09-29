@@ -1,7 +1,7 @@
 #.zshrc
 
 # Set path to rcfiles git repository
-RCPATH=/Users/leopold/code/rcfiles
+RCPATH=/home/benjamin/code/rcfiles
 # multi-dotfile setup
 source $RCPATH/profile         # load base config
 source $RCPATH/zsh_options     # load zsh options
