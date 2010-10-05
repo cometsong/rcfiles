@@ -45,7 +45,5 @@ if [[ -n $APPLE ]] {
 
 alias e="$EDITOR"
 alias h="history"
-
-#gvim is installed on my linux... change the below as you see fit
-if [[ -n $LINUX ]] { alias vi="gvim" } else { alias vi='vim' }  
+alias vi='vim'
 

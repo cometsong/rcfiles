@@ -1,9 +1,9 @@
 #!/bin/bash
 # CONFIG list of rcfiles for ln from home dir:
-lnkRCs=(profile zshrc bash_profile vimrc vim)
+lnkRCs=(zshrc bash_profile vimrc vim)
 
 read -p "
-   This file will remove the startup files in your home dir (~) 
+   This file will REMOVE the startup files in your home dir (~) 
    and create symbolic links to the rcfiles replacements.
    Please enter the path in which the rcfiles repository is stored.
    [default is ~/code/rcfiles]:" \
@@ -15,8 +15,7 @@ for LName in ${lnkRCs[@]} ; do {
   then  rm -f $HOME/.$LName ;                      # rm ~/link
   fi
 
-  echo "    Link to $LName...."
-  echo "      $RCPATH/$LName ~/.$LName"
+  echo "    Link to $LName....   $RCPATH/$LName"
   ln -s $RCPATH/$LName $HOME/.$LName               # create new link to rcfile
   };
 done
@@ -26,14 +25,15 @@ done
     i_str="-i '' " #space after -i needed on mac
   fi
   if [ `uname -s` = "Linux" ];  then 
-    i_str="-i'' " #space after -i disallowed on ubuntu
+    i_str="-i " #quotes after -i used as extensions on ubuntu
   fi
 
 # Sed the RCPATH entries in the shrc files to find all the others
-edRCs=(zshrc bash_profile profile)
+edRCs=(zshrc bash_profile config)
 #echo "rcpath: $RCPATH."
 for fName in ${edRCs[@]} ; do {
     echo "    Editing filepath in $fName...."
+    echo "s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName"
     sed -e s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName  # $i_str from current os, sed
   };
 done

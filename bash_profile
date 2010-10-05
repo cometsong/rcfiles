@@ -1,9 +1,9 @@
 # .bash_profile
 
 # Set path to rcfiles git repository
-RCPATH=/home/benjamin/code/rcfiles
+RCPATH=/code/rcfiles
 # multi-dotfile setup
-source $RCPATH/profile          # load base profile
+source $RCPATH/config           # load base profile
 
 echo "Welcome to $HOSTNAME in bash shell"!
 
