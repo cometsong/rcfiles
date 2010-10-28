@@ -28,7 +28,7 @@ setopt HIST_ALLOW_CLOBBER
 setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY SHARE_HISTORY
 setopt ALL_EXPORT
-
+setopt RE_MATCH_PCRE # allows regexp matching
 
 # Autoload zsh modules when they are referenced
 zmodload -a zsh/stat stat
