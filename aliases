@@ -8,7 +8,8 @@ alias l.='ls -d .[^.]*'    #size,show type,.dotfiles only
 alias ll.='ls -ld .[^.]*'  #long,size,show type,.dotfiles only
 alias la='ls -lAh'         #long list,show almost all,show type,human readable
 alias lsa='ls -Ah'         #short list,show almost all,show type,human readable
-alias lr='ls -tRh'         #sorted by date,recursive,show type,human readable
+alias lr='ls -tRh'         #short list,sorted by date,recursive,show type,human readable
+alias llr='ls -lRh'       #long list,recursive,show type,human readable
 alias lt='ls -lth'         #long list,sorted by date,show type,human readable
 alias lsd='ls -ld *(-/DN)' #ls long, dirs only
 
