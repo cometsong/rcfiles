@@ -27,7 +27,6 @@ alias rdbf="rake db:recreate db:fixtures:load RAILS_ENV=development"
 ##### git ##### 
 alias g="git checkout"
 alias gchk="git checkout"
-alias s="git status"
 alias gs="git status"
 alias ga="git add ."
 alias gd="git diff"
