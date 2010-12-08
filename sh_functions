@@ -35,10 +35,11 @@ alias gamend="git commit --amend"
 alias gc="git commit -am"
 alias gf="git fetch origin"
 alias gb="git checkout -b"
-alias gbr="git branch --color"
+alias gbr="git branch --color --verbose"
 alias gp="git push --tags "
 alias gu="git pull --tags "
-alias gl="git log"
+alias gl="git log --color --decorate --source"
+alias gll="git log --color --oneline --decorate --source"
 function gfm() {
   gf $*
   gm FETCH_HEAD
