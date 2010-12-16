@@ -13,78 +13,41 @@ done
 PR_NO_COLOR="%{$terminfo[sgr0]%}"
 
 
-# setopt NOHUP
-#setopt NOTIFY
-#setopt NO_FLOW_CONTROL
-setopt APPEND_HISTORY
-# setopt AUTO_LIST		# these two should be turned off
-# setopt AUTO_REMOVE_SLASH
-# setopt AUTO_RESUME		# tries to resume command of same name
-unsetopt BG_NICE		# do NOT nice bg commands
-setopt CORRECT			# command CORRECTION
-setopt EXTENDED_HISTORY		# puts timestamps in the history
-# setopt HASH_CMDS		# turns on hashing
-setopt HIST_ALLOW_CLOBBER
-setopt HIST_REDUCE_BLANKS
-setopt INC_APPEND_HISTORY SHARE_HISTORY
-setopt ALL_EXPORT
-setopt RE_MATCH_PCRE # allows regexp matching
-
 # Autoload zsh modules when they are referenced
 zmodload -a zsh/stat stat
 zmodload -a zsh/zpty zpty
 zmodload -a zsh/zprof zprof
-zmodload -ap zsh/mapfile mapfile
+# zmodload -ap zsh/mapfile mapfile
+
+ 
+# Set/unset  shell options
+# setopt NOHUP
+# setopt NO_FLOW_CONTROL
+# setopt AUTO_REMOVE_SLASH
+# setopt HASH_CMDS		  # turns on hashing
+setopt AUTO_RESUME		  # tries to resume command of same name
+setopt CORRECT			    # command CORRECTION
+setopt CORRECTALL
+setopt ALL_EXPORT
+setopt RE_MATCH_PCRE    # allows regexp matching
+setopt AUTOCD           # cd to dir if cmd without 'cd'
+setopt EXTENDEDGLOB     # extgended globbing features
+setopt NOTIFY GLOBDOTS CDABLEVARS AUTOLIST
+setopt RCQUOTES RECEXACT
+setopt NOCLOBBER MAILWARNING LONGLISTJOBS
+setopt AUTOPUSHD PUSHDMINUS PUSHDTOHOME PUSHDSILENT
+unsetopt BG_NICE		    # do NOT nice bg commands
+unsetopt AUTOPARAMSLASH
+
 
 #Set the auto completion on
 autoload -U compinit
 compinit
- 
-#Lets set some options
-setopt correctall
-setopt autocd           # cd to dir if cmd without 'cd'
-setopt auto_resume
-setopt extendedglob     # extgended globbing features
- 
 setopt MENUCOMPLETE
-# Set/unset  shell options
-setopt   notify globdots pushdtohome cdablevars autolist
-setopt   correctall autocd recexact longlistjobs
-setopt   histignoredups pushdsilent noclobber
-setopt   autopushd pushdminus extendedglob rcquotes mailwarning
-unsetopt bgnice autoparamslash
 
-#Set some ZSH styles
+# completion styles
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
-
-
-### History ###
-setopt hist_ignore_all_dups
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
-
-bindkey "^[[3~" delete-char
-bindkey '^r' history-incremental-search-backward
-bindkey "^[[5~" up-line-or-history
-bindkey "^[[6~" down-line-or-history
-bindkey "^[[H" beginning-of-line
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[F"  end-of-line
-bindkey "^[[4~" end-of-line
-bindkey ' ' magic-space    # also do history expansion on space
-bindkey '^I' complete-word # complete on tab, leave expansion to _expand
-
-# ctrl-arrows#
-bindkey "\E[1;5D" backward-word #ctrl-left  ^[[1;5D ^[[1;5C ^[[1;5A ^[[1;5B
-bindkey "\E[1;5C" forward-word #ctrl-right
-bindkey "\E[1;5A" history-incremental-search-backward #ctrl-up
-bindkey "\E[1;5B" history-incremental-search-forward #ctrl-down
-#bindkey "\E[1;7f" backward-kill-word #ctrl-backspace
-
 
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
@@ -108,12 +71,18 @@ zstyle -e ':completion:*:approximate:*' max-errors \
     
 # insert all expansions for expand completer
 zstyle ':completion:*:expand:*' tag-order all-expansions
-#
-#NEW completion:
+
+# Host completion:
 # 1. All /etc/hosts hostnames are in autocomplete
 # 2. If you have a comment in /etc/hosts like #%foobar.domain,
 #    then foobar.domain will show up in autocomplete!
 zstyle ':completion:*' hosts $(awk '/^[^#]/ {print $2 $3" "$4" "$5}' /etc/hosts | grep -v ip6- && grep "^#%" /etc/hosts | awk -F% '{print $2}') 
+
+# command for process lists, the local web server details and host completion
+#zstyle ':completion:*:processes' command 'ps -o pid,s,nice,stime,args'
+#zstyle ':completion:*:urls' local 'www' '/var/www/htdocs' 'public_html'
+zstyle '*' hosts $hosts
+
 # formatting and messages
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:descriptions' format '%B%d%b'
@@ -128,16 +97,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
-# command for process lists, the local web server details and host completion
-#zstyle ':completion:*:processes' command 'ps -o pid,s,nice,stime,args'
-#zstyle ':completion:*:urls' local 'www' '/var/www/htdocs' 'public_html'
-zstyle '*' hosts $hosts
-
 # Filename suffixes to ignore during completion (except after rm command)
 zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' \
     '*?.old' '*?.pro'
-# the same for old style completion
-#fignore=(.o .c~ .old .pro)
 
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
@@ -150,4 +112,39 @@ zstyle ':completion:*:ssh:*' tag-order \
 zstyle ':completion:*:ssh:*' group-order \
    hosts-domain hosts-host users hosts-ipaddr
 zstyle '*' single-ignored show
+
+
+### History ###
+setopt APPEND_HISTORY
+setopt EXTENDED_HISTORY		# puts timestamps in the history
+setopt HIST_ALLOW_CLOBBER
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY SHARE_HISTORY
+setopt HISTIGNOREDUPS HIST_IGNORE_ALL_DUPS
+
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+
+bindkey "^[[3~" delete-char
+bindkey '^r' history-incremental-search-backward
+bindkey "^[[5~" up-line-or-history
+bindkey "^[[6~" down-line-or-history
+bindkey "^[[H" beginning-of-line
+bindkey "^[[1~" beginning-of-line
+bindkey "^[[F"  end-of-line
+bindkey "^[[4~" end-of-line
+bindkey ' ' magic-space    # also do history expansion on space
+bindkey '^I' complete-word # complete on tab, leave expansion to _expand
+
+
+# ctrl-arrows#
+bindkey "\E[1;5D" backward-word #ctrl-left  ^[[1;5D ^[[1;5C ^[[1;5A ^[[1;5B
+bindkey "\E[1;5C" forward-word #ctrl-right
+bindkey "\E[1;5A" history-incremental-search-backward #ctrl-up
+bindkey "\E[1;5B" history-incremental-search-forward #ctrl-down
+#bindkey "\E[1;7f" backward-kill-word #ctrl-backspace
+
 
