@@ -25,6 +25,12 @@ alias rdbf="rake db:recreate db:fixtures:load RAILS_ENV=development"
 
 
 ##### git ##### 
+if ( [[ -e "/usr/local/bin/git" ]] ) then 
+#  {if ( [[ /usr/local/bin/git --version | sed 's/[A-Za-z ]*//g'  > 1.6 ]]
+    {alias git="/usr/local/bin/git"} 
+    else {alias git="/usr/bin/git"} 
+#  }
+fi
 alias g="git checkout"
 alias gchk="git checkout"
 alias s="git status"
@@ -39,8 +45,9 @@ alias gb="git checkout -b"
 alias gbr="git branch --color --verbose"
 alias gp="git push --tags "
 alias gu="git pull --tags "
-alias gl="git log --color --decorate --source"
-alias gll="git log --color --oneline --decorate --source"
+alias gll="git log --color --decorate --source"
+alias glo="git log --color --oneline --decorate --source"
+alias gl="git log --date=short --pretty='%C(yellow reverse)%h%Creset %C(yellow)%cn%Creset %C(green)%cd%Creset %d =%m %s' "
 function gfm() {
   gf $*
   gm FETCH_HEAD
