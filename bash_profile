@@ -1,7 +1,7 @@
 # .bash_profile
 
 # Set path to rcfiles git repository
-RCPATH=/apps/rcfiles
+RCPATH=/usr/local/rcfiles
 # multi-dotfile setup
 source $RCPATH/config           # load base profile
 
