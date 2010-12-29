@@ -33,7 +33,6 @@ if ( [[ -e "/usr/local/bin/git" ]] ) then
 fi
 alias g="git checkout"
 alias gchk="git checkout"
-alias s="git status"
 alias gs="git status"
 alias ga="git add ."
 alias gd="git diff"
