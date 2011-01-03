@@ -32,7 +32,7 @@ alias scom="ssh cometsong@cometsong.net"
 alias my="mysql"
 
 ##### vnc #####
-alias vncstart="vnc4server -geometry 1100x1000 -depth 16 -desktop `uname -n`"
+alias vncstart="vnc4server -geometry 1100x850 -depth 16 -desktop `uname -n`"
 alias vncstop="vnc4server -kill :2" #followed by :1, :2
 alias vncybr='/usr/bin/xvnc4viewer YellowBrickRoad:1'
 
