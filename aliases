@@ -27,14 +27,12 @@ alias scr="screen -r"
 
 ##### ssh #####
 alias scom="ssh cometsong@cometsong.net"
-
-##### mysql #####
-alias my="mysql"
+alias sybr="ssh yellowbrickroad"
 
 ##### vnc #####
 alias vncstart="vnc4server -geometry 1100x850 -depth 16 -desktop `uname -n`"
 alias vncstop="vnc4server -kill :2" #followed by :1, :2
-alias vncybr='/usr/bin/xvnc4viewer YellowBrickRoad:1'
+alias vncybr='/usr/bin/xvnc4viewer YellowBrickRoad:2'
 
 ##### apache2 #####
 alias htc="sudo vi /etc/apache2/httpd.conf"
