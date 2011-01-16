@@ -1,0 +1,21 @@
+[user]
+	name  = Benjamin Leopold
+	email = Benjamin.Leopold@uni-muenster.de
+[alias]
+	chk   = checkout
+	cb    = checkout -b
+	br    = branch --color --verbose
+	st    = status
+	s     = status
+	unadd = reset HEAD
+	rh    = reset HEAD
+	d     = diff
+	com   = commit -m
+	p     = push --tags
+	u     = pull --tags
+	mg    = merge
+	f     = fetch
+[alias]
+	ll    = log --color --decorate --source
+	lo    = log --color --oneline --decorate --source
+	ls    = log --date=short --pretty='%C(yellow reverse)%h%Creset %C(yellow)%cn%Creset %C(green)%cd%Creset %d =%m %s'

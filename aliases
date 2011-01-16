@@ -27,22 +27,28 @@ alias scr="screen -r"
 
 ##### ssh #####
 alias scom="ssh cometsong@cometsong.net"
+alias sybr="ssh yellowbrickroad"
 
-##### mysql #####
-alias my="mysql"
+##### vnc #####
+alias vncstart="vnc4server -geometry 1100x850 -depth 16 -desktop `uname -n`"
+alias vncstop="vnc4server -kill :2" #followed by :1, :2
+alias vncybr='/usr/bin/xvnc4viewer YellowBrickRoad:2'
 
+##### apache2 #####
 alias htc="sudo vi /etc/apache2/httpd.conf"
 alias htr="sudo /etc/init.d/apache2 restart"
 
-alias dmesg="sudo dmesg"
-
-alias su="su -s /bin/zsh"
+##### perls #####
+alias cpan="sudo cpan"
 
 # Mac aliases...
 if [[ -n $APPLE ]] {
   alias top="top -n40 -ocpu -Orsize"
   alias errcode='grep -e"$1" /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Headers/MacErrors.h | more'
 }
+
+alias dmesg="sudo dmesg"
+alias su="su -s /bin/zsh"
 
 alias e="$EDITOR"
 alias h="history"

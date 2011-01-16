@@ -1,14 +1,14 @@
 #!/bin/bash
 # CONFIG list of rcfiles for ln from home dir:
-lnkRCs=(zshrc bash_profile vimrc vim)
+lnkRCs=(zshrc bash_profile vimrc vim toprc gitconfig)
 
 read -p "
    This file will REMOVE the startup files in your home dir (~) 
    and create symbolic links to the rcfiles replacements.
    Please enter the path in which the rcfiles repository is stored.
-   [default is ~/code/rcfiles]:" \
+   [default is /usr/local/rcfiles]:" \
      -r rc_path
-RCPATH=${rc_path:=$HOME/code/rcfiles} #default value assigned if none entered
+RCPATH=${rc_path:=/usr/local/rcfiles} #default value assigned if none entered
 
 for LName in ${lnkRCs[@]} ; do {
   if (test -a $HOME/.$LName || test -h $HOME/.$LName); # if file or link exists

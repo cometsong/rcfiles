@@ -25,32 +25,16 @@ alias rdbf="rake db:recreate db:fixtures:load RAILS_ENV=development"
 
 
 ##### git ##### 
-if ( [[ -e "/usr/local/bin/git" ]] ) then 
-#  {if ( [[ /usr/local/bin/git --version | sed 's/[A-Za-z ]*//g'  > 1.6 ]]
-    {alias git="/usr/local/bin/git"} 
+## Also see ~/.gitconfig ##
+
+if ( [[ -e "/usr/local/bin/git" ]] ) then {alias git="/usr/local/bin/git"} 
     else {alias git="/usr/bin/git"} 
-#  }
 fi
-alias g="git checkout"
-alias gchk="git checkout"
-alias s="git status"
-alias gs="git status"
-alias ga="git add ."
-alias gd="git diff"
-alias gm="git merge"
-alias gamend="git commit --amend"
-alias gc="git commit -am"
-alias gf="git fetch origin"
-alias gb="git checkout -b"
-alias gbr="git branch --color --verbose"
-alias gp="git push --tags "
-alias gu="git pull --tags "
-alias gll="git log --color --decorate --source"
-alias glo="git log --color --oneline --decorate --source"
-alias gl="git log --date=short --pretty='%C(yellow reverse)%h%Creset %C(yellow)%cn%Creset %C(green)%cd%Creset %d =%m %s' "
+alias g="git"
+
 function gfm() {
-  gf $*
-  gm FETCH_HEAD
+  g f $*
+  g mg FETCH_HEAD
 }
 function gbranch() {
   current_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
@@ -58,18 +42,18 @@ function gbranch() {
 function gpo() {
   # pushes the current branch; whatever that is
   gbranch
-  gp origin $current_branch
+  g p origin $current_branch
 }
 function guo() {
   # pulls the current branch; whatever that is
   gbranch
-  gu origin $current_branch
+  g u origin $current_branch
 }
 function gpom() {
-  gp origin master
+  g p origin master
 }
 function guom() {
-  gu origin master
+  g u origin master
 }
 
 
