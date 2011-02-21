@@ -20,8 +20,7 @@ alias ....='cd ../../../'
 alias .....='cd ../../../../'
 
 ##### Screen aliases #####
-# - add a new screen , or entire session, name it, then ssh to
-# the host
+# - add a new screen , or entire session
 alias sc="screen"
 alias scr="screen -r"
 
@@ -56,3 +55,5 @@ alias h="history"
 alias vi='vim'
 
 alias grep="grep --color"
+alias psx='ps xf -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=25'
+alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=25'
