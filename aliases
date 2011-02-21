@@ -55,3 +55,4 @@ alias e="$EDITOR"
 alias h="history"
 alias vi='vim'
 
+alias grep="grep --color"

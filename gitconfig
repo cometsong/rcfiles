@@ -9,13 +9,21 @@
 	s     = status
 	unadd = reset HEAD
 	rh    = reset HEAD
-	d     = diff
+  d     = diff --color
+	diff  = diff --color
+[alias]
 	com   = commit -m
 	p     = push --tags
+	pom   = push --tags origin master
 	u     = pull --tags
+	uom   = pull --tags origin master
 	mg    = merge
 	f     = fetch
 [alias]
 	ll    = log --color --decorate --source
 	lo    = log --color --oneline --decorate --source
 	ls    = log --date=short --pretty='%C(yellow reverse)%h%Creset %C(yellow)%cn%Creset %C(green)%cd%Creset %d =%m %s'
+[giggle]
+	compact-mode = false
+	main-window-maximized = false
+	main-window-geometry = 961x1020+0+25
