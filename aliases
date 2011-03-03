@@ -29,8 +29,8 @@ alias scom="ssh cometsong@cometsong.net"
 alias sybr="ssh yellowbrickroad"
 
 ##### vnc #####
-alias vncstart2="vnc4server -geometry 1430x850 -depth 16 -desktop `uname -n`2 :2"  #macbook size
-alias vncstart3='vnc4server -geometry 1500x1100 -depth 16 -desktop `uname -n`3 :3' #desktop size
+alias vncstart2='vnc4server -geometry 1500x1100 -depth 16 -desktop `uname -n`2 :2' #desktop size
+alias vncstart3="vnc4server -geometry 1430x850 -depth 16 -desktop `uname -n`3 :3"  #macbook size
 alias vncstop="vnc4server -kill" #followed by :1, :2
 
 ##### apache2 #####
