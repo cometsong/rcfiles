@@ -3,13 +3,14 @@
 ##### ls, the common ones I use a lot shortened for rapid fire usage
 if [[ -n $APPLE ]] alias ls='ls -G'           #I like color (on Mac OsX)
 if [[ -n $LINUX ]] alias ls='ls --color=auto' #I like color (on Ubuntu)
+alias l='ls'               #size,show type,human readable
 alias ll='ls -lh'          #size,show type,human readable
 alias l.='ls -d .[^.]*'    #size,show type,.dotfiles only
 alias ll.='ls -ld .[^.]*'  #long,size,show type,.dotfiles only
 alias la='ls -lAh'         #long list,show almost all,show type,human readable
 alias lsa='ls -Ah'         #short list,show almost all,show type,human readable
 alias lr='ls -tRh'         #short list,sorted by date,recursive,show type,human readable
-alias llr='ls -lRh'       #long list,recursive,show type,human readable
+alias llr='ls -lRh'        #long list,recursive,show type,human readable
 alias lt='ls -lth'         #long list,sorted by date,show type,human readable
 alias lsd='ls -ld *(-/DN)' #ls long, dirs only
 
@@ -30,7 +31,7 @@ alias sybr="ssh yellowbrickroad"
 
 ##### vnc #####
 alias vncstart2='vnc4server -geometry 1500x1100 -depth 16 -desktop `uname -n`2 :2' #desktop size
-alias vncstart3="vnc4server -geometry 1430x850 -depth 16 -desktop `uname -n`3 :3"  #macbook size
+alias vncstart3='vnc4server -geometry 1430x850 -depth 16 -desktop `uname -n`3 :3'  #macbook size
 alias vncstop="vnc4server -kill" #followed by :1, :2
 
 ##### apache2 #####
