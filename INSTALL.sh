@@ -1,6 +1,6 @@
 #!/bin/bash
 # CONFIG list of rcfiles for ln from home dir:
-lnkRCs=(zshrc bash_profile vimrc vim toprc gitconfig)
+lnkRCs=(zshrc bash_profile vimrc vim toprc gitconfig cpan)
 
 read -p "
    This file will REMOVE the startup files in your home dir (~) 
