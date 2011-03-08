@@ -2,7 +2,7 @@
 	name  = Benjamin Leopold
 	email = Benjamin.Leopold@uni-muenster.de
 [alias]
-  aa    = add .
+	aa    = add .
 	chk   = checkout
 	cb    = checkout -b
 	br    = branch --color --verbose
@@ -11,7 +11,7 @@
 	ss    = status --short
 	unadd = reset HEAD
 	rh    = reset HEAD
-  d     = diff --color
+	d     = diff --color
 	diff  = diff --color
 [alias]
 	com   = commit -m
