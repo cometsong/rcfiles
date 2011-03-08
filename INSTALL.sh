@@ -1,14 +1,24 @@
 #!/bin/bash
-# CONFIG list of rcfiles for ln from home dir:
-lnkRCs=(zshrc bash_profile vimrc vim toprc gitconfig cpan)
 
 read -p "
    This file will REMOVE the startup files in your home dir (~) 
    and create symbolic links to the rcfiles replacements.
+
+   Your default git config user.name and user.email will be set 
+   according to the values YOU HAVE SET in \"git_user.sh\"
+   
    Please enter the path in which the rcfiles repository is stored.
    [default is /usr/local/rcfiles]:" \
      -r rc_path
 RCPATH=${rc_path:=/usr/local/rcfiles} #default value assigned if none entered
+
+# CHANGE THESE VALUES in git_user.sh DEPENDING ON YOUR OS/LOCATION!!!
+#   Git Config User.Name and User.Email
+source $RCPATH/git_user.sh
+
+
+# List of rcfiles for ln from git repo dir to home dir:
+lnkRCs=(zshrc bash_profile vimrc vim toprc gitconfig cpan)
 
 for LName in ${lnkRCs[@]} ; do {
   if (test -a $HOME/.$LName || test -h $HOME/.$LName); # if file or link exists
@@ -33,7 +43,7 @@ edRCs=(zshrc bash_profile config)
 #echo "rcpath: $RCPATH."
 for fName in ${edRCs[@]} ; do {
     echo "    Editing filepath in $fName...."
-    echo "s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName"
+    #echo "s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName"
     sed -e s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName  # $i_str from current os, sed
   };
 done
