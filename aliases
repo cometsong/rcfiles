@@ -57,3 +57,4 @@ alias vi='vim'
 alias grep="grep --color"
 alias psx='ps xf -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=25'
 alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=25'
+alias date='date +"%Y-%m-%d %H:%M:%S"'
