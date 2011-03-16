@@ -1,12 +1,17 @@
 #!/bin/bash
 
 read -p "
+  ==============================================================
+  IMPORTANT!!!
    This file will REMOVE the startup files in your home dir (~) 
    and create symbolic links to the rcfiles replacements.
 
+  ==============================================================
+  ALSO!!!
    Your default git config user.name and user.email will be set 
    according to the values YOU HAVE SET in \"git_user.sh\"
    
+  ==============================================================
    Please enter the path in which the rcfiles repository is stored.
    [default is /usr/local/rcfiles]:" \
      -r rc_path
