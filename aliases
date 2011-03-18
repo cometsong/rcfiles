@@ -45,6 +45,7 @@ alias cpan="sudo cpan"
 if [[ -n $APPLE ]] {
   alias top="top -n40 -ocpu -Orsize"
   alias errcode='grep -e"$1" /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Headers/MacErrors.h | more'
+  alias macvim="open /Applications/MacVim.app"
 }
 
 alias dmesg="sudo dmesg"
