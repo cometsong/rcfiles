@@ -3,13 +3,17 @@
 	aa    = add .
 	chk   = checkout
 	cb    = checkout -b
+  f     = fetch
 	br    = branch --color --verbose
+	bra   = branch --color --abbrev
+  mgf   = merge FETCH_HEAD
 	s     = status
 	st    = status
 	ss    = status --short
 	unadd = reset HEAD
 	rh    = reset HEAD
 	d     = diff --color
+	dh    = diff --color HEAD
 	diff  = diff --color
 [alias]
 	com   = commit -m
