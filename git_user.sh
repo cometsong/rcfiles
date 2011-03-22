@@ -6,13 +6,13 @@
 
 #  for UKM unix boxes
 if [[ `uname -n` == "ToothAndNails" ]] || [[ `uname -n` == "YellowBrickRoad" ]]; then
-  GITUSERNAME="bleopold"
+  GITUSERNAME="Benjamin Leopold"
   GITEMAIL=bLeopoldNOSPAM@uni-muenster.de
 fi
 
 # for MacBook Laptop
 if [[ `uname -n` == "JuniorMint.local" ]]; then
-  GITUSERNAME="JaminOne"
+  GITUSERNAME="JaminOne JuniorMint"
   GITEMAIL=JaminWebDesignNOSPAM@gmail.com
 fi
 
