@@ -23,15 +23,15 @@ source $RCPATH/git_user.sh
 
 
 # List of rcfiles for ln from git repo dir to home dir:
-lnkRCs=(zshrc bash_profile vimrc vim toprc gitconfig cpan)
+lnkRCs=(zshrc bash_profile vimrc vim toprc gitconfig cpan perltidyrc)
 
 for LName in ${lnkRCs[@]} ; do {
   if (test -a $HOME/.$LName || test -h $HOME/.$LName); # if file or link exists
-  then  rm -f $HOME/.$LName ;                      # rm ~/link
+  then  rm -f $HOME/.$LName ;                          # rm ~/link
   fi
 
   echo "    Link to $LName....   $RCPATH/$LName"
-  ln -s $RCPATH/$LName $HOME/.$LName               # create new link to rcfile
+  ln -s $RCPATH/$LName $HOME/.$LName              # create new link to rcfile
   };
 done
 
