@@ -23,7 +23,7 @@ source $RCPATH/git_user.sh
 
 
 # List of rcfiles for ln from git repo dir to home dir:
-lnkRCs=(zshrc bash_profile vimrc vim toprc gitconfig cpan perltidyrc)
+lnkRCs=(zshrc bash_profile vimrc gvimrc vim toprc gitconfig cpan perltidyrc)
 
 for LName in ${lnkRCs[@]} ; do {
   if (test -a $HOME/.$LName || test -h $HOME/.$LName); # if file or link exists

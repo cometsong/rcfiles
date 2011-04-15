@@ -1,36 +1,39 @@
 [user]
 [alias]
-	aa    = add .
-	chk   = checkout
-	cb    = checkout -b
-  f     = fetch
-	br    = branch --color --verbose
-	bra   = branch --color --abbrev
-  mgf   = merge FETCH_HEAD
-	s     = status
-	st    = status
-	ss    = status --short
-	unadd = reset HEAD
-	rh    = reset HEAD
-	d     = diff --color
-	dh    = diff --color HEAD
-	diff  = diff --color
+    aa    = add .
+    chk   = checkout
+    cb    = checkout -b
+    f     = fetch
+    br    = branch --color --verbose
+    bra   = branch --color --abbrev
+    mgf   = merge FETCH_HEAD
+    s     = status
+    st    = status
+    ss    = status --short
+    unadd = reset HEAD
+    rh    = reset HEAD
+    d     = diff --color
+    dh    = diff --color HEAD
+    diff  = diff --color
+    cfg   = config
+    cfl   = config -l
+    sub   = submodule
 [alias]
-	com   = commit -m
-	p     = push --tags
-	pom   = push --tags origin master
-	u     = pull --tags
-	uom   = pull --tags origin master
-	mg    = merge
-	f     = fetch
+    com   = commit -m
+    p     = push --tags
+    pom   = push --tags origin master
+    u     = pull --tags
+    uom   = pull --tags origin master
+    mg    = merge
+    f     = fetch
 [alias]
-	ll    = log --color --decorate --source
-	lo    = log --color --oneline --decorate --source
-	ls    = log --date=short --pretty='%C(yellow reverse)%h%Creset %C(yellow)%cn%Creset %C(green)%cd%Creset %d =%m %s'
+    ll    = log --color --decorate --source
+    lo    = log --color --oneline --decorate --source
+    ls    = log --date=short --pretty='%C(yellow reverse)%h%Creset %C(yellow)%cn%Creset %C(green)%cd%Creset %d =%m %s'
 [giggle]
-	compact-mode = false
-	main-window-maximized = false
-	main-window-geometry = 961x1020+0+25
+    compact-mode = false
+    main-window-maximized = false
+    main-window-geometry = 961x1020+0+25
 [user]
-	name = JaminOne
-	email = jaminwebdesign@gmail.com
+    name = JaminOne
+    email = jaminwebdesign@gmail.com
