@@ -1,7 +1,3 @@
-# The CPAN.pm systemwide configuration file is /etc/perl/CPAN/Config.pm
-# This file provides defaults for users, and the values can be changed 
-# in a per-user configuration file. 
-# The user-config file is being looked for as ${HOME}/.cpan/CPAN/MyConfig.pm.
 
 $CPAN::Config = {
   'applypatch' => q[],

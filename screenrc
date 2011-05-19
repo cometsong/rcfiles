@@ -1,0 +1,6 @@
+# Default Settings for my screens
+
+activity 'Activity in window: %n'
+defmonitor on
+defscrollback 1000
+

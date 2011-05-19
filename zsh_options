@@ -44,8 +44,8 @@ setopt MAILWARNING      # Print warning message if mail file has been accessed s
 setopt RCQUOTES         # Allow the character sequence '' to signify a single quote
 
 ### Completion ###
-#autoload -U compinit
-#compinit
+autoload -U compinit
+compinit
 setopt AUTO_LIST            # Automatically list choices on an ambiguous completion.
 setopt AUTO_PARAM_SLASH     # add a trailing slash instead of a space after dirname
 unsetopt AUTO_REMOVE_SLASH  # do NOT remove trailing slash
