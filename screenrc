@@ -3,4 +3,5 @@
 activity 'Activity in window: %n'
 defmonitor on
 defscrollback 1000
+shell zsh
 
