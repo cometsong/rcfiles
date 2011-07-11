@@ -1,9 +1,9 @@
 # perlTidy! 
 -se     # errors to standard error output
 -w      # show all warnings
-#-bl     # braces on new lines
 -pt=0   # parens not tight at all
 #-bt=0   # braces not tight
+#-bl     # braces on new lines
 -sbt=0  # square brackets not tight
 -i=4    # indent = 4 spaces
 -nt     # no tabs: use n spaces per indentation level
