@@ -1,7 +1,13 @@
 # Default Settings for my screens
 
+startup_message off
 activity 'Activity in window: %n'
-defmonitor on
-defscrollback 1000
+defmonitor off
+defscrollback 2000
+deflog on
 shell zsh
+
+hardstatus alwayslastline
+hardstatus string    '%{gk}[%{G}%H%{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n:%t%?%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]'
+#hardstatus string '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}'
 
