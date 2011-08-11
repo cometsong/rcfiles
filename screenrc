@@ -15,7 +15,8 @@ defscrollback 2000                      # Set default lines of scrollback. See s
 shell zsh
 
 hardstatus alwayslastline               # Use the hardware status line. See section 17.2 Hardware Status Line. 
-hardstatus string    '%{gk}[%{G}%H%{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n:%t%?%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]'
+hardstatus string    '%{gk}[%{G}%H%{g}]%?[%{G}%h%{g}]%?[%= %{wk}%?%-W%? %{=b kR}(%{W}%n:%t%?%?%{=b kR})%{= kw}%?%+w%?%?%= %{g}][%{Y}%l%{g}]'
+#hardstatus string    '%{gk}[%{G}%H%{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n:%t%?%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]'
 #hardstatus string '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}'
 
 # F1-F12 function keys for window selection
