@@ -5,7 +5,10 @@
 #                         #
 ###########################
 
-# Base .profile Config for .rcfiles
+# Base Profile Config for .rcfiles
+
+# load RCPATH env var
+source $HOME/.rcpath_env
 
 ##### Situations #####
 function current_os {
@@ -38,15 +41,12 @@ HOSTNAME=`uname -n`
 #LANGUAGE=
 LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
-LC_CTYPE=C
 
 if [[ -n $APPLE ]] EDITOR="open /Applications/MacVim.app" # on Mac, use GUI macvim
 if [[ -n $LINUX ]] EDITOR='gvim'   # on linux, use GUI gvim
 
 export PATH=$PATH:/usr/local/bin:${HOME}/bin
 
-# Set path to rcfiles git repository
-RCPATH=/usr/local/rcfiles
 # multi-dotfile setup
 source $RCPATH/colors          # load color vars
 source $RCPATH/aliases         # load aliases 

@@ -23,7 +23,7 @@ source $RCPATH/git_user.sh
 
 
 # List of rcfiles for ln from git repo dir to home dir:
-lnkRCs=(zshrc bash_profile vimrc gvimrc vim toprc gitconfig cpan perltidyrc screenrc)
+lnkRCs=(zshrc bash_profile vimrc gvimrc vim toprc gitconfig cpan perltidyrc screenrc sh_config)
 
 for LName in ${lnkRCs[@]} ; do {
   if (test -a $HOME/.$LName || test -h $HOME/.$LName); # if file or link exists
@@ -43,15 +43,18 @@ done
     i_str="-i " #quotes after -i used as extensions on ubuntu
   fi
 
+# create file defining the RCPATH var for the config script to source
+echo "RCPATH=${RCPATH}" > $HOME/.rcpath_env
+
 # Sed the RCPATH entries in the shrc files to find all the others
-edRCs=(zshrc bash_profile config)
-#echo "rcpath: $RCPATH."
-for fName in ${edRCs[@]} ; do {
-    echo "    Editing filepath in $fName...."
-    #echo "s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName"
-    sed -e s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName  # $i_str from current os, sed
-  };
-done
+#edRCs=(zshrc bash_profile config)
+##echo "rcpath: $RCPATH."
+#for fName in ${edRCs[@]} ; do {
+#    echo "    Editing filepath in $fName...."
+#    #echo "s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName"
+#    sed -e s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName  # $i_str from current os, sed
+#  };
+#done
 
 #"Done"
 
