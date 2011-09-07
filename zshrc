@@ -1,7 +1,7 @@
 #.zshrc
 
 # multi-dotfile setup
-source .sh_config              # load base config 
+source $HOME/.sh_config        # load base config 
 source $RCPATH/zsh_options     # load zsh options
 source $RCPATH/zsh_compctl     # load compctl settings
 

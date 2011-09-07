@@ -1,7 +1,7 @@
 # .bash_profile
 
 # multi-dotfile setup
-source .sh_config              # load base config 
+source $HOME/.sh_config              # load base config 
 
 echo "Welcome to $HOSTNAME in bash shell"!
 
