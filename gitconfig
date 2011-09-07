@@ -1,31 +1,31 @@
 [user]
 [alias]
+    a     = add
     aa    = add .
-    chk   = checkout
-    cb    = checkout -b
-    f     = fetch
     br    = branch --color --verbose
     bra   = branch --color --abbrev
-    mgf   = merge FETCH_HEAD
-    s     = status
-    st    = status
-    ss    = status --short
-    unadd = reset HEAD
-    rh    = reset HEAD
+    cfg   = config
+    cfl   = config -l
+    chk   = checkout
+    cb    = checkout -b
     d     = diff --color
     dh    = diff --color HEAD
     diff  = diff --color
-    cfg   = config
-    cfl   = config -l
+    rh    = reset HEAD
+    s     = status
+    st    = status
+    ss    = status --short
     sub   = submodule
+    unadd = reset HEAD
 [alias]
     com   = commit -m
     p     = push --tags
     pom   = push --tags origin master
     u     = pull --tags
     uom   = pull --tags origin master
-    mg    = merge
     f     = fetch
+    mg    = merge
+    mgf   = merge FETCH_HEAD
 [alias]
     ll    = log --color --decorate --source
     lo    = log --color --oneline --decorate --source
