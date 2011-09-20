@@ -1,4 +1,4 @@
-#/bin/zsh
+#/bin/sh
 ###########################
 #                         #
 #     JaminOne, v0.6      #
@@ -32,7 +32,7 @@ function dispnum {
 
 ##### Config Vars #####
 TZ="Europe/Zurich"
-HISTFILE=$HOME/.zsh_history
+HISTFILE=$HOME/.history
 HISTSIZE=2000
 SAVEHIST=$HISTSIZE
 PAGER='less'
