@@ -7,8 +7,8 @@ source $RCPATH/zsh_compctl     # load compctl settings
 
 echo "Welcome to $HOSTNAME"!
 
-# set cmd prompt => user@host[pwd] \n[hh:mi]:➤ 
-PS1="${fg_lgray}%n @${at_underl}%m${at_underloff}${fg_white}[${fg_green}%~${fg_white}]
-${at_normal}> "
-RPS1="$MAGENTA(%D{%m-%d %H:%M})$PR_NO_COLOR"
+# set cmd prompts:
+# ( mo-day 24time ) (! history) user @hostname [ ~pwd ]  \n➤>
+PS1="${FG_GREEN}(${FG_YELLOW} %D{%m-%d %H:%M} ${FG_GREEN}) ${FG_GREEN}(${FG_WHITE}! %h$FG_GREEN) ${FG_YELLOW}%n @%m ${FG_GREEN}[ ${FG_WHITE}%~${FG_GREEN} ]${FG_WHITE}
+${AT_NORMAL}➤> "
 

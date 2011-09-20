@@ -1,18 +1,5 @@
 # set some enviromental/shell pref stuff up
 
-#extend color setup in zsh:
-autoload colors zsh/terminfo
-if [[ "$terminfo[colors]" -ge 8 ]]; then
-  colors
-fi
-for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-  eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
-  eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
-  (( count = $count + 1 ))
-done
-PR_NO_COLOR="%{$terminfo[sgr0]%}"
-
-
 # Autoload zsh modules when they are referenced
 zmodload -a zsh/stat stat
 zmodload -a zsh/zpty zpty
