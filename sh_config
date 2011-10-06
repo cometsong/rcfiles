@@ -33,8 +33,8 @@ umask 002
 LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
 
-if [[ -n $APPLE ]] EDITOR="open /Applications/MacVim.app" # on Mac, use GUI macvim
-if [[ -n $LINUX ]] EDITOR='gvim'   # on linux, use GUI gvim
+if [[ -n $APPLE ]]; then EDITOR="open /Applications/MacVim.app"; fi # on Mac, use GUI macvim
+if [[ -n $LINUX ]]; then EDITOR='gvim'; fi                          # on linux, use GUI gvim
 
 export PATH=$PATH:/usr/local/bin:${HOME}/bin
 
@@ -42,6 +42,6 @@ export PATH=$PATH:/usr/local/bin:${HOME}/bin
 source $RCPATH/colors          # load color vars
 source $RCPATH/aliases         # load aliases 
 source $RCPATH/sh_functions    # load sh functions
-if [[ -e $RCPATH/my_aliases ]] source $RCPATH/my_aliases # if 'my' password-full alias file exists, source it.
+if [[ -e $RCPATH/my_aliases ]]; then source $RCPATH/my_aliases; fi  # if 'my' password-full alias file exists, source it.
 
 

@@ -1,8 +1,8 @@
 ##### Aliases #####
 
 ##### ls, the common ones I use a lot shortened for rapid fire usage
-if [[ -n $APPLE ]] alias ls='ls -G'           #I like color (on Mac OsX)
-if [[ -n $LINUX ]] alias ls='ls --color=auto' #I like color (on Ubuntu)
+if [[ -n $APPLE ]]; then alias ls='ls -G'; fi           #I like color (on Mac OsX)
+if [[ -n $LINUX ]]; then alias ls='ls --color=auto'; fi #I like color (on Ubuntu)
 alias l='ls'               #size,show type,human readable
 alias ll='ls -lh'          #size,show type,human readable
 alias l.='ls -d .[^.]*'    #size,show type,.dotfiles only
@@ -41,11 +41,11 @@ alias htr="sudo /etc/init.d/apache2 restart"
 alias cpan="sudo cpan"
 
 # Mac aliases...
-if [[ -n $APPLE ]] {
+if [[ -n $APPLE ]]; then {
   alias top="top -n40 -ocpu -Orsize"
   alias errcode='grep -e"$1" /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Headers/MacErrors.h | more'
   alias macvim="open /Applications/MacVim.app"
-}
+}; fi
 
 alias dmesg="sudo dmesg"
 alias su="su -s /bin/zsh"
