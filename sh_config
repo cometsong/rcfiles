@@ -13,22 +13,12 @@ source $HOME/.rcpath_env
 ##### Situations #####
 function current_os {
   # If Darwin (OS X)
-    if [[ `uname -s` = "Darwin" ]] export APPLE=TRUE;
+    if [[ `uname -s` = "Darwin" ]]; then export APPLE=TRUE; fi
   # If Linux (Ubuntu,RedHat,etc)
-    if [[ `uname -s` = "Linux" ]]  export LINUX=TRUE;
+    if [[ `uname -s` = "Linux" ]];  then export LINUX=TRUE; fi
   }
 # run current_os func here:
 current_os
-
-# set DISPLAY (if on vnc connection or not)
-function dispnum {
-	if [[ $VNCDESKTOP != "" ]]; then
-		DISPLAY=$({ echo $VNCDESKTOP| sed -e 's/.*\(:[0-9]\).*/\1/' })
-	else
-		DISPLAY=:0
-	fi
-}
-# dispnum
 
 ##### Config Vars #####
 TZ="Europe/Zurich"
