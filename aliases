@@ -3,18 +3,23 @@
 ##### ls, the common ones I use a lot shortened for rapid fire usage
 if [[ -n $APPLE ]]; then alias ls='ls -G'; fi           #I like color (on Mac OsX)
 if [[ -n $LINUX ]]; then alias ls='ls --color=auto'; fi #I like color (on Ubuntu)
-alias l='ls'               #size,show type,human readable
-alias ll='ls -lh'          #size,show type,human readable
-alias l.='ls -d .[^.]*'    #size,show type,.dotfiles only
-alias ll.='ls -ld .[^.]*'  #long,size,show type,.dotfiles only
-alias la='ls -lAh'         #long list,show almost all,show type,human readable
-alias lsa='ls -Ah'         #short list,show almost all,show type,human readable
-alias lr='ls -tRh'         #short list,sorted by date,recursive,show type,human readable
-alias llr='ls -lRh'        #long list,recursive,show type,human readable
-alias lt='ls -lth'         #long list,sorted by date,show type,human readable
-alias lsd='ls -ld *(-/DN)' #ls long, dirs only
+alias l='ls'               #simplest
+alias l1='ls'              #short,1 column
+alias ll='ls -lh'          #long,human readable
+alias llb='ls -l'          #long,show all bytes
+alias lll='ls -lhL'        #long,human readable, resolve sym links
+alias l.='ls -d .[^.]*'    #short,.dotfiles only
+alias ll.='ls -ld .[^.]*'  #long,.dotfiles only
+alias la='ls -A'           #short,show almost all
+alias lsa='ls -A'          #short,show almost all
+alias lla='ls -lAh'        #long,show almost all,show type,human readable
+alias lrt='ls -tRh'        #short,sorted by date,recursive,show type,human readable
+alias llr='ls -lRh'        #long,recursive,show type,human readable
+alias lt='ls -lth'         #long,sorted by date,show type,human readable
+alias lsd='ls -d *(-/DN)'  #ls short, dirs only
+alias lld='ls -ld *(-/DN)' #ls long, dirs only
 
-##### cd, because typing the backslash is ALOT of work!!
+##### cd, because typing the slash is A LOT of work!!
 #alias .='cd ../'  # removed b/c .. already does 'cd ../" and b/c '.' => 'source'
 alias ...='cd ../../'
 alias ....='cd ../../../'
@@ -22,11 +27,11 @@ alias .....='cd ../../../../'
 
 ##### Screen aliases #####
 # - add a new screen , or entire session
-alias sc="screen"           # start a new screen session
+alias scn="screen"          # start a new screen session
 alias scl="screen -ls"      # list out screen sessions
 alias scr="screen -r"       # resume a screen session
 alias scd="screen -d -r"    # detach and resume an attached screen session
-alias scn="screen -dm -c"   # start new detached session using the screenrc config file that follows -c
+alias scc="screen -dm -c"   # start new detached session using the screenrc config file that follows -c
 
 ##### vnc #####
 alias vncstart2='vnc4server -geometry 1500x1100 -depth 16 -desktop `uname -n`2 :2' #desktop size
@@ -34,11 +39,14 @@ alias vncstart3='vnc4server -geometry 1430x850 -depth 16 -desktop `uname -n`3 :3
 alias vnckill="vnc4server -kill" #followed by :1, :2
 
 ##### apache2 #####
-alias htc="sudo vi /etc/apache2/httpd.conf"
+alias htc="sudo vim /etc/apache2/httpd.conf"
 alias htr="sudo /etc/init.d/apache2 restart"
 
 ##### perls #####
 alias cpan="sudo cpan"
+
+##### ssh #####
+alias ssh="ssh -X"
 
 # Mac aliases...
 if [[ -n $APPLE ]]; then {
@@ -58,3 +66,4 @@ alias grep="grep --color"
 alias psx='ps xf -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias date='date +"%Y-%m-%d %H:%M:%S"'
+
