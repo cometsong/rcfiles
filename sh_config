@@ -36,7 +36,7 @@ LANG='en_US.UTF-8'
 if [[ -n $APPLE ]]; then EDITOR="open /Applications/MacVim.app"; fi # on Mac, use GUI macvim
 if [[ -n $LINUX ]]; then EDITOR='gvim'; fi                          # on linux, use GUI gvim
 
-export PATH=$PATH:/usr/local/bin:${HOME}/bin
+export PATH=${HOME}/bin:/usr/local/bin:$PATH
 
 # multi-dotfile setup
 source $RCPATH/colors          # load color vars
