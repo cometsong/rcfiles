@@ -26,10 +26,6 @@ alias rdbf="rake db:recreate db:fixtures:load RAILS_ENV=development"
 
 ##### git ##### 
 ## Also see ~/.gitconfig ##
-
-if ( [[ -e "/usr/local/bin/git" ]] ) then {alias git="/usr/local/bin/git"} 
-    else {alias git="/usr/bin/git"} 
-fi
 alias g="git"
 
 function gfm() {
