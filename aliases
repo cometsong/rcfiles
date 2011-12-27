@@ -42,11 +42,8 @@ alias vnckill="vnc4server -kill" #followed by :1, :2
 alias htc="sudo vim /etc/apache2/httpd.conf"
 alias htr="sudo /etc/init.d/apache2 restart"
 
-##### perls #####
-alias cpan="sudo cpan"
-
 ##### ssh #####
-alias ssh="ssh -X"
+alias ssx="ssh -X"
 
 # Mac aliases...
 if [[ -n $APPLE ]]; then {
@@ -56,8 +53,6 @@ if [[ -n $APPLE ]]; then {
 }; fi
 
 alias dmesg="sudo dmesg"
-alias su="su -s /bin/zsh"
-
 alias e="$EDITOR"
 alias h="history"
 alias vi='vim'
