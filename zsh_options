@@ -1,94 +1,22 @@
-# set some enviromental/shell pref stuff up
+# correction of command line
+setopt correct_all
 
-# Autoload zsh modules when they are referenced
-zmodload -a zsh/stat stat
-zmodload -a zsh/zpty zpty
-zmodload -a zsh/zprof zprof
-# zmodload -ap zsh/mapfile mapfile
+# Changing/making/removing directory
+setopt auto_name_dirs
+setopt auto_pushd
+setopt pushd_ignore_dups
 
- 
-#####   Set/unset  shell options  ####
+## smart urls
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
 
-### Initialisation ###
-setopt ALL_EXPORT       # all vars are exported to shell
+## file rename magick
+bindkey "^[m" copy-prev-shell-word
 
-### Change Dirs ###
-setopt AUTO_CD            # cd to dir if cmd without 'cd'
-setopt AUTO_PUSHD         # Make cd push the old directory onto the directory stack. 
-setopt CDABLE_VARS        # if cd to non-dir, try to expand as if began with ~
-setopt PUSHD_MINUS        # Exchanges the meanings of `+' and `-' when used with a number
-setopt PUSHD_TO_HOME      # Have pushd with no arguments act like `pushd $HOME'.
-setopt PUSHD_SILENT       # Do not print the directory stack after pushd or popd.
-setopt PUSHD_IGNORE_DUPS  # No multiple copies of same directory in directory stack. 
+## jobs
+setopt long_list_jobs
 
-### Input/Output ###
-unsetopt CLOBBER        # do NOT allow truncation of files
-setopt CORRECT          # command spelling Correction
-setopt CORRECT_ALL      # correct the spelling of all arguments
-unsetopt FLOW_CONTROL   # output flow control via start/stop characters is disabled in editor
-unsetopt HASH_CMDS      # do NOT turn on command path hashing
-setopt MAILWARNING      # Print warning message if mail file has been accessed since last checked. 
-setopt RCQUOTES         # Allow the character sequence '' to signify a single quote
-
-### Completion ###
-autoload -U compinit
-compinit
-setopt AUTO_LIST            # Automatically list choices on an ambiguous completion.
-setopt AUTO_PARAM_SLASH     # add a trailing slash instead of a space after dirname
-unsetopt AUTO_REMOVE_SLASH  # do NOT remove trailing slash
-unsetopt LIST_BEEP          # do NOT Beep on an ambiguous completion.
-setopt LIST_PACKED          # make list smaller by printing columns with different widths
-setopt LIST_TYPES           # show the type of each file with a trailing identifying mark
-setopt MENU_COMPLETE        # insert 1st match, replace with 2nd, etc
-setopt REC_EXACT             # recognize exact matches even if they are ambiguous
-
-### Expansion ###
-setopt EXTENDED_GLOB    # Treat `#', `~' and `^' characters as part of patterns
-unsetopt GLOBDOTS       # require a '.' in front of filename to match it
-setopt MARK_DIRS        # append trailing slash to dirnames
-setopt RE_MATCH_PCRE    # allows regexp matching
-
-### History ###
-setopt APPEND_HISTORY       # all sessions will append their history to the file on exit
-setopt EXTENDED_HISTORY		# puts timestamps in the history
-setopt HIST_ALLOW_CLOBBER   # Add `|' to output redirections in the history
-setopt HIST_IGNORE_ALL_DUPS # if new command dups older one, older is deleted
-setopt HIST_IGNORE_DUPS     # if command is dup of last one, don't add
-setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks from each command line
-unsetopt INC_APPEND_HISTORY # new history lines are added as soon as they are entered
-
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
-
-### Job Control ###
-setopt AUTO_RESUME      # tries to resume command of same name
-unsetopt HUP            # do NOT Send the HUP signal to running jobs when shell exits.
-setopt NOTIFY           # Report the status of background jobs immediately
-unsetopt BG_NICE        # do NOT nice bg commands
-setopt LONG_LIST_JOBS   # List jobs in the long format by default
-
-
-
-### Key Binding ###
-bindkey "^[[3~" delete-char
-bindkey '^r' history-incremental-search-backward
-bindkey "^[[5~" up-line-or-history
-bindkey "^[[6~" down-line-or-history
-bindkey "^[[H" beginning-of-line
-bindkey "^[[1~" beginning-of-line
-bindkey "^[[F"  end-of-line
-bindkey "^[[4~" end-of-line
-bindkey ' ' magic-space    # also do history expansion on space
-bindkey '^I' complete-word # complete on tab, leave expansion to _expand
-
-# ctrl-arrows#
-bindkey "\E[1;5D" backward-word #ctrl-left  ^[[1;5D ^[[1;5C ^[[1;5A ^[[1;5B
-bindkey "\E[1;5C" forward-word #ctrl-right
-bindkey "\E[1;5A" history-incremental-search-backward #ctrl-up
-bindkey "\E[1;5B" history-incremental-search-forward #ctrl-down
-bindkey "\E[1;7f" backward-kill-word #ctrl-backspace
-
+## pager
+export PAGER=less
+export LC_CTYPE=$LANG
 
