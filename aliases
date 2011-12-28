@@ -19,12 +19,6 @@ alias lt='ls -lth'         #long,sorted by date,show type,human readable
 alias lsd='ls -d *(-/DN)'  #ls short, dirs only
 alias lld='ls -ld *(-/DN)' #ls long, dirs only
 
-##### cd, because typing the slash is A LOT of work!!
-#alias .='cd ../'  # removed b/c .. already does 'cd ../" and b/c '.' => 'source'
-alias ...='cd ../../'
-alias ....='cd ../../../'
-alias .....='cd ../../../../'
-
 ##### Screen aliases #####
 # - add a new screen , or entire session
 alias scn="screen"          # start a new screen session
