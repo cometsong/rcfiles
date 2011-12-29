@@ -11,6 +11,7 @@ alias mv='nocorrect mv'
 alias mysql='nocorrect mysql'
 alias mkdir='nocorrect mkdir'
 alias cp='nocorrect cp'
+alias cd='nocorrect cd'
 
 
 echo "Welcome to $HOSTNAME"!
