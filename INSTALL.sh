@@ -13,9 +13,9 @@ read -p "
    
   ==============================================================
    Please enter the path in which the rcfiles repository is stored.
-   [default is /usr/local/rcfiles]:" \
+   [default is $HOME/code/rcfiles]:" \
      -r rc_path
-RCPATH=${rc_path:=/usr/local/rcfiles} #default value assigned if none entered
+RCPATH=${rc_path:=$HOME/code/rcfiles} #default value assigned if none entered
 
 # CHANGE THESE VALUES in git_user.sh DEPENDING ON YOUR OS/LOCATION!!!
 #   Git Config User.Name and User.Email
@@ -35,26 +35,21 @@ for LName in ${lnkRCs[@]} ; do {
   };
 done
 
-#the next two if's show my love for different distribs of unix, and sed.
-  if [ `uname -s` = "Darwin" ]; then 
-    i_str="-i '' " #space after -i needed on mac
-  fi
-  if [ `uname -s` = "Linux" ];  then 
-    i_str="-i " #quotes after -i used as extensions on ubuntu
-  fi
-
 # create file defining the RCPATH var for the config script to source
 echo "RCPATH=${RCPATH}" > $HOME/.rcpath_env
 
-# Sed the RCPATH entries in the shrc files to find all the others
-#edRCs=(zshrc bash_profile config)
-##echo "rcpath: $RCPATH."
-#for fName in ${edRCs[@]} ; do {
-#    echo "    Editing filepath in $fName...."
-#    #echo "s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName"
-#    sed -e s%RCPATH=.*%RCPATH=$RCPATH% $i_str $RCPATH/$fName  # $i_str from current os, sed
-#  };
-#done
+# link all files in $RCPATH/bin to $HOME/bin
+#   create dir if does not exist
+if [[ ! -d $HOME/bin ]] ; then
+    mkdir $HOME/bin
+fi
+
+BINS=`ls -1 $RCPATH/bin`
+for B in $BINS; do
+    echo "    Link to $HOME/bin/$B...."
+    ln -s $RCPATH/bin/$B $HOME/bin/$B              # create new link to rcfile
+done
+
 
 #"Done"
 
