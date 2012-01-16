@@ -1,16 +1,12 @@
 #/bin/sh
-###########################
-#                         #
-#     JaminOne, v0.6      #
-#                         #
-###########################
+# ---------------------------------------------------------------------------- #
+#                       shell config of JaminOne rcfiles                       #
+# ---------------------------------------------------------------------------- #
 
-# Base Profile Config for .rcfiles
-
-# load RCPATH env var
+##### load RCPATH env var #####
 source $HOME/.rcpath_env
 
-##### Situations #####
+##### Operating Situations #####
 function current_os {
   # If Darwin (OS X)
     if [[ `uname -s` = "Darwin" ]]; then export APPLE=TRUE; fi
@@ -32,9 +28,10 @@ umask 002
 #LANGUAGE=
 LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
+LC_CTYPE=$LANG
 
-if [[ -n $APPLE ]]; then EDITOR="open /Applications/MacVim.app"; fi # on Mac, use GUI macvim
-if [[ -n $LINUX ]]; then EDITOR='gvim'; fi                          # on linux, use GUI gvim
+if [[ -n $APPLE ]]; then EDITOR="mvim"; fi # on Mac, use GUI macvim
+if [[ -n $LINUX ]]; then EDITOR='gvim'; fi # on linux, use GUI gvim
 
 export PATH=${HOME}/bin:/usr/local/bin:$PATH
 

@@ -1,10 +1,36 @@
-# correction of command line
-setopt correct_all
+# ---------------------------------------------------------------------------- #
+#                        zsh options of JaminOne rcfiles                       #
+# ---------------------------------------------------------------------------- #
 
-# Changing/making/removing directory
+## correction of command line
+setopt correct_all
+alias man='nocorrect man'
+alias mv='nocorrect mv'
+alias mysql='nocorrect mysql'
+alias mkdir='nocorrect mkdir'
+alias cp='nocorrect cp'
+alias cd='nocorrect cd'
+alias vims='nocorrect vims'
+alias mvims='nocorrect mvims'
+alias gvims='nocorrect gvims'
+
+setopt no_beep
+
+## Changing/making/removing directory
 setopt auto_name_dirs
 setopt auto_pushd
 setopt pushd_ignore_dups
+
+## for cd .../dir
+rationalise-dot() {
+  if [[ $LBUFFER = *.. ]]; then
+    LBUFFER+=/..
+  else
+    LBUFFER+=.
+  fi
+}
+zle -N rationalise-dot
+bindkey . rationalise-dot
 
 ## smart urls
 autoload -U url-quote-magic
@@ -16,7 +42,4 @@ bindkey "^[m" copy-prev-shell-word
 ## jobs
 setopt long_list_jobs
 
-## pager
-export PAGER=less
-export LC_CTYPE=$LANG
 
