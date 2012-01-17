@@ -3,10 +3,11 @@
 #                       bash_profile of JaminOne rcfiles                       #
 # ---------------------------------------------------------------------------- #
 
-## IF Shell is non-interactive.  Be done now!
-if [[ $- != *i* ]] ; then
-    return
+## source bashrc
+if [  -f $HOME/.bashrc ]; then
+    . $HOME/.bashrc
 fi
+
 
 ## multi-dotfile setup
 source $HOME/.sh_config              # load base config 
