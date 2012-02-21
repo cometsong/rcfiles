@@ -1,11 +1,15 @@
 #.zshrc
 
+# source .zprofile, because .zprofile does not always get automatically sourced
+if [ -f "$HOME/.zprofile" ]; then
+    . "$HOME/.zprofile"
+fi
+
 # multi-dotfile setup
-source $HOME/.sh_config        # load base config 
 source $RCPATH/zsh_options     # load zsh options
 source $RCPATH/zsh_compctl     # load compctl settings
 
-echo "Welcome to $HOSTNAME"!
+echo "Welcome to $HOSTNAME in zsh"!
 
 # set cmd prompts:
 # (day mnth date 24h)-(!hist)-(user@hostname)-(-zsh)-[~pwd]\n =>

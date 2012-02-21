@@ -23,7 +23,7 @@ source $RCPATH/git_user.sh
 
 
 # List of rcfiles for ln from git repo dir to home dir:
-lnkRCs=(zshrc bash_profile vimrc gvimrc vim toprc gitconfig cpan perltidyrc screenrc sh_config)
+lnkRCs=(profile zprofile zshrc bashrc vimrc gvimrc vim toprc gitconfig cpan perltidyrc screenrc)
 
 for LName in ${lnkRCs[@]} ; do {
   if (test -a $HOME/.$LName || test -h $HOME/.$LName); # if file or link exists
@@ -46,8 +46,12 @@ fi
 
 BINS=`ls -1 $RCPATH/bin`
 for B in $BINS; do
+    if (test -a $HOME/.$B || test -h $HOME/.$B);    # if file or link exists
+    then  rm -f $HOME/.$B ;                         # rm ~/link
+    fi
+
     echo "    Link to $HOME/bin/$B...."
-    ln -s $RCPATH/bin/$B $HOME/bin/$B              # create new link to rcfile
+    ln -s $RCPATH/bin/$B $HOME/bin/$B               # create new link to rcfile
 done
 
 
