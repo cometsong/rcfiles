@@ -5,6 +5,11 @@ if [  -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+# source .profile as base shell config
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
+fi
+
 
 ## completion
 source $RCPATH/bash_comp

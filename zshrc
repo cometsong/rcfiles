@@ -1,8 +1,8 @@
 #.zshrc
 
-# source .zprofile, because .zprofile does not always get automatically sourced
-if [ -f "$HOME/.zprofile" ]; then
-    . "$HOME/.zprofile"
+# source .profile as base shell config
+if [ -f "$HOME/.profile" ]; then
+    . "$HOME/.profile"
 fi
 
 # multi-dotfile setup
