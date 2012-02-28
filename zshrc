@@ -1,8 +1,8 @@
 #.zshrc
 
-# source .profile as base shell config
-if [ -f "$HOME/.profile" ]; then
-    . "$HOME/.profile"
+# source .rcprofile as base shell config
+if [ -f "$HOME/.rcprofile" ]; then
+    . "$HOME/.rcprofile"
 fi
 
 # multi-dotfile setup

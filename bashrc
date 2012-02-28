@@ -1,13 +1,17 @@
 # ---------------------------------------------------------------------------- #
 #                           bashrc of JaminOne rcfiles                         #
 # ---------------------------------------------------------------------------- #
-if [  -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
 
-# source .profile as base shell config
-if [ -f "$HOME/.profile" ]; then
-    . "$HOME/.profile"
+# source base etc files, varying based on OS
+for BRC in bashrc bash.bashrc; do
+    if [  -f /etc/$BRC ]; then
+        . /etc/$BRC
+    fi
+done
+
+# source .rcprofile as base shell config
+if [ -f "$HOME/.rcprofile" ]; then
+    . "$HOME/.rcprofile"
 fi
 
 
