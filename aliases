@@ -5,17 +5,19 @@ if [[ -n $APPLE ]]; then alias ls='ls -G'; fi           #I like color (on Mac Os
 if [[ -n $LINUX ]]; then alias ls='ls --color=auto'; fi #I like color (on Ubuntu)
 alias l='ls'               # simplest
 alias l1='ls -1'           # short,1 column
+alias la='ls -A'           # short,show almost all
+alias lsa='ls -A'          # short,show almost all
+alias lsf='ls -FLsh1'      # single col, show human sizes, append slashes
+alias laf='ls -FLAsh1'     # single col, show human sizes, append slashes, almost-all
 alias ll='ls -lh'          # long,human readable
 alias llb='ls -l'          # long,show all bytes
 alias lll='ls -lhL'        # long,human readable, resolve sym links
-alias l.='ls -d .[^.]*'    # short,.dotfiles only
-alias ll.='ls -ld .[^.]*'  # long,.dotfiles only
-alias la='ls -A'           # short,show almost all
-alias lsa='ls -A'          # short,show almost all
-alias lla='ls -lAh'        # long,show almost all,show type,human readable
+alias lla='ls -lAph'       # long,show almost all,show type,human readable
 alias lrt='ls -tRh'        # short,sorted by date,recursive,show type,human readable
 alias llr='ls -lRh'        # long,recursive,show type,human readable
 alias lt='ls -lth'         # long,sorted by date,show type,human readable
+alias l.='ls -d .[^.]*'    # short,.dotfiles only
+alias ll.='ls -ld .[^.]*'  # long,.dotfiles only
 alias lsd='ls -d *(-/DN)'  # ls short, dirs only
 alias lld='ls -ld *(-/DN)' # ls long, dirs only
 
