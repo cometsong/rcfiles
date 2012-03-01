@@ -4,7 +4,16 @@
 #    (This file is sourced by .bashrc and by .zshrc in interactive sessions.)  #
 # ---------------------------------------------------------------------------- #
 
-RCPATH=/home/benjamin/code/rcfiles
+##### Operating Situations #####
+function current_os {
+  # If Darwin (OS X)
+    if [[ `uname -s` = "Darwin" ]]; then export APPLE=TRUE; fi
+  # If Linux (Ubuntu,RedHat,Debian,etc)
+    if [[ `uname -s` = "Linux" ]];  then export LINUX=TRUE; fi
+  }
+# run current_os func here:
+current_os
+
 ##### load RCPATH env var #####
 source $HOME/.rcpath_env
 
@@ -34,17 +43,6 @@ LC_CTYPE=$LANG
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-
-
-##### Operating Situations #####
-function current_os {
-  # If Darwin (OS X)
-    if [[ `uname -s` = "Darwin" ]]; then export APPLE=TRUE; fi
-  # If Linux (Ubuntu,RedHat,etc)
-    if [[ `uname -s` = "Linux" ]];  then export LINUX=TRUE; fi
-  }
-# run current_os func here:
-current_os
 
 if [[ -n $APPLE ]]; then EDITOR="mvim"; fi # on Mac, use GUI macvim
 if [[ -n $LINUX ]]; then EDITOR='gvim'; fi # on linux, use GUI gvim
