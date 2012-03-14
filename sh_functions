@@ -55,7 +55,6 @@ alias g="git"
 
 function gfm() {
   git fetch $*
-      n
   git merge FETCH_HEAD
 }
 function gfms() {
