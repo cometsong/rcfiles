@@ -17,7 +17,6 @@ fi
 
 ## completion
 source $RCPATH/bash_comp
-stty -ixon              # disable XON/XOFF flow control (^s/^q) 
 complete -cf sudo       # Tab complete for sudo
 
 ## sh-options

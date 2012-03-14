@@ -4,7 +4,6 @@
 #    (This file is sourced by .bashrc and by .zshrc in interactive sessions.)  #
 # ---------------------------------------------------------------------------- #
 
-RCPATH=/home/benjamin/code/rcfiles
 ##### load RCPATH env var #####
 source $HOME/.rcpath_env
 
