@@ -83,6 +83,25 @@ function guom() {
   git pull origin master
 }
 
+# queries config for all remote repos, pushes master to all
+function gpam { 
+    REMOTES=`git remote -v | cut -f 1 | uniq`
+    for R in $REMOTES; do 
+        echo Pushing to $R
+        git push --tags $R master
+    done
+}
+
+# queries config for all remote repos, pushes current_branch to all
+function gpab { 
+    REMOTES=`git remote -v | cut -f 1 | uniq`
+    gbranch
+    for R in $REMOTES; do 
+        echo Pushing \"$current_branch\" to \"$R\"
+        git push --tags $R $current_branch
+    done
+}
+
 ##### Find a file with a pattern in name ##### 
 function ff() { find . -type f -iname '*'$*'*' -ls ; }
 
