@@ -12,7 +12,7 @@ nethack on                              # Use nethack-like error messages. See s
 # logfile ~/tmp/screenlogs/               # Place where to collect logfiles. See section 18.2 log. 
 defscrollback 2000                      # Set default lines of scrollback. See section 12.1.2 Scrollback. 
 
-shell zsh
+# shell zsh                               # set default shell (dies with error if that shell does not exist on machine)
 
 hardstatus alwayslastline               # Use the hardware status line. See section 17.2 Hardware Status Line. 
 hardstatus string    '%{gk}[%{G}%H%{g}]%?[%{G}%h%{g}]%?[%= %{wk}%?%-W%? %{=b kR}(%{W}%n:%t%?%?%{=b kR})%{= kw}%?%+w%?%?%= %{g}][%{Y}%l%{g}]'
