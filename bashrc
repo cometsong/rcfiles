@@ -17,7 +17,6 @@ fi
 
 ## completion
 source $RCPATH/bash_comp
-complete -cf sudo       # Tab complete for sudo
 
 ## sh-options
 shopt -s cdspell        # This will correct minor spelling errors in a cd command.
@@ -29,6 +28,9 @@ shopt -s dotglob        # files beginning with . to be returned in the results o
 ulimit -S -c 0          # Don't want any coredumps.
 set -o noclobber        # prevent overwriting files with cat
 set -o ignoreeof        # stops ctrl+d from logging me out
+
+set -o vi               # run bash in vi editing mode (instead of default emacs)
+set editing-mode vi
 
 
 echo Welcome to $HOSTNAME in bash!
