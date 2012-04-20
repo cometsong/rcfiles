@@ -34,17 +34,14 @@ HOSTNAME=`uname -n`
 umask 002
 
 ##### LANGUAGE #####
-LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
+LC_ALL=$LANG
 LC_CTYPE=$LANG
 
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-if [[ -n $APPLE ]]; then EDITOR="mvim"; fi # on Mac, use GUI macvim
-if [[ -n $LINUX ]]; then EDITOR='gvim'; fi # on linux, use GUI gvim
+# prepend $PATH with $HOME bins
+PATH="$HOME/bin:$HOME/.vim/bin:$PATH"
+# parse $PATH, remove duplicate entries
+PATH=$(echo $PATH | awk 'BEGIN{RS=ORS=":"}{ if (a[$0] == 0){ a[$0] += 1; print $0}}')
 
 
