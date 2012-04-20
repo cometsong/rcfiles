@@ -42,4 +42,7 @@ bindkey "^[m" copy-prev-shell-word
 ## jobs
 setopt long_list_jobs
 
+setopt vi
+setopt complete_aliases
+setopt hist_ignore_all_dups
 
