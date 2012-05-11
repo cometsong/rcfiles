@@ -1,0 +1,51 @@
+#  OSX ignores
+.DS_Store
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+#  Linux ignores
+!.gitignore
+*~
+
+#  Vim ignores
+.*.sw[a-z]
+*.un~
+Session.vim
+.VimballRecord
+
+# Ignore tags created by ctags
+tags
+!tags/
+
+
+# from gitignores Global/Eclipse.gitignore 
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+
+
