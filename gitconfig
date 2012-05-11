@@ -37,3 +37,7 @@
 [user]
     name = JaminOne
     email = jaminwebdesign@gmail.com
+[init]
+	templatedir = ~/code/gits/git_template
+[core]
+	excludesfile = /home/benjamin/.gitignore_global
