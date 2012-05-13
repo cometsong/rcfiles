@@ -5,15 +5,15 @@
 
 
 #  for UKM unix boxes
-if [[ `uname -n` == "ToothAndNails" ]] || [[ `uname -n` == "YellowBrickRoad" ]]; then
+if [[ `uname -n` == "ToothAndNails" ]] || [[ `uname -n` == "YellowBrickRoad" ]] || [[ `uname -n` == "palma001" ]]; then
   GITUSERNAME="Benjamin Leopold"
   GITEMAIL=bLeopoldNOSPAM@uni-muenster.de
 fi
 
 # for MacBook Laptop
-if [[ `uname -n` == "JuniorMint.local" ]]; then
+if [[ `uname -n` == "JuniorMint.local" ]] | [[ `uname -n` =~ ".alicedsl.de" ]]; then
   GITUSERNAME="JaminOne JuniorMint"
-  GITEMAIL=JaminWebDesignNOSPAM@gmail.com
+  GITEMAIL=benjamin@cometsong.net
 fi
 
 
