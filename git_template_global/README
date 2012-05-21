@@ -1,0 +1,12 @@
+#===============================================================================
+#          REPO: git_template
+#   DESCRIPTION: git config init.template 
+#  REQUIREMENTS: git, ctags (preferably exuberant)
+#        AUTHOR: B. Leopold (cometsong)
+#       CREATED: 2012-05-09 12:41:36+0200
+#===============================================================================
+
+Acknowledgements:
+    hooks for ctags:  tbaggery.com -> "Effortless Ctags with Git"
+
+
