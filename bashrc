@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------- #
-#                           bashrc of JaminOne rcfiles                         #
+#                                bashrc of rcfiles                             #
 # ---------------------------------------------------------------------------- #
 
 # source base etc files, varying based on OS
@@ -9,14 +9,6 @@ for BRC in bashrc bash.bashrc; do
     fi
 done
 
-# source .rcprofile as base shell config
-if [ -f "$HOME/.rcprofile" ]; then
-    . "$HOME/.rcprofile"
-fi
-
-
-## completion
-source $RCPATH/bash_comp
 
 ## sh-options
 shopt -s cdspell        # This will correct minor spelling errors in a cd command.
@@ -31,10 +23,4 @@ set -o ignoreeof        # stops ctrl+d from logging me out
 
 set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
-
-
-echo Welcome to $HOSTNAME in bash!
-# set cmd prompt for bash shells 
-# (day mnth date 24h)-(!hist)-(user@hostname)-(bash)-[~pwd]\n =>
-PS1='${FG_G}(${FG_Y}\d \t${FG_G})-(!${FG_W}\!${FG_G})-(${FG_Y}\u${FG_G}@${FG_Y}\h${FG_G})-(${FG_Y}\s${FG_G})-[${FG_W}\w\e[m${FG_G}]\n ${NORM}=> '
 
