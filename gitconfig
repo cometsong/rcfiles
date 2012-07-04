@@ -10,13 +10,15 @@
     cb    = checkout -b
     d     = diff --color
     dh    = diff --color HEAD
-    diff  = diff --color
+    vimdiff = difftool -y -t vimdiff -R
     rh    = reset HEAD
     s     = status
     st    = status
     ss    = status --short
-    sub   = submodule
     unadd = reset HEAD
+[alias]
+    sub   = submodule
+    subrm = !~/.git_template_global/git-submodule-rm.sh
 [alias]
     com   = commit -m
     p     = push --tags
@@ -36,7 +38,7 @@
     main-window-geometry = 961x1020+0+25
 [user]
     name = JaminOne
-    email = jaminwebdesign@gmail.com
+    email = benjamin@cometsong.net
 [init]
 	templatedir = ~/.git_template_global
 [core]
