@@ -1,3 +1,4 @@
+#!/bin/sh
 ##### Aliases #####
 
 ##### ls, the common ones I use a lot shortened for rapid fire usage
@@ -28,6 +29,15 @@ alias scl="screen -ls"      # list out screen sessions
 alias scr="screen -r"       # resume a screen session
 alias scd="screen -d -r"    # detach and resume an attached screen session
 alias scc="screen -dm -c"   # start new detached session using the screenrc config file that follows -c
+
+##### Ruby/Rails/Rake ##### 
+alias rsrv="./script/server -u"
+alias rsrvp="ss -p"
+alias rcon="./script/console"
+alias rmig="rake db:migrate db:test:clone"
+alias rdbf="rake db:recreate db:fixtures:load RAILS_ENV=development"
+# setup rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 ##### vnc #####
 alias vncstart2='vnc4server -geometry 1500x1100 -depth 16 -desktop `uname -n`2 :2' #desktop size

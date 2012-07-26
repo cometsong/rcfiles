@@ -1,4 +1,4 @@
-
+#!/bin/sh
 # ---------------------------------------------------------------------------- #
 #                                Shell Functions                               #
 # ---------------------------------------------------------------------------- #
@@ -11,8 +11,8 @@ function mdc() {
 cd () { # from cd_dot.sh (more comments for readability in there)
     if [[ $1 =~ "\.\.\." ]] 
     then
-        YESDOTS=`echo $1 | sed 's/^\(\.*\)\(.*\)/\1/'`
-        NOTDOTS=`echo $1 | sed 's/^\(\.*\)\(.*\)/\2/'`
+        YESDOTS=$(echo $1 | sed 's/^\(\.*\)\(.*\)/\1/')
+        NOTDOTS=$(echo $1 | sed 's/^\(\.*\)\(.*\)/\2/')
         NOTDOTS=${NOTDOTS/\//}
         DOTS=${#YESDOTS}
         DOTDIR=''
@@ -26,6 +26,15 @@ cd () { # from cd_dot.sh (more comments for readability in there)
     fi
 }
 
+function scll () { # from screen-list.sh (more comments for readability in there)
+    echo "Screen sessions:"    
+    screen -ls | \
+        grep "^\s[0-9]" | \
+        sed "s'\([0-9]*\)\.\([-_A-Za-z]*\)'\1\t\2'" | \
+        awk '{ printf("  %-15s %6i  %10s\n",$2,$1,$6) }' | \
+        sort 
+}
+
 ##### chmod functions #####
 # group-writable
 function chmod-all-rw() {
@@ -37,16 +46,6 @@ function chmod-all-r() {
   find . -type d -exec chmod 755 {} \;
   find . -type f -exec chmod 644 {} \;
 }
-
-
-##### Ruby/Rails/Rake ##### 
-alias rsrv="./script/server -u"
-alias rsrvp="ss -p"
-alias rcon="./script/console"
-alias rmig="rake db:migrate db:test:clone"
-alias rdbf="rake db:recreate db:fixtures:load RAILS_ENV=development"
-# setup rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 
 ##### git ##### 
