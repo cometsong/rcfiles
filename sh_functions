@@ -8,7 +8,8 @@ function mdc() {
     cd $1 
 }
 
-cd () { # from cd_dot.sh (more comments for readability in there)
+# from cd_dot.sh (more comments for readability in there)
+function cd () { 
     if [[ $1 =~ "\.\.\." ]] 
     then
         YESDOTS=$(echo $1 | sed 's/^\(\.*\)\(.*\)/\1/')
@@ -26,12 +27,13 @@ cd () { # from cd_dot.sh (more comments for readability in there)
     fi
 }
 
-function scll () { # from screen-list.sh (more comments for readability in there)
+# from screen-list.sh (more comments for readability in there)
+function scll () { 
     echo "Screen sessions:"    
     screen -ls | \
-        grep "^\s[0-9]" | \
-        sed "s'\([0-9]*\)\.\([-_A-Za-z]*\)'\1\t\2'" | \
-        awk '{ printf("  %-15s %6i  %10s\n",$2,$1,$6) }' | \
+        grep "^[[:space:]][0-9]" | \
+        sed "s'\([0-9]*\)\.\([-_A-Za-z]*\).*\(..tached\).*'\2\t\1\t\3'" | \
+        awk '{ printf("  %-12s %6i  %10s\n",$1,$2,$3) }' | \
         sort 
 }
 
