@@ -37,7 +37,7 @@
     main-window-maximized = false
     main-window-geometry = 961x1020+0+25
 [user]
-    name = JaminOne
+    name = cometsong
     email = benjamin@cometsong.net
 [init]
 	templatedir = ~/.git_template_global
