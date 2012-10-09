@@ -17,7 +17,7 @@ Session.vim
 
 # Ignore tags created by ctags
 tags
-tags-te
+tags-*
 !tags/
 
 
