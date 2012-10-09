@@ -21,8 +21,9 @@ current_os
 source $RCPATH/colors          # load color vars
 source $RCPATH/aliases         # load aliases 
 source $RCPATH/sh_functions    # load sh functions
-if [[ -e $RCPATH/my_aliases ]]; then source $RCPATH/my_aliases; fi  # if 'my' password-full alias file exists, source it.
 
+# if 'my' password-full alias file exists, source it.
+if [[ -e $RCPATH/my_aliases ]]; then source $RCPATH/my_aliases; fi
 
 ##### Config Vars #####
 TZ="Europe/Zurich"
@@ -31,6 +32,7 @@ HISTSIZE=2000
 SAVEHIST=$HISTSIZE
 PAGER='less'
 HOSTNAME=`uname -n`
+EDITOR=vim
 umask 002
 
 ##### LANGUAGE #####
@@ -38,6 +40,9 @@ LANG='en_US.UTF-8'
 LC_ALL=$LANG
 LC_CTYPE=$LANG
 
+##### Python #####
+export PYTHONSTARTUP=$HOME/.pythonrc.py
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
 # prepend $PATH with $HOME bins
 PATH="$HOME/bin:$HOME/.vim/bin:/usr/local/bin:/usr/local/sbin:$PATH"

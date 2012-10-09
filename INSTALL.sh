@@ -27,6 +27,7 @@ lnkRCs=(rcprofile bash_profile zshrc bashrc toprc screenrc
         vimrc gvimrc vim 
         gitconfig gitignore_global git_template_global
         cpan perltidyrc 
+        pythonrc.py pylintrc inputrc
         )
 
 for LName in ${lnkRCs[@]} ; do {
