@@ -28,11 +28,11 @@ function cd () {
 }
 
 # from screen-list.sh (more comments for readability in there)
-function scll () { 
+function scll () {
     echo "Screen sessions:"    
     screen -ls | \
         grep "^[[:space:]][0-9]" | \
-        sed "s'\([0-9]*\)\.\([-_A-Za-z]*\).*\(..tached\).*'\2\t\1\t\3'" | \
+        sed "s'\([0-9]*\)\.\([-_~.A-Za-z]*\).*\(..tached\).*'\2 \1 \3'" | \
         awk '{ printf("  %-12s %6i  %10s\n",$1,$2,$3) }' | \
         sort 
 }

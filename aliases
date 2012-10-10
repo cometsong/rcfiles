@@ -25,6 +25,7 @@ alias lld='ls -ld *(-/DN)' # ls long, dirs only
 ##### Screen aliases #####
 # - add a new screen , or entire session
 alias scn="screen"          # start a new screen session
+alias scs="screen -S"       # start a new screen session with name $1
 alias scl="screen -ls"      # list out screen sessions
 alias scr="screen -r"       # resume a screen session
 alias scd="screen -d -r"    # detach and resume an attached screen session
