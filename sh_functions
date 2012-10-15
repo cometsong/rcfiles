@@ -28,14 +28,48 @@ function cd () {
 }
 
 # from screen-list.sh (more comments for readability in there)
-function scll () {
-    echo "Screen sessions:"    
-    screen -ls | \
-        grep "^[[:space:]][0-9]" | \
-        sed "s'\([0-9]*\)\.\([-_~.A-Za-z]*\).*\(..tached\).*'\2 \1 \3'" | \
-        awk '{ printf("  %-12s %6i  %10s\n",$1,$2,$3) }' | \
+function sclists () {
+    LL=$(screen -ls | \
+        grep "^[[:space:]][0-9]." | \
+        sed "s'\([0-9]*\)\.\([-_~.A-Za-z]*\).*\(..tached\).*'\2 \1 \3'" |\
         sort 
+        )
+    if [[ "x$LL" != "x" ]]; then
+        echo "Screen sessions"
+        echo "name pid status" |\
+        awk '{printf("  %-12s %-6s %-10s\n", $1, $2, $3)}'
+
+        echo $LL |\
+        awk '{printf("  %-12s %-6s %-10s\n", $1, $2, $3)}'
+    else 
+        echo "  No screen sessions running."
+    fi
 }
+
+# from tmux-list.sh (more comments for readability in there)
+function tmlists {
+    if [[ ! -z $1 ]]; then
+        FORMAT='-F "#{session_name} w:#{session_windows} \
+            #{?session_attached,Attached,Detached}"'
+    else
+        FORMAT=''
+    fi
+    LL=$(tmux ls $FORMAT 2> /dev/null | sort)
+
+    if [[ "x$LL" != "x" && ! -z $FORMAT ]]; then
+        echo "tmux sessions:"
+        echo "name wins status" |\
+        awk '{printf("  %-12s %-5s  %-10s\n", $1, $2, $3)}'
+
+        echo $LL |\
+        awk '{printf("  %-12s %-5s  %-10s\n", $1, $2, $3)}'
+    elif [[  "x$LL" != "x" ]]; then
+        echo $LL
+    else 
+        echo "  No tmux sessions running."
+    fi
+}
+
 
 ##### chmod functions #####
 # group-writable
