@@ -2,13 +2,13 @@
 #                            bash_profile of rcfiles                           #
 # ---------------------------------------------------------------------------- #
 
+# source bashrc if exists
+if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
+
 # source .rcprofile as base shell config
 if [ -f "$HOME/.rcprofile" ]; then
     . "$HOME/.rcprofile"
 fi
-
-# source bashrc if exists
-if [ -f ~/.bashrc ]; then . ~/.bashrc; fi
 
 ## completion
 source $RCPATH/bash_comp
