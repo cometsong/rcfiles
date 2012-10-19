@@ -41,6 +41,10 @@ alias tmas="tmux attach -t" # resume a tmux session by name
 alias tmll="tmlists long"   # list out tmux sessions (long format)
 alias tmls="tmlists"        # list out tmux sessions (default format)
 
+# Session List od screen and tmux
+alias sessls='sclists; tmlists long'
+alias sls=sessls
+
 ##### Ruby/Rails/Rake ##### 
 alias rsrv="./script/server -u"
 alias rsrvp="ss -p"

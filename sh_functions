@@ -36,11 +36,9 @@ function sclists () {
         )
     if [[ "x$LL" != "x" ]]; then
         echo "Screen sessions"
-        echo "name pid status" |\
-        awk '{printf("  %-12s %-6s %-10s\n", $1, $2, $3)}'
-
-        echo $LL |\
-        awk '{printf("  %-12s %-6s %-10s\n", $1, $2, $3)}'
+        listawkout "name pid status"
+        listawkout "------------ ------ ----------"
+        listawkout $LL
     else 
         echo "  No screen sessions running."
     fi
@@ -49,8 +47,8 @@ function sclists () {
 # from tmux-list.sh (more comments for readability in there)
 function tmlists {
     if [[ ! -z $1 ]]; then
-        FORMAT='-F "#{session_name} w:#{session_windows} \
-            #{?session_attached,Attached,Detached}"'
+        FORMAT='-F #{session_name} #{session_windows} \
+            #{?session_attached,Attached,Detached}'
     else
         FORMAT=''
     fi
@@ -58,17 +56,24 @@ function tmlists {
 
     if [[ "x$LL" != "x" && ! -z $FORMAT ]]; then
         echo "tmux sessions:"
-        echo "name wins status" |\
-        awk '{printf("  %-12s %-5s  %-10s\n", $1, $2, $3)}'
-
-        echo $LL |\
-        awk '{printf("  %-12s %-5s  %-10s\n", $1, $2, $3)}'
+        listawkout "name wins status"
+        listawkout "------------ ------ ----------"
+        listawkout $LL
     elif [[  "x$LL" != "x" ]]; then
         echo $LL
     else 
         echo "  No tmux sessions running."
     fi
 }
+
+function listawkout () {
+    # expects a string with three args to be split on whitespace
+    if [ "$*" ]; then
+        echo "$*" |\
+        awk '{printf("  %-12s %-6s %-10s\n", $1, $2, $3)}'
+    fi
+}
+
 
 
 ##### chmod functions #####
