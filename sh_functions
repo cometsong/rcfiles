@@ -47,8 +47,7 @@ function sclists () {
 # from tmux-list.sh (more comments for readability in there)
 function tmlists {
     if [[ ! -z $1 ]]; then
-        FORMAT='-F #{session_name} #{session_windows} \
-            #{?session_attached,Attached,Detached}'
+        FORMAT='-F #{session_name} #{session_windows} #{?session_attached,Attached,Detached}'
     else
         FORMAT=''
     fi
