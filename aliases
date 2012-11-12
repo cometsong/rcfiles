@@ -34,10 +34,9 @@ alias scc="screen -dm -c"   # start new detached session using the screenrc conf
 
 ##### tmux aliases #####
 alias tm="tmux"
-alias tmn="tmux new"        # start a new tmux session
-alias tmns="tmux new -s"    # start a new tmux session with name $1
+alias tmn="tmux new -s"     # start a new tmux session with name $1
 alias tma="tmux attach"     # resume most recent tmux session
-alias tmas="tmux attach -t" # resume a tmux session by name
+alias tmr="tmux attach -t"  # resume a tmux session by name
 alias tmll="tmlists long"   # list out tmux sessions (long format)
 alias tmls="tmlists"        # list out tmux sessions (default format)
 
