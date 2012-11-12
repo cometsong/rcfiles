@@ -50,7 +50,7 @@ class TermColors(dict):
     )
 
     NoColor = ''
-    _base = '\001\033[%sm\002'
+    _base = '\033[%sm'
 
     def __init__(self):
         if os.environ.get('TERM') in ('xterm', 'xterm-color', 'xterm-256color', 'linux',
@@ -100,16 +100,12 @@ sys.displayhook = my_displayhook
 # Welcome message
 #################
 WELCOME = """\
-%(Cyan)s
-You've got color, history, and pretty printing.
-(If your ~/.inputrc doesn't suck, you've also
-got completion and vi-mode keybindings.)
-%(Brown)s
-Type \e to get an external editor.
-%(Normal)s""" % _c
+%(LightBlue)sHere be dragons, %(LightRed)sc%(Green)so%(LightGray)sl%(Purple)so%(Yellow)sr\
+%(LightBlue)ss, history, \
+(and with .inputrc:) completion, vi-keybinds.
+%(Brown)sType \e to get an external editor.%(Normal)s""" % _c
 
-atexit.register(lambda: sys.stdout.write("""%(DarkGray)s
-See ya later!
+atexit.register(lambda: sys.stdout.write("""%(LightGray)s See ya later!
 %(Normal)s""" % _c))
 
 
