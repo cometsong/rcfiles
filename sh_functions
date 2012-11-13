@@ -97,10 +97,21 @@ function gfm() {
   git merge FETCH_HEAD
 }
 function gfms() {
-  git fetch $*
+  git fetch
   git merge FETCH_HEAD
   git submodule init
-  git submodule update
+  git-sub-pull
+}
+function git-sub-pull() {
+  # TODO: currently only 'origin' repo and  'master' branch; make it broader.
+  REPO=origin
+  BRANCH=master
+  git submodule foreach --recursive '
+    git checkout $BRANCH;
+    git pull $REPO $BRANCH;
+    cd $toplevel;
+    git submodule sync -- $path;
+    cd $path;'
 }
 function gbranch() {
   current_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
