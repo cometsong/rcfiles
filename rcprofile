@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 # ---------------------------------------------------------------------------- #
 #                      shell profile of Cometsong rcfiles                      #
 #    (This file is sourced by .bashrc and by .zshrc in interactive sessions.)  #
@@ -42,7 +42,7 @@ LC_CTYPE=$LANG
 
 ##### Python #####
 export PYTHONSTARTUP=$HOME/.pythonrc.py
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+#export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
 # prepend $PATH with $HOME bins
 PATH="$HOME/bin:$HOME/.vim/bin:/usr/local/bin:/usr/local/sbin:$PATH"
