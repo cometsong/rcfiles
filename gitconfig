@@ -19,6 +19,7 @@
 [alias]
     sub   = submodule
     subrm = !~/.git_template_global/git-submodule-rm.sh
+    subnames = "!git submodule status -- | cut -d' ' -f3 | sort"
 [alias]
     com   = commit -m
     p     = push --tags
