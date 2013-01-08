@@ -80,5 +80,6 @@ alias vi='vim'
 alias grep="grep --color"
 alias psx='ps xf -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
+alias psc="ps f -o pid,cputime,cmd -C"
 alias date='date +"%Y-%m-%d %H:%M:%S"'
 alias treef='tree -FuCh' # /*, user, colors, human sizes
