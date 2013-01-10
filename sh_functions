@@ -9,7 +9,7 @@ function mdc() {
 }
 
 # from cd_dot.sh (more comments for readability in there)
-function cd () { 
+function cd() { 
     if [[ $1 =~ "\.\.\." ]] 
     then
         YESDOTS=$(echo $1 | sed 's/^\(\.*\)\(.*\)/\1/')
@@ -28,7 +28,7 @@ function cd () {
 }
 
 # from screen-list.sh (more comments for readability in there)
-function sclists () {
+function sclists() {
     LL=$(screen -ls | \
         grep "^[[:space:]][0-9]." | \
         sed "s'\([0-9]*\)\.\([-_~.A-Za-z]*\).*\(..tached\).*'\2 \1 \3'" |\
@@ -45,7 +45,7 @@ function sclists () {
 }
 
 # from tmux-list.sh (more comments for readability in there)
-function tmlists {
+function tmlists() {
     if [[ ! -z $1 ]]; then
         FORMAT='-F #{session_name} #{session_windows} #{?session_attached,Attached,Detached}'
     else
@@ -65,7 +65,7 @@ function tmlists {
     fi
 }
 
-function listawkout () {
+function listawkout() {
     # expects a string with three args to be split on whitespace
     if [ "$*" ]; then
         echo "$*" |\
@@ -134,7 +134,7 @@ function guom() {
 }
 
 # queries config for all remote repos, pushes master to all
-function gpam { 
+function gpam() { 
     REMOTES=`git remote -v | cut -f 1 | uniq`
     for R in $REMOTES; do 
         echo Pushing to $R
@@ -143,7 +143,7 @@ function gpam {
 }
 
 # queries config for all remote repos, pushes current_branch to all
-function gpab { 
+function gpab() { 
     REMOTES=`git remote -v | cut -f 1 | uniq`
     gbranch
     for R in $REMOTES; do 
@@ -153,11 +153,14 @@ function gpab {
 }
 
 ##### Find a file with a pattern in name ##### 
-function ff() { find . -type f -iname '*'$*'*' -ls ; }
+function ff() {
+    find . -type f -iname '*'$*'*' -ls ; 
+}
 
 ##### Find a file with pattern $1 in name and Execute $2 on it ##### 
-function fe()
-{ find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \;  ; }
+function fe() {
+    find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \;  ; 
+}
 
 ##### Find a pattern in a set of files and highlight them #####
 # (needs a recent version of egrep)
