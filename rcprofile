@@ -42,9 +42,20 @@ LC_CTYPE=$LANG
 
 ##### Python #####
 export PYTHONSTARTUP=$HOME/.pythonrc.py
-#export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
-# prepend $PATH with $HOME bins
+##### Brews... #####
+if [[ -n $APPLE ]]; then 
+    # for ruby
+    PATH="/usr/local/Cellar/ruby/1.9.3-p362/bin:$PATH"
+    # for python
+    PATH="/usr/local/share/python:$PATH"
+    PATH="/usr/local/share/python3:$PATH"
+    # for coreutils
+    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
+
+##### prepend $PATH with $HOME bins
 PATH="$HOME/bin:$HOME/.vim/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 # parse $PATH, remove duplicate entries, then remove trailing ORS and \n
 PATH=$(echo $PATH | awk 'BEGIN{RS=ORS=":"}{ if (a[$0] == 0){ a[$0] += 1; print $0}}' | awk '{sub(/:$/,"");print}' | tr -d '\n')
