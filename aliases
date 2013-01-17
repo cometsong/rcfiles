@@ -2,8 +2,11 @@
 ##### Aliases #####
 
 ##### ls, the common ones I use a lot shortened for rapid fire usage
-if [[ -n $APPLE ]]; then alias ls='ls -G'; fi           #I like color (on Mac OsX)
-if [[ -n $LINUX ]]; then alias ls='ls --color=auto'; fi #I like color (on Ubuntu)
+if [[ -n $APPLE && ! -d /usr/local/Cellar/coreutils ]]; then 
+    alias ls='ls -G'; 
+else
+    alias ls='ls --color=auto';
+fi
 alias l='ls'               # simplest
 alias l1='ls -1'           # short,1 column
 alias la='ls -A'           # short,show almost all
