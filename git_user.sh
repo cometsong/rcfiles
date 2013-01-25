@@ -7,13 +7,13 @@
 #  for UKM unix boxes
 if [[ `uname -n` == "ToothAndNails" ]] || [[ `uname -n` == "NGS-Anal" ]] || [[ `uname -n` == "palma001" ]]; then
   GITUSERNAME="cometsong"
-  GITEMAIL=bLeopold.NOSPAM@uni-muenster.de
+  GITEMAIL="bLeopold at uni-muenster dot de"
 fi
 
 # for MacBook Laptop
-if [[ `uname -n` == "JuniorMint.local" ]] | [[ `uname -n` =~ ".alicedsl.de" ]]; then
+if [[ `uname -n` == "JuniorMint" ]] ; then
   GITUSERNAME="cometsong"
-  GITEMAIL=benjamin.NOSPAM@cometsong.net
+  GITEMAIL="benjamin at cometsong dot net"
 fi
 
 
