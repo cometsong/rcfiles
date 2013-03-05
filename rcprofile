@@ -60,3 +60,5 @@ PATH="$HOME/bin:$HOME/.vim/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 # parse $PATH, remove duplicate entries, then remove trailing ORS and \n
 PATH=$(echo $PATH | awk 'BEGIN{RS=ORS=":"}{ if (a[$0] == 0){ a[$0] += 1; print $0}}' | awk '{sub(/:$/,"");print}' | tr -d '\n')
 
+echo Welcome to ${HOSTNAME} in ${SHELL#/*/}!
+

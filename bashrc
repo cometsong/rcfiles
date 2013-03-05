@@ -9,6 +9,10 @@ for BRC in bashrc bash.bashrc; do
     fi
 done
 
+# source .rcprofile as base shell config
+if [ -f "$HOME/.rcprofile" ]; then
+    . "$HOME/.rcprofile"
+fi
 
 ## sh-options
 shopt -s cdspell        # This will correct minor spelling errors in a cd command.
@@ -23,4 +27,3 @@ set -o ignoreeof        # stops ctrl+d from logging me out
 
 set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
-
