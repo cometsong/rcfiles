@@ -23,7 +23,8 @@ shopt -s dotglob        # files beginning with . to be returned in the results o
 ## set options
 ulimit -S -c 0          # Don't want any coredumps.
 set -o noclobber        # prevent overwriting files with cat
-set -o ignoreeof        # stops ctrl+d from logging me out
+#set -o ignoreeof        # stops ctrl+d from logging me out
+set -o allexport        # auto export all vars for subsequent cmds
 
 set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
