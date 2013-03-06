@@ -23,6 +23,10 @@ setopt auto_name_dirs
 setopt auto_pushd
 setopt pushd_ignore_dups
 
+# promptin
+setopt prompt_subst
+setopt transient_rprompt
+
 ## for cd .../dir
 rationalise-dot() {
   if [[ $LBUFFER = *.. ]]; then
