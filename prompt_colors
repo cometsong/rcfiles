@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# root-specificity for colors
+# usage: $(RootColor $root $other)
+# default: root = red, other users = yellow
+function RootColor {
+    rootClr=${1:-$FG_R}
+    dfltClr=${2:-$FG_Y}
+    if [[ $UID == 0 ]];
+    then echo $rootClr
+    else echo $dfltClr
+    fi;
+}
+# short color names for prompt uses
+RCy=$(RootColor $FG_R $FG_Y)
+RCw=$(RootColor $FG_R $FG_W)
+
+# delimiter color ()-
+DC=${FG_G}

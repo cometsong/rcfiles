@@ -34,7 +34,7 @@ source $RCPATH/bash_comp
 
 # set cmd prompt:
 # based on https://wiki.archlinux.org/index.php/Color_Bash_Prompt#Wolfman.27s (with some mods)
-function setPWD {  
+function setPWD {
     #   How many characters of the $PWD should be kept
     local pwdmaxlen=30
     #   Indicator that there has been directory truncation:
@@ -49,9 +49,16 @@ function setPWD {
     fi
     echo $DIR
 }
+
+# set colors
+source $RCPATH/prompt_colors
+
 # vc-awesome prompt format
 export VCPROMPT_FORMAT="${FG_G}[${FG_B}%s:%b:%m%u${FG_G}]"
-# (date-mnth 24h)-(!hist)-(@hostname)-(shell)-[~pwd]\n=>
-PS1L='${FG_G}(${FG_Y}\D{%d-%b %T}${FG_G})-(!${FG_W}\!${FG_G})-(@${FG_Y}\h${FG_G})-(${FG_Y}\s${FG_G})-[${FG_W}$(setPWD)${FG_G}]'
+
+# (date-mnth 24h)-(!hist)-(user@hostname)-(shell)-[~pwd]\n=>
+PS1L="${DC}(${RCy}\D{%d-%b %T}${DC})-(!${RCw}\!${DC})"
+PS1L+="-(${RCy}\u${DC}@${RCy}\h${DC})"
+PS1L+="-(${RCy}\s${DC})-[${RCw}$(setPWD)${DC}]"
 PS1="${PS1L}
 \$(vcprompt) => ${FG_W}${NORM}"
