@@ -25,3 +25,5 @@ PS1L+="-(${RCy}%n${DC}@${RCy}%m${DC})"
 PS1L+="-(${RCy}$(basename $SHELL)${DC})-[${RCw}%${PWDlength}<...<%~%<<${DC}]"
 PS1="${PS1L}
 \$(vcprompt) => ${FG_W}${NORM}"
+
+echo Welcome to ${HOSTNAME} in ${SHELL##*/}!
