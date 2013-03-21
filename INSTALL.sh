@@ -23,11 +23,11 @@ source $RCPATH/git_user.sh
 
 
 # List of rcfiles for ln from git repo dir to home dir:
-lnkRCs=(rcprofile bash_profile zshrc bashrc toprc screenrc tmux.conf
+lnkRCs=(rcprofile bash_profile zshrc bashrc bash_completion
+        toprc screenrc tmux.conf
         vimrc gvimrc vim 
         gitconfig gitignore_global git_template_global
-        cpan perltidyrc 
-        pythonrc.py pylintrc inputrc
+        perltidyrc pythonrc.py pylintrc inputrc
         )
 
 for LName in ${lnkRCs[@]} ; do {

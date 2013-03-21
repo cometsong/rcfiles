@@ -30,7 +30,7 @@ set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
 
 ## completion
-source $RCPATH/bash_comp
+source $RCPATH/bash-completion
 
 # set cmd prompt:
 # based on https://wiki.archlinux.org/index.php/Color_Bash_Prompt#Wolfman.27s (with some mods)
