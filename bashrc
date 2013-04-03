@@ -41,7 +41,6 @@ function setPWD {
     local trunc_symbol="..."
     local DIR=$PWD
     [[ "$DIR" =~ ^"$HOME"(/|$) ]] && DIR="~${DIR#$HOME}"
-    #local DIR=$( echo $PWD | awk -F$HOME '{print $2}'` )
     if [ ${#DIR} -gt $pwdmaxlen ]
     then
         local pwdoffset=$(( ${#DIR} - $pwdmaxlen ))
@@ -59,6 +58,7 @@ export VCPROMPT_FORMAT="${FG_G}[${FG_B}%s:%b:%m%u${FG_G}]"
 # (date-mnth 24h)-(!hist)-(user@hostname)-(shell)-[~pwd]\n=>
 PS1L="${DC}(${RCy}\D{%d-%b %T}${DC})-(!${RCw}\!${DC})"
 PS1L+="-(${RCy}\u${DC}@${RCy}\h${DC})"
-PS1L+="-(${RCy}\s${DC})-[${RCw}$(setPWD)${DC}]"
+PS1L+="-(${RCy}\s${DC})-[${RCw}\$(setPWD)${DC}]"
 PS1="${PS1L}
 \$(vcprompt) => ${FG_W}${NORM}"
+unset PS1L
