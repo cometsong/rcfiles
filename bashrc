@@ -8,6 +8,7 @@ for BRC in bashrc bash.bashrc; do
         . /etc/$BRC
     fi
 done
+unset BRC
 
 # source .rcprofile as base shell config
 if [ -f "$HOME/.rcprofile" ]; then
@@ -29,8 +30,14 @@ set -o allexport        # auto export all vars for subsequent cmds
 set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
 
-## completion
-source $RCPATH/bash-completion
+## Use bash-completion, if available
+for B in /etc/bash_completion \
+         ~/bin/bash-completion/bash_completion ; 
+    do
+    [[ $PS1 && -f $B ]] && . $B && break
+done
+unset B
+source $RCPATH/bash_completion
 
 # set cmd prompt:
 # based on https://wiki.archlinux.org/index.php/Color_Bash_Prompt#Wolfman.27s (with some mods)
