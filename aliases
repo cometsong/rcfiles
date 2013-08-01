@@ -73,13 +73,6 @@ alias htr='sudo /etc/init.d/apache2 restart'
 ##### ssh #####
 alias ssx='ssh -X'
 
-# Mac aliases...
-if [[ -n $APPLE ]]; then {
-  alias top='top -n40 -ocpu -Orsize'
-  alias errcode='grep -e"$1" /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Headers/MacErrors.h | more'
-  alias macvim='open /Applications/MacVim.app'
-}; fi
-
 alias dmesg='sudo dmesg'
 alias e="$EDITOR"
 alias h='history'
@@ -91,3 +84,13 @@ alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu -
 alias psc="ps f -o pid,cputime,cmd -C"
 alias date='date +"%Y-%m-%d %H:%M:%S"'
 alias treef='tree -FuCh' # /*, user, colors, human sizes
+
+# Mac aliases...
+if [[ -n $APPLE ]]; then {
+  alias top='top -n40 -ocpu -Orsize'
+  alias errcode='grep -e"$1" /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Headers/MacErrors.h | more'
+  alias macvim='open /Applications/MacVim.app'
+  alias psx="ps -x -h -o pid,ppid,pcpu,pmem,vsz,cputime,user,command"
+  alias psa="ps -x -h -o pid,ppid,pcpu,pmem,vsz,cputime,user,command -a"
+}; fi
+
