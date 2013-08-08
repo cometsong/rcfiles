@@ -1,200 +1,252 @@
 # Default Settings for my screens
 
-startup_message off                     # Display copyright notice on startup. See section 19. Startup. 
-
-defmonitor off                          # Select default activity monitoring behavior. See section 10.6 Monitoring. 
-#activity 'Activity in window: %n'       # Set the activity notification message. See section 10.6 Monitoring. 
-
-nethack on                              # Use nethack-like error messages. See section 20.5 Nethack. 
+startup_message off                     # Display copyright notice on startup. See section 19. Startup.
+autodetach on                           # Automatically detach the session on SIGHUP. See section 8.1 Detach.
+defmonitor off                          # Select default activity monitoring behavior. See section 10.6 Monitoring.
+nethack on                              # Use nethack-like error messages. See section 20.5 Nethack.
 
 #deflog on
-#log on                                  # Log all output in the current window. See section 18.2 log. 
-# logfile ~/tmp/screenlogs/               # Place where to collect logfiles. See section 18.2 log. 
-defscrollback 2000                      # Set default lines of scrollback. See section 12.1.2 Scrollback. 
+#log on                                  # Log all output in the current window. See section 18.2 log.
+#logfile ~/tmp/screenlogs/               # Place where to collect logfiles. See section 18.2 log.
+defscrollback 20000                     # Set default lines of scrollback. See section 12.1.2 Scrollback.
+termcapinfo xterm ti@:te@               # Makes scrollbar in xterm work
 
-# shell zsh                               # set default shell (dies with error if that shell does not exist on machine)
+shell zsh                               # set default shell (dies with error if that shell does not exist on machine)
 
-hardstatus alwayslastline               # Use the hardware status line. See section 17.2 Hardware Status Line. 
+hardstatus alwayslastline               # Use the hardware status line. See section 17.2 Hardware Status Line.
 hardstatus string    '%{gk}[%{G}%H%{g}]%?[%{G}%h%{g}]%?[%= %{wk}%?%-W%? %{=b kR}(%{W}%n:%t%?%?%{=b kR})%{= kw}%?%+w%?%?%= %{g}][%{Y}%l%{g}]'
 #hardstatus string    '%{gk}[%{G}%H%{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n:%t%?%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]'
 #hardstatus string '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}'
 
+time "[ %Y-%m-%d %c:%s ]  %H%?  [%l%?]" # set time string to "[ CCYY-MM-DD HH:MI:SS ]  hostname  [load avgs]"
+
+# Key Bindings
+
+# Reload any changed screen settings
+bind R eval "source $HOME/.screenrc" "echo '.screenrc reloaded!'"
+
+bind k
+bind ^k
+bind 'K' kill                           # Destroy the current window. See section 10.3 Kill.
+
+# Pretend that the window numbering starts at 1, not 0.
+# Then use command '0' to jump to window number #10.
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10
+
+bind ' '
+
 # F1-F12 function keys for window selection
-terminfo * k1=\EOP
-terminfo * k2=\EOQ
-terminfo * k3=\EOR
-terminfo * k4=\EOS
-terminfo * k5=\E[15~
-terminfo * k6=\E[17~
-terminfo * k7=\E[18~
-terminfo * k8=\E[19~
-terminfo * k9=\E[20~
-terminfo * F1=\E[23~  # previous window
-terminfo * F2=\E[24~  # next window
+bindkey -k k1 select 1
+bindkey -k k2 select 2
+bindkey -k k3 select 3
+bindkey -k k4 select 4
+bindkey -k k5 select 5
+bindkey -k k6 select 6
+bindkey -k k7 select 7
+bindkey -k k8 select 8
+bindkey -k k9 select 9
+#bindkey -k k; select 10
+#bindkey -k F1 select 11
+#bindkey -k F2 select 12
+
+# bind backspace to previous 'other' window
+#bindkey -d -k kb stuff "\010"      # this is actual backspace value!
+#bind backspace other
+
+# Region, foci
+bind j focus down
+bind k focus up
+bind t focus top
+bind b focus bottom
+
+bind o only                             # Make this is the only region shown. (default=Q)
+bind X remove                           # Kill current region. See section 9. Regions.
+bind S split                            # Split region into two parts. See section 9. Regions.
+bind V split -v                         # Split vertically
+
+#bind ^a ^a
+
+# some useful keys for resizing
+bind = resize =
+bind + resize +1
+bind - resize -1
+bind _ resize max
+
+# Unbind a whole bunch of silly flow control keys
+bind s
+bind q 
+bind ^S
+bind ^Q
+
+# remove lockscreen binds!
+bind x
+bind ^X
 
 
 
 ######################
 # .screenrc options  #
 ######################
-#  acladd usernames                        # Allow other users in this session. See section 8.4 Multiuser Session. 
-#  aclchg usernames permbits list          # Change a user's permissions. See section 8.4 Multiuser Session. 
-#  acldel username                         # Disallow other user in this session. See section 8.4 Multiuser Session. 
-#  aclgrp usrname [groupname]              # Inherit permissions granted to a group leader. See section 8.4 Multiuser Session. 
-#  aclumask [users]+/-bits ...             # Predefine access to new windows. See section 8.4.7 aclumask. 
-#  activity message                        # Set the activity notification message. See section 10.6 Monitoring. 
-#  addacl usernames                        # Synonym to acladd. See section 8.4 Multiuser Session. 
-#  allpartial state                        # Set all windows to partial refresh. See section 11.7 Redisplay. 
-#  at [ident][#|*|%] command [args]        # Execute a command at other displays or windows. See section 20.1 At. 
-#  attrcolor attrib [attribute/color-modifier]          # Map attributes to colors. See section 20.15 Attrcolor. 
-#  autodetach state                        # Automatically detach the session on SIGHUP. See section 8.1 Detach. 
-#  autonuke state                          # Enable a clear screen to discard unwritten output. See section 16.6 Autonuke. 
-#  bce [state]                             # Change background color erase. See section 11.11 Character Processing. 
-#  bell_msg [message]                      # Set the bell notification message. See section 11.4 Bell. 
-#  bind key [command [args]]               # Bind a command to a key. See section 14.1 The bind command. 
-#  bindkey [opts] [string [cmd args]]      # Bind a string to a series of keystrokes. See section 14.5 Bindkey. 
-#  break [duration]                        # Send a break signal to the current window. See section 20.2 Break. 
-#  breaktype [tcsendbreak | TCSBRK | TIOCSBRK]          # Specify how to generate breaks. See section 20.2 Break. 
-#  bufferfile [exchange-file]              # Select a file for screen-exchange. See section 12.4 Screen-Exchange. 
-#  c1 [state]                              # Change c1 code processing. See section 11.11 Character Processing. 
-#  caption mode [string]                   # Change caption mode and string. See section 9. Regions. 
-#  chacl usernames permbits list           # Synonym to aclchg. See section 8.4 Multiuser Session. 
-#  charset set                             # Change character set slot designation. See section 11.11 Character Processing. 
-#  chdir [directory]                       # Change the current directory for future windows. See section 6.1 Chdir. 
-#  clear                                   # Clear the window screen. See section 11.5 Clear. 
-#  colon                                   # Enter a screen command. See section 4.2 Colon. 
-#  command                                 # Simulate the screen escape key. See section 14.3 Command Character. 
-#  compacthist [state]                     # Selects compaction of trailing empty lines. See section 12.1.2 Scrollback. 
-#  console [state]                         # Grab or ungrab console output. See section 10.2 Console. 
-#  copy                                    # Enter copy mode. See section 12.1 Copying. 
-#  copy_reg [key]                          # Removed. Use paste instead. See section 12.3 Registers. 
-#  crlf state                              # Select line break behavior for copying. See section 12.1.1 CR/LF. 
-#  debug state                             # Suppress/allow debugging output. See section 20.3 Debug. 
-#  defautonuke state                       # Select default autonuke behavior. See section 16.6 Autonuke. 
-#  defbce state                            # Select background color erase. See section 11.11 Character Processing. 
-#  defbreaktype [tcsendbreak | TCSBRK | TIOCSBRK]       # Specify the default for generating breaks. See section 20.2 Break. 
-#  defc1 state                             # Select default c1 processing behavior. See section 11.11 Character Processing. 
-#  defcharset [set]                        # Change default character set slot designation. See section 11.11 Character Processing. 
-#  defescape xy                            # Set the default command and meta characters. See section 14.3 Command Character. 
-#  defflow fstate                          # Select default flow control behavior. See section 15.2 Flow. 
-#  defgr state                             # Select default GR processing behavior. See section 11.11 Character Processing. 
-#  defhstatus [status]                     # Select default window hardstatus line. See section 10.8 Hardstatus. 
-#  defkanji wtype                          # Select default GR processing behavior. See section 11.11 Character Processing. 
-#  deflogin state                          # Select default utmp logging behavior. See section 10.4 Login. 
-#  defmode mode                            # Select default file mode for ptys. See section 10.5 Mode. 
-#  defmonitor state                        # Select default activity monitoring behavior. See section 10.6 Monitoring. 
-#  defobuflimit limit                      # Select default output buffer limit. See section 16.7 Obuflimit. 
-#  defscrollback num                       # Set default lines of scrollback. See section 12.1.2 Scrollback. 
-#  defshell command                        # Set the default program for new windows. See section 6.4 Shell. 
-#  defsilence state                        # Select default idle monitoring behavior. See section 20.8 Silence. 
-#  defslowpaste msec                       # Select the default inter-character timeout when pasting. See section 12.2 Paste. 
-#  defutf8 state                           # Select default character encoding. See section 11.11 Character Processing. 
-#  defwrap state                           # Set default line-wrapping behavior. See section 11.8 Wrap. 
-#  defwritelock on|off|auto                # Set default writelock behavior. See section 8.4 Multiuser Session. 
-#  defzombie [keys]                        # Keep dead windows. See section 20.12 Zombie. 
-#  detach                                  # Disconnect screen from the terminal. See section 8.1 Detach. 
-#  digraph                                 # Enter digraph sequence. See section 11.3 Digraph. 
-#  dinfo                                   # Display terminal information. See section 11.6 Info. 
-#  displays                                # List currently active user interfaces. See section 8.4.6 Displays. 
-#  dumptermcap                             # Write the window's termcap entry to a file. See section 16.2 Write out the window's termcap entry. 
-#  echo [-n] message                       # Display a message on startup. See section 19. Startup. 
-#  escape xy                               # Set the command and meta characters. See section 14.3 Command Character. 
-#  exec [[fdpat] command [args ...]]       # Run a subprocess (filter). See section 13.1 Exec. 
-#  fit                                     # Change window size to current display size. See section 11.10 Window Size. 
-#  flow [fstate]                           # Set flow control behavior. See section 15.2 Flow. 
-#  focus                                   # Move focus to next region. See section 9. Regions. 
-#  gr [state]                              # Change GR charset processing. See section 11.11 Character Processing. 
-#  hardcopy                                # Write out the contents of the current window. See section 18.1 hardcopy. 
-#  hardcopy_append state                   # Append to hardcopy files. See section 18.1 hardcopy. 
-#  hardcopydir directory                   # Place, where to dump hardcopy files. See section 18.1 hardcopy. 
-#  hardstatus [state]                      # Use the hardware status line. See section 17.2 Hardware Status Line. 
-#  height [lines [cols]]                   # Set display height. See section 11.10 Window Size. 
-#  help                                    # Display current key bindings. See section 14.4 Help. 
-#  history                                 # Find previous command beginning .... See section 12.5 History. 
-#  hstatus status                          # Change the window's hardstatus line. See section 10.8 Hardstatus. 
-#  info                                    # Display window settings. See section 11.6 Info. 
-#  ins_reg [key]                           # Removed, use paste instead. See section 12.3 Registers. 
-#  kanji wtype [dtype]                     # Set the kanji type of a window. See section 11.11 Character Processing. 
-#  kill                                    # Destroy the current window. See section 10.3 Kill. 
-#  lastmsg                                 # Redisplay the last message. See section 17.3 Display Last Message. 
-#  license                                 # Display licensing information. See section 19. Startup. 
-#  lockscreen                              # Lock the controlling terminal. See section 8.3 Lock. 
-#  log [state]                             # Log all output in the current window. See section 18.2 log. 
-#  logfile filename                        # Place where to collect logfiles. See section 18.2 log. 
-#  login [state]                           # Log the window in `/etc/utmp'. See section 10.4 Login. 
-#  logtstamp [state]                       # Configure logfile time-stamps. See section 18.2 log. 
-#  mapdefault                              # Use only the default mapping table for the next keystroke. See section 14.7 Bindkey Control. 
-#  mapnotnext                              # Don't try to do keymapping on the next keystroke. See section 14.7 Bindkey Control. 
-#  maptimeout timo                         # Set the inter-character timeout used for keymapping. See section 14.7 Bindkey Control. 
-#  markkeys string                         # Rebind keys in copy mode. See section 12.1.3 markkeys. 
-#  meta                                    # Insert the command character. See section 14.3 Command Character. 
-#  monitor [state]                         # Monitor activity in window. See section 10.6 Monitoring. 
-#  msgminwait sec                          # Set minimum message wait. See section 17.4 Message Wait. 
-#  msgwait sec                             # Set default message wait. See section 17.4 Message Wait. 
-#  multiuser state                         # Go into single or multi user mode. See section 8.4 Multiuser Session. 
-#  nethack state                           # Use nethack-like error messages. See section 20.5 Nethack. 
-#  next                                    # Switch to the next window. See section 7. Selecting a Window. 
-#  nonblock state                          # Disable flow control to the current display. See section 20.6 Nonblock. 
-#  number [n]                              # Change/display the current window's number. See section 20.7 Number. 
-#  obuflimit [limit]                       # Select output buffer limit. See section 16.7 Obuflimit. 
-#  only                                    # Kill all other regions. See section 9. Regions. 
-#  other                                   # Switch to the window you were in last. See section 7. Selecting a Window. 
-#  partial state                           # Set window to partial refresh. See section 11.7 Redisplay. 
-#  password [crypted_pw]                   # Set reattach password. See section 8.1 Detach. 
-#  paste [src_regs [dest_reg]]             # Paste contents of paste buffer or registers somewhere. See section 12.2 Paste. 
-#  pastefont [state]                       # Include font information in the paste buffer. See section 12.2 Paste. 
-#  pow_break                               # Close and Reopen the window's terminal. See section 20.2 Break. 
-#  pow_detach                              # Detach and hang up. See section 8.2 Power Detach. 
-#  pow_detach_msg [message]                # Set message displayed on pow_detach. See section 8.2 Power Detach. 
-#  prev                                    # Switch to the previous window. See section 7. Selecting a Window. 
-#  printcmd [cmd]                          # Set a command for VT100 printer port emulation. See section 20.13 Printcmd. 
-#  process [key]                           # Treat a register as input to screen. See section 12.3 Registers. 
-#  quit                                    # Kill all windows and exit. See section 8.7 Quit. 
-#  readbuf [filename]                      # Read the paste buffer from the screen-exchange file. See section 12.4 Screen-Exchange. 
-#  readreg [reg [file]]                    # Load a register from paste buffer or file. See section 12.3 Registers. 
-#  redisplay                               # Redisplay the current window. See section 11.7 Redisplay. 
-#  register key string                     # Store a string to a register. See section 12.3 Registers. 
-#  remove                                  # Kill current region. See section 9. Regions. 
-#  removebuf                               # Delete the screen-exchange file. See section 12.4 Screen-Exchange. 
-#  reset                                   # Reset the terminal settings for the window. See section 11.9 Reset. 
-#  resize [(+/-)lines]                     # Grow or shrink a region 
-#  screen [opts] [n] [cmd [args]]          # Create a new window. See section 6.2 Screen Command. 
-#  scrollback num                          # Set size of scrollback buffer. See section 12.1.2 Scrollback. 
-#  select [n]                              # Switch to a specified window. See section 7. Selecting a Window. 
-#  sessionname [name]                      # Name this session. See section 8.5 Session Name. 
-#  setenv [var [string]]                   # Set an environment variable for new windows. See section 6.3 Setenv. 
-#  shell command                           # Set the default program for new windows. See section 6.4 Shell. 
-#  shelltitle title                        # Set the default name for new windows. See section 6.4 Shell. 
-#  silence [state|seconds]                 # Monitor a window for inactivity. See section 20.8 Silence. 
-#  silencewait seconds                     # Default timeout to trigger an inactivity notify. See section 20.8 Silence. 
-#  sleep num                               # Pause during startup. See section 19. Startup. 
-#  slowpaste msec                          # Slow down pasting in windows. See section 12.2 Paste. 
-#  sorendition [attr [color]]              # Change text highlighting. See section 20.14 Sorendition. 
-#  split                                   # Split region into two parts. See section 9. Regions. 
-#  startup_message state                   # Display copyright notice on startup. See section 19. Startup. 
-#  stuff string                            # Stuff a string in the input buffer of a window. See section 12.2 Paste. 
-#  su [username [password [password2]]]    # Identify a user. See section 8.4 Multiuser Session. 
-#  suspend                                 # Put session in background. See section 8.6 Suspend. 
-#  term term                               # Set $TERM for new windows. See section 6.5 Term. 
-#  termcap term terminal-tweaks [window-tweaks]         # Tweak termcap entries for best performance. See section 16.3 The termcap command. 
-#  terminfo term terminal-tweaks [window-tweaks]        # Ditto, for terminfo systems. See section 16.3 The termcap command. 
-#  termcapinfo term terminal-tweaks [window-tweaks]     # Ditto, for both systems. See section 16.3 The termcap command. 
-#  time                                    # Display time and load average. See section 20.9 Time. 
-#  title [windowtitle]                     # Set the name of the current window. See section 10.1.1 Title Command. 
-#  umask [users]+/-bits ...                # Synonym to aclumask. See section 8.4.7 aclumask. 
-#  unsetenv var                            # Unset environment variable for new windows. See section 6.3 Setenv. 
-#  utf8 [state [dstate]]                   # Select character encoding of the current window. See section 11.11 Character Processing. 
-#  vbell [state]                           # Use visual bell. See section 11.4 Bell. 
-#  vbell_msg [message]                     # Set vbell message. See section 11.4 Bell. 
-#  vbellwait sec                           # Set delay for vbell message. See section 11.4 Bell. 
-#  version                                 # Display screen version. See section 20.11 Version. 
-#  wall message                            # Write a message to all displays. See section 8.4 Multiuser Session. 
-#  width [cols [lines]]                    # Set the width of the window. See section 11.10 Window Size. 
-#  windows                                 # List active windows. See section 10.7 Windows. 
-#  wrap [state]                            # Control line-wrap behavior. See section 11.8 Wrap. 
-#  writebuf [filename]                     # Write paste buffer to screen-exchange file. See section 12.4 Screen-Exchange. 
-#  writelock on|off|auto                   # Grant exclusive write permission. See section 8.4 Multiuser Session. 
-#  xoff                                    # Send an XOFF character. See section 15.3 XON and XOFF. 
-#  xon                                     # Send an XON character. See section 15.3 XON and XOFF. 
-#  zombie [keys]                           # Keep dead windows. See section 20.12 Zombie. 
+#  acladd usernames                        # Allow other users in this session. See section 8.4 Multiuser Session.
+#  aclchg usernames permbits list          # Change a user's permissions. See section 8.4 Multiuser Session.
+#  acldel username                         # Disallow other user in this session. See section 8.4 Multiuser Session.
+#  aclgrp usrname [groupname]              # Inherit permissions granted to a group leader. See section 8.4 Multiuser Session.
+#  aclumask [users]+/-bits ...             # Predefine access to new windows. See section 8.4.7 aclumask.
+#  activity message                        # Set the activity notification message. See section 10.6 Monitoring.
+#  addacl usernames                        # Synonym to acladd. See section 8.4 Multiuser Session.
+#  allpartial state                        # Set all windows to partial refresh. See section 11.7 Redisplay.
+#  at [ident][#|*|%] command [args]        # Execute a command at other displays or windows. See section 20.1 At.
+#  attrcolor attrib [attribute/color-modifier]          # Map attributes to colors. See section 20.15 Attrcolor.
+#  autodetach state                        # Automatically detach the session on SIGHUP. See section 8.1 Detach.
+#  autonuke state                          # Enable a clear screen to discard unwritten output. See section 16.6 Autonuke.
+#  bce [state]                             # Change background color erase. See section 11.11 Character Processing.
+#  bell_msg [message]                      # Set the bell notification message. See section 11.4 Bell.
+#  bind key [command [args]]               # Bind a command to a key. See section 14.1 The bind command.
+#  bindkey [opts] [string [cmd args]]      # Bind a string to a series of keystrokes. See section 14.5 Bindkey.
+#  break [duration]                        # Send a break signal to the current window. See section 20.2 Break.
+#  breaktype [tcsendbreak | TCSBRK | TIOCSBRK]          # Specify how to generate breaks. See section 20.2 Break.
+#  bufferfile [exchange-file]              # Select a file for screen-exchange. See section 12.4 Screen-Exchange.
+#  c1 [state]                              # Change c1 code processing. See section 11.11 Character Processing.
+#  caption mode [string]                   # Change caption mode and string. See section 9. Regions.
+#  chacl usernames permbits list           # Synonym to aclchg. See section 8.4 Multiuser Session.
+#  charset set                             # Change character set slot designation. See section 11.11 Character Processing.
+#  chdir [directory]                       # Change the current directory for future windows. See section 6.1 Chdir.
+#  clear                                   # Clear the window screen. See section 11.5 Clear.
+#  colon                                   # Enter a screen command. See section 4.2 Colon.
+#  command                                 # Simulate the screen escape key. See section 14.3 Command Character.
+#  compacthist [state]                     # Selects compaction of trailing empty lines. See section 12.1.2 Scrollback.
+#  console [state]                         # Grab or ungrab console output. See section 10.2 Console.
+#  copy                                    # Enter copy mode. See section 12.1 Copying.
+#  copy_reg [key]                          # Removed. Use paste instead. See section 12.3 Registers.
+#  crlf state                              # Select line break behavior for copying. See section 12.1.1 CR/LF.
+#  debug state                             # Suppress/allow debugging output. See section 20.3 Debug.
+#  defautonuke state                       # Select default autonuke behavior. See section 16.6 Autonuke.
+#  defbce state                            # Select background color erase. See section 11.11 Character Processing.
+#  defbreaktype [tcsendbreak | TCSBRK | TIOCSBRK]       # Specify the default for generating breaks. See section 20.2 Break.
+#  defc1 state                             # Select default c1 processing behavior. See section 11.11 Character Processing.
+#  defcharset [set]                        # Change default character set slot designation. See section 11.11 Character Processing.
+#  defescape xy                            # Set the default command and meta characters. See section 14.3 Command Character.
+#  defflow fstate                          # Select default flow control behavior. See section 15.2 Flow.
+#  defgr state                             # Select default GR processing behavior. See section 11.11 Character Processing.
+#  defhstatus [status]                     # Select default window hardstatus line. See section 10.8 Hardstatus.
+#  defkanji wtype                          # Select default GR processing behavior. See section 11.11 Character Processing.
+#  deflogin state                          # Select default utmp logging behavior. See section 10.4 Login.
+#  defmode mode                            # Select default file mode for ptys. See section 10.5 Mode.
+#  defmonitor state                        # Select default activity monitoring behavior. See section 10.6 Monitoring.
+#  defobuflimit limit                      # Select default output buffer limit. See section 16.7 Obuflimit.
+#  defscrollback num                       # Set default lines of scrollback. See section 12.1.2 Scrollback.
+#  defshell command                        # Set the default program for new windows. See section 6.4 Shell.
+#  defsilence state                        # Select default idle monitoring behavior. See section 20.8 Silence.
+#  defslowpaste msec                       # Select the default inter-character timeout when pasting. See section 12.2 Paste.
+#  defutf8 state                           # Select default character encoding. See section 11.11 Character Processing.
+#  defwrap state                           # Set default line-wrapping behavior. See section 11.8 Wrap.
+#  defwritelock on|off|auto                # Set default writelock behavior. See section 8.4 Multiuser Session.
+#  defzombie [keys]                        # Keep dead windows. See section 20.12 Zombie.
+#  detach                                  # Disconnect screen from the terminal. See section 8.1 Detach.
+#  digraph                                 # Enter digraph sequence. See section 11.3 Digraph.
+#  dinfo                                   # Display terminal information. See section 11.6 Info.
+#  displays                                # List currently active user interfaces. See section 8.4.6 Displays.
+#  dumptermcap                             # Write the window's termcap entry to a file. See section 16.2 Write out the window's termcap entry.
+#  echo [-n] message                       # Display a message on startup. See section 19. Startup.
+#  escape xy                               # Set the command and meta characters. See section 14.3 Command Character.
+#  exec [[fdpat] command [args ...]]       # Run a subprocess (filter). See section 13.1 Exec.
+#  fit                                     # Change window size to current display size. See section 11.10 Window Size.
+#  flow [fstate]                           # Set flow control behavior. See section 15.2 Flow.
+#  focus                                   # Move focus to next region. See section 9. Regions.
+#  gr [state]                              # Change GR charset processing. See section 11.11 Character Processing.
+#  hardcopy                                # Write out the contents of the current window. See section 18.1 hardcopy.
+#  hardcopy_append state                   # Append to hardcopy files. See section 18.1 hardcopy.
+#  hardcopydir directory                   # Place, where to dump hardcopy files. See section 18.1 hardcopy.
+#  hardstatus [state]                      # Use the hardware status line. See section 17.2 Hardware Status Line.
+#  height [lines [cols]]                   # Set display height. See section 11.10 Window Size.
+#  help                                    # Display current key bindings. See section 14.4 Help.
+#  history                                 # Find previous command beginning .... See section 12.5 History.
+#  hstatus status                          # Change the window's hardstatus line. See section 10.8 Hardstatus.
+#  info                                    # Display window settings. See section 11.6 Info.
+#  ins_reg [key]                           # Removed, use paste instead. See section 12.3 Registers.
+#  kanji wtype [dtype]                     # Set the kanji type of a window. See section 11.11 Character Processing.
+#  kill                                    # Destroy the current window. See section 10.3 Kill.
+#  lastmsg                                 # Redisplay the last message. See section 17.3 Display Last Message.
+#  license                                 # Display licensing information. See section 19. Startup.
+#  lockscreen                              # Lock the controlling terminal. See section 8.3 Lock.
+#  log [state]                             # Log all output in the current window. See section 18.2 log.
+#  logfile filename                        # Place where to collect logfiles. See section 18.2 log.
+#  login [state]                           # Log the window in `/etc/utmp'. See section 10.4 Login.
+#  logtstamp [state]                       # Configure logfile time-stamps. See section 18.2 log.
+#  mapdefault                              # Use only the default mapping table for the next keystroke. See section 14.7 Bindkey Control.
+#  mapnotnext                              # Don't try to do keymapping on the next keystroke. See section 14.7 Bindkey Control.
+#  maptimeout timo                         # Set the inter-character timeout used for keymapping. See section 14.7 Bindkey Control.
+#  markkeys string                         # Rebind keys in copy mode. See section 12.1.3 markkeys.
+#  meta                                    # Insert the command character. See section 14.3 Command Character.
+#  monitor [state]                         # Monitor activity in window. See section 10.6 Monitoring.
+#  msgminwait sec                          # Set minimum message wait. See section 17.4 Message Wait.
+#  msgwait sec                             # Set default message wait. See section 17.4 Message Wait.
+#  multiuser state                         # Go into single or multi user mode. See section 8.4 Multiuser Session.
+#  nethack state                           # Use nethack-like error messages. See section 20.5 Nethack.
+#  next                                    # Switch to the next window. See section 7. Selecting a Window.
+#  nonblock state                          # Disable flow control to the current display. See section 20.6 Nonblock.
+#  number [n]                              # Change/display the current window's number. See section 20.7 Number.
+#  obuflimit [limit]                       # Select output buffer limit. See section 16.7 Obuflimit.
+#  only                                    # Kill all other regions. See section 9. Regions.
+#  other                                   # Switch to the window you were in last. See section 7. Selecting a Window.
+#  partial state                           # Set window to partial refresh. See section 11.7 Redisplay.
+#  password [crypted_pw]                   # Set reattach password. See section 8.1 Detach.
+#  paste [src_regs [dest_reg]]             # Paste contents of paste buffer or registers somewhere. See section 12.2 Paste.
+#  pastefont [state]                       # Include font information in the paste buffer. See section 12.2 Paste.
+#  pow_break                               # Close and Reopen the window's terminal. See section 20.2 Break.
+#  pow_detach                              # Detach and hang up. See section 8.2 Power Detach.
+#  pow_detach_msg [message]                # Set message displayed on pow_detach. See section 8.2 Power Detach.
+#  prev                                    # Switch to the previous window. See section 7. Selecting a Window.
+#  printcmd [cmd]                          # Set a command for VT100 printer port emulation. See section 20.13 Printcmd.
+#  process [key]                           # Treat a register as input to screen. See section 12.3 Registers.
+#  quit                                    # Kill all windows and exit. See section 8.7 Quit.
+#  readbuf [filename]                      # Read the paste buffer from the screen-exchange file. See section 12.4 Screen-Exchange.
+#  readreg [reg [file]]                    # Load a register from paste buffer or file. See section 12.3 Registers.
+#  redisplay                               # Redisplay the current window. See section 11.7 Redisplay.
+#  register key string                     # Store a string to a register. See section 12.3 Registers.
+#  remove                                  # Kill current region. See section 9. Regions.
+#  removebuf                               # Delete the screen-exchange file. See section 12.4 Screen-Exchange.
+#  reset                                   # Reset the terminal settings for the window. See section 11.9 Reset.
+#  resize [(+/-)lines]                     # Grow or shrink a region
+#  screen [opts] [n] [cmd [args]]          # Create a new window. See section 6.2 Screen Command.
+#  scrollback num                          # Set size of scrollback buffer. See section 12.1.2 Scrollback.
+#  select [n]                              # Switch to a specified window. See section 7. Selecting a Window.
+#  sessionname [name]                      # Name this session. See section 8.5 Session Name.
+#  setenv [var [string]]                   # Set an environment variable for new windows. See section 6.3 Setenv.
+#  shell command                           # Set the default program for new windows. See section 6.4 Shell.
+#  shelltitle title                        # Set the default name for new windows. See section 6.4 Shell.
+#  silence [state|seconds]                 # Monitor a window for inactivity. See section 20.8 Silence.
+#  silencewait seconds                     # Default timeout to trigger an inactivity notify. See section 20.8 Silence.
+#  sleep num                               # Pause during startup. See section 19. Startup.
+#  slowpaste msec                          # Slow down pasting in windows. See section 12.2 Paste.
+#  sorendition [attr [color]]              # Change text highlighting. See section 20.14 Sorendition.
+#  split                                   # Split region into two parts. See section 9. Regions.
+#  startup_message state                   # Display copyright notice on startup. See section 19. Startup.
+#  stuff string                            # Stuff a string in the input buffer of a window. See section 12.2 Paste.
+#  su [username [password [password2]]]    # Identify a user. See section 8.4 Multiuser Session.
+#  suspend                                 # Put session in background. See section 8.6 Suspend.
+#  term term                               # Set $TERM for new windows. See section 6.5 Term.
+#  termcap term terminal-tweaks [window-tweaks]         # Tweak termcap entries for best performance. See section 16.3 The termcap command.
+#  terminfo term terminal-tweaks [window-tweaks]        # Ditto, for terminfo systems. See section 16.3 The termcap command.
+#  termcapinfo term terminal-tweaks [window-tweaks]     # Ditto, for both systems. See section 16.3 The termcap command.
+#  time                                    # Display time and load average. See section 20.9 Time.
+#  title [windowtitle]                     # Set the name of the current window. See section 10.1.1 Title Command.
+#  umask [users]+/-bits ...                # Synonym to aclumask. See section 8.4.7 aclumask.
+#  unsetenv var                            # Unset environment variable for new windows. See section 6.3 Setenv.
+#  utf8 [state [dstate]]                   # Select character encoding of the current window. See section 11.11 Character Processing.
+#  vbell [state]                           # Use visual bell. See section 11.4 Bell.
+#  vbell_msg [message]                     # Set vbell message. See section 11.4 Bell.
+#  vbellwait sec                           # Set delay for vbell message. See section 11.4 Bell.
+#  version                                 # Display screen version. See section 20.11 Version.
+#  wall message                            # Write a message to all displays. See section 8.4 Multiuser Session.
+#  width [cols [lines]]                    # Set the width of the window. See section 11.10 Window Size.
+#  windows                                 # List active windows. See section 10.7 Windows.
+#  wrap [state]                            # Control line-wrap behavior. See section 11.8 Wrap.
+#  writebuf [filename]                     # Write paste buffer to screen-exchange file. See section 12.4 Screen-Exchange.
+#  writelock on|off|auto                   # Grant exclusive write permission. See section 8.4 Multiuser Session.
+#  xoff                                    # Send an XOFF character. See section 15.3 XON and XOFF.
+#  xon                                     # Send an XON character. See section 15.3 XON and XOFF.
+#  zombie [keys]                           # Keep dead windows. See section 20.12 Zombie.
 
