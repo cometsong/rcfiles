@@ -4,7 +4,7 @@ read -p "
   ==============================================================
   IMPORTANT!!!
    This file will REMOVE the startup files in your home dir (~) 
-   and create symbolic links to the rcfiles replacements.
+   and create links to the rcfiles replacements (symbolic if dir).
 
   ==============================================================
   ALSO!!!
@@ -31,12 +31,16 @@ lnkRCs=(rcprofile bash_profile zshrc bashrc bash_completion
         )
 
 for LName in ${lnkRCs[@]} ; do {
-  if (test -a $HOME/.$LName || test -h $HOME/.$LName); # if file or link exists
-  then  rm -f $HOME/.$LName ;                          # rm ~/link
+  if (test -d $LName)                             # if it's a dir
+    then  rm -rf $HOME/.$LName ;                  # rm ~/dir
+          ln -sf $RCPATH/$LName $HOME/.$LName     # create new link to dir
+  else 
+    if (test -e $LName);                              # if file exists
+        then  rm -f $HOME/.$LName ;                   # rm ~/link
+              ln -f $RCPATH/$LName $HOME/.$LName      # create new link to file
+    fi
   fi
-
   echo "    Link to $LName....   $RCPATH/$LName"
-  ln -sf $RCPATH/$LName $HOME/.$LName              # create new link to rcfile
   };
 done
 
@@ -56,7 +60,7 @@ for B in $BINS; do
     fi
 
     echo "    Link to $HOME/bin/$B...."
-    ln -s $RCPATH/bin/$B $HOME/bin/$B               # create new link to rcfile
+    ln -f $RCPATH/bin/$B $HOME/bin/$B               # create new link to rcfile
 done
 
 
