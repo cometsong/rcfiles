@@ -16,6 +16,7 @@ source $RCPATH/zsh_compctl     # load compctl settings
 source $RCPATH/prompt_colors
 
 # vc-awesome prompt format
+export VCPROMPT_TIMEOUT=2
 export VCPROMPT_FORMAT="%{${FG_G}%}[%{${FG_B}%}%s:%b:%m%u%{${FG_G}%}]"
 
 local PWDlength=30
