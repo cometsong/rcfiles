@@ -70,6 +70,9 @@ alias vnckill='vnc4server -kill' #followed by :1, :2
 alias htc='sudo vim /etc/apache2/httpd.conf'
 alias htr='sudo /etc/init.d/apache2 restart'
 
+##### qsub #####
+alias qu='qstat -u $USER'
+
 ##### ssh #####
 alias ssx='ssh -X'
 
