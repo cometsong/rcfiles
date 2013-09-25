@@ -25,7 +25,6 @@ source $RCPATH/git_user.sh
 # List of rcfiles for ln from git repo dir to home dir:
 lnkRCs=(rcprofile bash_profile zshrc bashrc bash_completion
         toprc screenrc tmux.conf
-        vimrc gvimrc vim 
         gitconfig gitignore_global git_template_global
         perltidyrc pythonrc.py pylintrc inputrc
         pinerc

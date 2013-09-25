@@ -16,8 +16,6 @@ Just follow these old vague directions:
 
         ln -s ~/[rcfiles.git.dir]/zshrc ~/.zshrc
         ln -s ~/[rcfiles.git.dir]/bash_profile ~/.bash_profile
-        ln -s ~/[rcfiles.git.dir]/vimrc ~/.vimrc
-        ln -s ~/[rcfiles.git.dir]/vim ~/.vim
         for each and every file that you want there
 
 Of course replacing "`[rcfiles.git.dir]`" with the actual directory you've cloned
