@@ -1,9 +1,6 @@
 ## To use this 'rcfiles' project:
 
 -----------------------------------------------------------------  
-> **It can be installed via an included shell script: INSTALL.sh**  
-
------------------------------------------------------------------  
 To Install, simply clone the git repository to wherever you'd like to keep it.
 Then cd to that dir, check/edit the Makefile, and run 'make'
 
