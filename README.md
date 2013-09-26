@@ -4,10 +4,11 @@
 > **It can be installed via an included shell script: INSTALL.sh**  
 
 -----------------------------------------------------------------  
-Simply clone the git repository to wherever you'd like to keep it.
-Then run the included INSTALL.sh script to have it create the links
-and to modify the primary rc starters.
+To Install, simply clone the git repository to wherever you'd like to keep it.
+Then cd to that dir, check/edit the Makefile, and run 'make'
 
+This will delete all links/files that exist in your home dir (or other 
+destination) and make new ones from the files in this repo.
 
 
 **OR.........................................**  
@@ -26,12 +27,10 @@ If your prefer actual files instead of links, then just copy the desired files
 to your `$HOME` directory.
 
 
-One note: there's a file named '`my_aliases`' referring to a file with mysql db
-connection shortcuts which includes the passwords, hosts, etc. and thus the file
-won't exist for you as it's not part of this repo of files.
+One note: there's a file named '`my_aliases`' referring to a file with private
+shortcuts, functions, etc. It's in gitignore, but it IS linked to, so if you
+don't have it, then just rm the resulting link, or create a while new file of
+excitement!
 
-Sooooo... either delete the reference to it, or create your own file in its
-places or not.
-
--Jamin-
-
+Smile,
+    Cometsong
