@@ -37,4 +37,4 @@ tags_excludelist='*.@(o|O|so|SO|so.!(conf)|SO.!(CONF)|a|A|rpm|RPM|deb|DEB|gif|GI
 complete -F _vim_ctags -f -X "${tags_excludelist}" vi vim gvim mvim rvim view rview rgvim rgview gview
 
 # source Completion function for all aliases
-source .bash_completion_alias
+source $HOME/.bash_completion_alias

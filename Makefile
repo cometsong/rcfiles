@@ -15,7 +15,7 @@ gits: git-init submodules
 RCFILES = rcprofile $(SHFILES) $(LANGFILES) $(OTHERFILES)
 SHFILES = $(ZSHFILES) $(BASHFILES)
 ZSHFILES = zshrc
-BASHFILES = bash_profile bashrc bash_completion bash_completion_aliases
+BASHFILES = bash_profile bashrc bash_completion bash_completion_alias
 LANGFILES = inputrc perltidyrc pythonrc.py pylintrc
 OTHERFILES = toprc inputrc screenrc tmux.conf
 
