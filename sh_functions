@@ -135,7 +135,7 @@ function guom() {
 
 # queries config for all remote repos, pushes master to all
 function gpam() { 
-    REMOTES=`git remote -v | cut -f 1 | uniq`
+    REMOTES=( $(git remote) )
     for R in $REMOTES; do 
         echo Pushing to $R
         git push --tags $R master
