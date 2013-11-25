@@ -2,14 +2,14 @@
 [alias]
     a     = add
     aa    = add .
-    br    = branch --color --verbose
-    bra   = branch --color --abbrev
+    br    = branch --verbose
+    bra   = branch --abbrev
     cfg   = config
     cfl   = config -l
     chk   = checkout
     cb    = checkout -b
-    d     = diff --color
-    dh    = diff --color HEAD
+    d     = diff
+    dh    = diff HEAD
     vimdiff = difftool -y -t vimdiff -R
     rh    = reset HEAD
     s     = status
@@ -31,9 +31,10 @@
     mg    = merge
     mgf   = merge FETCH_HEAD
 [alias]
-    ll    = log --color --decorate --source
-    lo    = log --color --oneline --decorate --source
-    ls    = log --date=short --pretty='%C(yellow reverse)%h%Creset %C(yellow)%cn%Creset %C(green)%cd%Creset %d =%m %s'
+    log   = log --decorate
+    ll    = log --decorate --pretty='Commit:%Creset %C(yellow)%h%C(green)%d%Creset %C(white)%ci%nAuthor:%Creset %C(blue)%an %Creset<%ae>%nTitle:  %C(white)%s%n'
+    la    = log --decorate --date=short --pretty='%C(yellow)%h%Creset %C(blue)%cn%Creset %C(green)%cd%C(white)%d%Creset %s'
+    ls    = log --decorate --oneline --date=short
 [giggle]
     compact-mode = false
     main-window-maximized = false
@@ -45,3 +46,24 @@
 	templatedir = ~/.git_template_global
 [core]
 	excludesfile = ~/.gitignore_global
+[color]
+    branch = true
+    diff = true
+    interactive = true
+    status = true
+    grep = true
+    ui = true
+;colors: normal, black, red, green, yellow, blue, magenta, cyan, white
+[color "diff"]
+    plain = white
+    commit = yellow
+    whitespace = normal
+    old = red
+    new = green
+[color "decorate"]
+    branch = green
+    remoteBranch = green
+    tag = cyan
+    HEAD = blue
+    tags = normal
+    author = blue
