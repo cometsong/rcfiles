@@ -16,7 +16,7 @@ RCFILES = rcprofile $(SHFILES) $(LANGFILES) $(OTHERFILES)
 SHFILES = $(ZSHFILES) $(BASHFILES)
 ZSHFILES = zshrc
 BASHFILES = bash_profile bashrc bash_completion bash_completion_alias
-LANGFILES = inputrc perltidyrc pythonrc.py pylintrc
+LANGFILES = inputrc perltidyrc pythonrc.py pylintrc Rprofile
 OTHERFILES = toprc inputrc screenrc tmux.conf
 
 GITFILES = gitconfig gitignore_global git_template_global
