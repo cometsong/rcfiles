@@ -17,7 +17,7 @@ SHFILES = $(ZSHFILES) $(BASHFILES)
 ZSHFILES = zshrc
 BASHFILES = bash_profile bashrc bash_completion bash_completion_alias
 LANGFILES = inputrc perltidyrc pythonrc.py pylintrc Rprofile
-OTHERFILES = toprc inputrc screenrc tmux.conf
+OTHERFILES = toprc inputrc screenrc tmux.conf osx
 
 GITFILES = gitconfig gitignore_global git_template_global
 BINFILES=$(shell ls -1 $(SRCDIR)/bin)
