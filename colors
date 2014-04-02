@@ -1,33 +1,56 @@
 #####  Colors  #####
 
+# tput color ref:
+#
+#    tput setab color
+#    tput setaf color
+#    tput bold
+#    tput dim
+#    tput smul
+#    tput rmul
+#    tput rev
+#    tput smso|rmso  (standout mode)
+#    tput sgr0 (Reset all)
+#
+#   Color   Code
+#    Black   0
+#    Red     1
+#    Green   2
+#    Yellow  3
+#    Blue    4
+#    Magenta 5
+#    Cyan    6
+#    White   7
+
+
 # Attributes
-NORM=$'\e[0m'
-BOLD=$'\e[1m'
-ITAL=$'\e[3m'
-UNDL=$'\e[4m'
-BOLDOFF=$'\e[22m'
-ITALOFF=$'\e[23m'
-UNDLOFF=$'\e[24m'
+NORM=$(tput sgr0)
+BOLD=$(tput bold)
+ITAL=$(tput smso)
+UNDL=$(tput smul)
+BOLDOFF=$(tput dim)
+ITALOFF=$(tput rmso)
+UNDLOFF=$(tput rmul)
 
 # FOREGROUND colors
-FG_K=$'\e[0;30m'    # black
-FG_R=$'\e[0;31m'    # red
-FG_G=$'\e[0;32m'    # green
-FG_Y=$'\e[0;33m'    # yellow
-FG_B=$'\e[0;34m'    # blue
-FG_M=$'\e[0;35m'    # magenta
-FG_C=$'\e[0;36m'    # cyan
-FG_W=$'\e[0;37m'    # white
+FG_K=$(tput setaf 0)    # black
+FG_R=$(tput setaf 1)    # red
+FG_G=$(tput setaf 2)    # green
+FG_Y=$(tput setaf 3)    # yellow
+FG_B=$(tput setaf 4)    # blue
+FG_M=$(tput setaf 5)    # magenta
+FG_C=$(tput setaf 6)    # cyan
+FG_W=$(tput setaf 7)    # white
 
 # BACKGROUND colors
-BG_K=$'\e[40m'
-BG_R=$'\e[41m'
-BG_G=$'\e[42m'
-BG_Y=$'\e[43m'
-BG_B=$'\e[44m'
-BG_M=$'\e[45m'
-BG_C=$'\e[46m'
-BG_W=$'\e[47m'
+BG_K=$(tput setab 0)    # black
+BG_R=$(tput setab 1)    # red
+BG_G=$(tput setab 2)    # green
+BG_Y=$(tput setab 3)    # yellow
+BG_B=$(tput setab 4)    # blue
+BG_M=$(tput setab 5)    # magenta
+BG_C=$(tput setab 6)    # cyan
+BG_W=$(tput setab 7)    # white
 
 # function 'colors' from https://wiki.archlinux.org/index.php/Color_Bash_Prompt
 function colors() {
