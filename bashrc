@@ -61,12 +61,12 @@ source $RCPATH/prompt_colors
 
 # vc-awesome prompt format
 export VCPROMPT_TIMEOUT=2
-export VCPROMPT_FORMAT="${FG_G}[${FG_B}%s:%b:%m%u${FG_G}]"
+export VCPROMPT_FORMAT="-${DC}(${FG_B}%s:%b:%m%u${DC})"
 
 # (date-mnth 24h)-(!hist)-(user@hostname)-(shell)-[~pwd]\n=>
-PS1L="${DC}(${RCy}\D{%d-%b %T}${DC})-(!${RCw}\!${DC})"
-PS1L+="-(${RCy}\u${DC}@${RCy}\h${DC})"
-PS1L+="-(${RCy}\s${DC})-[${RCw}\$(setPWD)${DC}]"
-PS1="${PS1L}
-\$(vcprompt) => ${FG_W}${NORM}"
+PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
+PS1L+="-(\[${RCy}\]\u\[${DC}\]@\[${RCy}\]\h\[${DC}\])"
+PS1L+="-(\[${RCy}\]\s\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
+PS1="${PS1L}\$(vcprompt)
+=> \[${NORM}\]"
 unset PS1L
