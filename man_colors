@@ -1,0 +1,8 @@
+# man colorific!
+LESS_TERMCAP_mb=$FG_R        # enter blinking mode - red
+LESS_TERMCAP_md=$FG_Y        # enter double-bright mode - green
+LESS_TERMCAP_me=$NORM        # turn off all appearance modes
+LESS_TERMCAP_se=$NORM        # leave standout mode
+LESS_TERMCAP_so=$ITAL$FG_Y   # standout mode - yellow
+LESS_TERMCAP_ue=$NORM        # leave underline mode
+LESS_TERMCAP_us=$UNDL$FG_C   # underline - magenta

@@ -19,6 +19,7 @@ current_os
 
 ##### multi-dotfile setup ##### 
 source $RCPATH/colors          # load color vars
+source $RCPATH/man_colors      # load man_colors
 source $RCPATH/aliases         # load aliases 
 source $RCPATH/sh_functions    # load sh functions
 
