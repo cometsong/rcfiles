@@ -1,0 +1,77 @@
+#!/bin/sh
+#/ Usage: vvv [<options>] <env> [<command> [<args>]]
+#/
+#/ Options:
+#/   -c ENV [virtualenv_opts] Create a virtuelenv with the given options
+#/   -d ENV                   Delete a virtualenv
+#/   -h                       Print this message and exit
+PROGNAME=$(basename "$0")
+VIRTUAL_ENV_ROOT="${VIRTUAL_ENV_ROOT:-$HOME/.virtualenvs}"
+
+abort() {
+  echo "$PROGNAME: $1" >&2
+  exit 1
+}
+
+usage() {
+  grep "^#/" $0 | cut -c4- >&2
+  exit 2
+}
+
+activate() {
+  VIRTUAL_ENV="$VIRTUAL_ENV_ROOT/$1"
+  [ -d "$VIRTUAL_ENV" ] || abort "Unknown virtualenv '$1'"
+  shift
+
+  export VIRTUAL_ENV
+  export PATH="$VIRTUAL_ENV/bin:$PATH"
+  unset PYTHON_HOME
+  exec "${@:-$SHELL}"
+}
+
+create() {
+  [ -d "$VIRTUAL_ENV_ROOT/$1" ] && abort "virtualenv '$1' already exists"
+  virtualenv ${@:2} "$VIRTUAL_ENV_ROOT/$1"
+}
+
+delete() {
+  if [ -n "$VIRTUAL_ENV" ]; then
+    if [ "$(basename $VIRTUAL_ENV)" = "$1" ]; then
+      abort "Cannot delete the active virtualenv"
+    fi
+  fi
+  rm -rf "$VIRTUAL_ENV_ROOT/$1"
+}
+
+list() {
+  find "$VIRTUAL_ENV_ROOT" -maxdepth 1 -type d | sed '1d' | xargs -n1 basename 2> /dev/null
+  exit
+}
+
+while getopts :hd:c: o; do
+  case "$o" in
+    d)
+      delete "$OPTARG"
+      exit
+      ;;
+    c)
+      create "$OPTARG" "${@:3}"
+      activate "$OPTARG"
+      exit
+      ;;
+    h|\?|:)
+      usage
+      ;;
+  esac
+done
+
+shift $((OPTIND-1))
+
+# make sure $VIRTUAL_ENV_ROOT exists
+[ -d "$VIRTUAL_ENV_ROOT" ] ||  abort "$VIRTUAL_ENV_ROOT does not exist"
+
+# no arguments so print all virtualenvs
+[ $# -eq 0 ] && list
+
+# go!
+activate "$1" "${@:2}"
