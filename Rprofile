@@ -1,9 +1,8 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Rprofile (cometsong) ~~~~~
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Default Repo Setup ~~~~~
-repo_list <- c(CRAN   = "http://cran.us.r-project.org/"
-             , Rforge = "http://r-forge.r-project.org"
-               )
+# R is too stupid to multiple repos
+repo_list <- c("http://cran.us.r-project.org/")
 options(repos = repo_list)
 rm(repo_list) #cleanup
 
