@@ -45,15 +45,16 @@ function sclists() {
 }
 
 # from tmux-list.sh (more comments for readability in there)
-function tmlists() {
+function tmlists {
     if [[ ! -z $1 ]]; then
-        FORMAT='-F #{session_name} #{session_windows} #{?session_attached,Attached,Detached}'
+        LONG=1
+        CMD="tmux ls -F '#{session_name} #{session_windows} #{?session_attached,Attached,Detached}'"
     else
-        FORMAT=''
+        CMD="tmux ls"
     fi
-    LL=$(tmux ls $FORMAT 2> /dev/null | sort)
+    LL=$(eval $CMD 2> /dev/null | sort)
 
-    if [[ "x$LL" != "x" && ! -z $FORMAT ]]; then
+    if [[ "x$LL" != "x" && ! -z $LONG ]]; then
         echo "tmux sessions:"
         listawkout "name wins status"
         listawkout "------------ ------ ----------"
