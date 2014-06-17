@@ -17,6 +17,9 @@ function current_os {
 # run current_os func here:
 current_os
 
+# for tput to complain less
+export TERM=xterm
+
 ##### multi-dotfile setup ##### 
 source $RCPATH/colors          # load color vars
 source $RCPATH/man_colors      # load man_colors
