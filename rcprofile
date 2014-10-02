@@ -57,6 +57,8 @@ if [[ -n $APPLE ]]; then
     # for coreutils
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    # for java
+    JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 fi
 
 ##### prepend $PATH with $HOME bins
