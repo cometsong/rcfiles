@@ -72,6 +72,7 @@ alias htr='sudo /etc/init.d/apache2 restart'
 
 ##### qsub #####
 alias qu='qstat -u $USER'
+alias qi='qsub -I'
 
 ##### ssh #####
 alias ssx='ssh -X'
