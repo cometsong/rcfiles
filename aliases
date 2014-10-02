@@ -61,11 +61,6 @@ alias  py=python
 alias py2=python2
 alias py3=python3
 
-##### vnc #####
-alias vncstart2='vnc4server -geometry 1500x1100 -depth 16 -desktop `uname -n`2 :2' #desktop size
-alias vncstart3='vnc4server -geometry 1430x850 -depth 16 -desktop `uname -n`3 :3'  #macbook size
-alias vnckill='vnc4server -kill' #followed by :1, :2
-
 ##### apache2 #####
 alias htc='sudo vim /etc/apache2/httpd.conf'
 alias htr='sudo /etc/init.d/apache2 restart'
