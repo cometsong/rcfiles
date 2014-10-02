@@ -2,6 +2,9 @@
 #                  Bash Completion Options of Cometsong rcfiles                #
 # ---------------------------------------------------------------------------- #
 
+# source Completion function for all aliases
+source $HOME/.bash_completion_alias
+
 # For use with vim and ctags
 # from http://vim.wikia.com/wiki/Using_bash_completion_with_ctags_and_Vim, with 'mvim' added to last line
 _vim_ctags() {
@@ -36,5 +39,13 @@ _vim_ctags() {
 tags_excludelist='*.@(o|O|so|SO|so.!(conf)|SO.!(CONF)|a|A|rpm|RPM|deb|DEB|gif|GIF|jp?(e)g|JP?(E)G|mp3|MP3|mp?(e)g|MP?(E)G|avi|AVI|asf|ASF|ogg|OGG|class|CLASS)'
 complete -F _vim_ctags -f -X "${tags_excludelist}" vi vim gvim mvim rvim view rview rgvim rgview gview
 
-# source Completion function for all aliases
-source $HOME/.bash_completion_alias
+# pip bash completion start
+_pip_completion()
+{
+    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   PIP_AUTO_COMPLETE=1 $1 ) )
+}
+complete -o default -F _pip_completion pip
+# pip bash completion end
+
