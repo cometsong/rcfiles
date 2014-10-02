@@ -32,6 +32,7 @@ set editing-mode vi
 
 ## Use bash-completion, if available
 for B in /etc/bash_completion \
+         $(brew --prefix)/share/bash-completion/bash_completion \
          /usr/local/etc/bash_completion ;
     do
     [[ $PS1 && -f $B ]] && . $B && break
