@@ -31,13 +31,13 @@ set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
 
 ## Use bash-completion, if available
-for B in /etc/bash_completion \
-         $(brew --prefix)/share/bash-completion/bash_completion \
-         /usr/local/etc/bash_completion ;
-    do
+BCOMPS="/etc/bash_completion /usr/local/etc/bash_completion"
+if [[ -n $APPLE ]]; then BCOMPS+=" $(brew --prefix)/share/bash-completion/bash_completion"; fi
+  
+for B in ${BCOMPS}; do
     [[ $PS1 && -f $B ]] && . $B && break
 done
-unset B
+unset B BCOMPS
 source $RCPATH/bash_completion
 
 # set cmd prompt:
