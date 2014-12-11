@@ -22,8 +22,6 @@ alias llr='ls -lRh'        # long,recursive,show type,human readable
 alias lt='ls -lth'         # long,sorted by date,show type,human readable
 alias l.='ls -d .[^.]*'    # short,.dotfiles only
 alias ll.='ls -ld .[^.]*'  # long,.dotfiles only
-alias lsd='ls -d *(-/DN)'  # ls short, dirs only
-alias lld='ls -ld *(-/DN)' # ls long, dirs only
 
 ##### Screen aliases #####
 alias scn='screen'          # start a new screen session
@@ -67,6 +65,9 @@ alias htr='sudo service httpd restart'
 ##### qsub #####
 alias qu='qstat -u $USER'
 alias qi='qsub -I'
+alias qi2='qsub -l walltime=24:00:00,nodes=1:ppn=8 -I -d $PWD'
+alias qi4='qsub -l walltime=48:00:00,nodes=1:ppn=8 -I -d $PWD'
+alias qsd='qsub -l walltime=24:00:00,nodes=1:ppn=8 -d $PWD'
 
 ##### ssh #####
 alias ssx='ssh -X'
