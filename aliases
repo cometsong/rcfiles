@@ -64,10 +64,11 @@ alias htr='sudo service httpd restart'
 
 ##### qsub #####
 alias qu='qstat -u $USER'
-alias qi='qsub -I'
+alias qi='qsub -l walltime=216:00:00,nodes=1:ppn=8 -I -d $PWD'
 alias qi2='qsub -l walltime=24:00:00,nodes=1:ppn=8 -I -d $PWD'
 alias qi4='qsub -l walltime=48:00:00,nodes=1:ppn=8 -I -d $PWD'
 alias qsd='qsub -l walltime=24:00:00,nodes=1:ppn=8 -d $PWD'
+alias qs4='qsub -l walltime=48:00:00,nodes=1:ppn=8 -d $PWD'
 
 ##### ssh #####
 alias ssx='ssh -X'
