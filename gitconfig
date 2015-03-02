@@ -1,4 +1,6 @@
 [user]
+    name = cometsong
+    email = benjamin@cometsong.net
 [alias]
     a     = add
     aa    = add .
@@ -35,13 +37,6 @@
     ll    = log --decorate --pretty='Commit:%Creset %C(yellow)%h%C(green)%d%Creset %C(white)%ci%nAuthor:%Creset %C(blue)%an %Creset<%ae>%nTitle:  %C(white)%s%n'
     la    = log --decorate --date=short --pretty='%C(yellow)%h%Creset %C(blue)%cn%Creset %C(green)%cd%C(white)%d%Creset %s'
     ls    = log --decorate --oneline --date=short
-[giggle]
-    compact-mode = false
-    main-window-maximized = false
-    main-window-geometry = 961x1020+0+25
-[user]
-    name = cometsong
-    email = benjamin@cometsong.net
 [init]
 	templatedir = ~/.git_template_global
 [core]
@@ -67,3 +62,10 @@
     HEAD = blue
     tags = normal
     author = blue
+[push]
+    default = current
+[git-up "fetch"]
+	prune = true
+	all = true
+[git-up "rebase"]
+	show-hashes = true
