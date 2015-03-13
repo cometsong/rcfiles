@@ -114,9 +114,8 @@ function gfms() {
   git-sub-pull
 }
 function git-sub-pull() {
-  # TODO: currently only 'origin' repo and  'master' branch; make it broader.
-  REPO=origin
-  BRANCH=master
+  REPO=${1:-origin}
+  BRANCH=${2:-master}
   git submodule foreach --recursive '
     git checkout $BRANCH;
     git pull $REPO $BRANCH;
