@@ -64,6 +64,7 @@ alias htr='sudo service httpd restart'
 
 ##### qsub #####
 alias qu='qstat -u $USER'
+alias qj="qu -f | grep '[Jj]ob\( Id\|_Name\|_state\)\|resources_used.walltime'"
 alias qi='qsub -l walltime=333:33:33,nodes=1:ppn=8 -I -d $PWD'
 alias qi2='qsub -l walltime=24:00:00,nodes=1:ppn=8 -I -d $PWD'
 alias qi4='qsub -l walltime=48:00:00,nodes=1:ppn=8 -I -d $PWD'
