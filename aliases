@@ -84,6 +84,7 @@ alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu -
 alias psc="ps f -o pid,cputime,cmd -C"
 alias datey='date +"%Y-%m-%d %H:%M:%S"'
 alias treef='tree -FuCh' # /*, user, colors, human sizes
+alias duh='du -csh'
 
 # Mac aliases...
 if [[ -n $APPLE ]]; then {
