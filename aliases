@@ -98,3 +98,4 @@ if [[ -n $APPLE ]]; then {
   alias htr='sudo /etc/init.d/httpd restart'
 }; fi
 
+alias psmem="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"
