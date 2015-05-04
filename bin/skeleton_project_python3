@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+#===============================================================================
+#         FILE: skeleton_project_python [projectname [submodule_name]]
+#  DESCRIPTION: Creates python3 virtual env and skeleton_project folder structure
+#       AUTHOR: B. Leopold (cometsong), benjamin(at)cometsong(dot)net
+#    COPYRIGHT: Copyright (c) 2015, B. Leopold
+#      LICENSE: GNU General Public License v3+
+#      CREATED: 2015-05-01 11:39:32-0400
+#===============================================================================
+set -o nounset                                # Treat unset variables as an error
+
+projectname=${1:-'skeleton_project'}
+module_name=${2:-'app_module'}
+
+### Dirs
+mkdir -p ${projectname}/{${module_name},bin,docs,tests};
+
+### Files
+touch ${projectname}/${module_name}/{__init__.py,${module_name}.py}
+touch ${projectname}/tests/{__init__.py,${module_name}_tests.py}
+touch ${projectname}/setup.py
+
+### Contents
+cat <<EOF > ${projectname}/setup.py
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+
+    config = {
+        'description': 'The coolest ${projectname} project!',
+        'author': 'Benjamin Leopold (cometsong)',
+        'url': 'URL to get it at.',
+        'download_url': 'Where to download it.',
+        'author_email': 'benjamin(at)cometsong(dot)net',
+        'version': '0.1',
+        'install_requires': ['nose'],
+        'packages': ['${module_name}'],
+        'scripts': [],
+        'name': '${projectname}'
+    }
+
+    setup(**config)
+EOF
+
+cat <<EOF > ${projectname}/tests/${module_name}_tests.py
+from __future__ import print_function
+
+from nose.tools import *
+import ${module_name}
+
+def setup():
+    """set up test fixtures"""
+    print("SETUP!")
+
+def teardown():
+    """tear down test fixtures"""
+    print("TEAR DOWN!")
+
+#@with_setup(setup, teardown)
+def test_basic():
+    """test nosetests running"""
+    print("I RAN!")
+EOF
+
+### pyvenv
+pyvenv ${projectname}
+
+### nosetests
+#echo << EOF >&1
+cd ${projectname}
+bash -c ". ./bin/activate && pip install nose && nosetests"
+#EOF
