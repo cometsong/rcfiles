@@ -22,6 +22,8 @@ alias llr='ls -lRh'        # long,recursive,show type,human readable
 alias lt='ls -lth'         # long,sorted by date,show type,human readable
 alias l.='ls -d .[^.]*'    # short,.dotfiles only
 alias ll.='ls -ld .[^.]*'  # long,.dotfiles only
+alias lg="ls -lhgG"        # long,human,no group/owner shown
+alias lsd="ls -ldhgG"      # long,human,no group/owner shown, do not recurse directories
 
 ##### Screen aliases #####
 alias scn='screen'          # start a new screen session
@@ -98,3 +100,4 @@ if [[ -n $APPLE ]]; then {
   alias htr='sudo /etc/init.d/httpd restart'
 }; fi
 
+alias psmem="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"
