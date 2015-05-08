@@ -38,9 +38,11 @@
     la    = log --decorate --date=short --pretty='%C(yellow)%h%Creset %C(blue)%cn%Creset %C(green)%cd%C(white)%d%Creset %s'
     ls    = log --decorate --oneline --date=short
 [init]
-	templatedir = ~/.git_template_global
+    templatedir = ~/.git_template_global
 [core]
-	excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global
+[status]
+    submodulesummary = true
 [color]
     branch = true
     diff = true
@@ -65,7 +67,7 @@
 [push]
     default = current
 [git-up "fetch"]
-	prune = true
-	all = true
+    prune = true
+    all = true
 [git-up "rebase"]
-	show-hashes = true
+    show-hashes = true
