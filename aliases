@@ -43,7 +43,7 @@ alias tmll='tmlists long'   # list out tmux sessions (long format)
 alias tmls='tmlists'        # list out tmux sessions (default format)
 
 # Session List of screen and tmux
-alias sessls='sclists; tmlists long'
+alias sessls='sclists; tmlists'
 alias sls=sessls
 
 ##### Ruby/Rails/Rake ##### 

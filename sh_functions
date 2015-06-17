@@ -46,21 +46,14 @@ function sclists() {
 
 # from tmux-list.sh (more comments for readability in there)
 function tmlists {
-    if [[ ! -z $1 ]]; then
-        LONG=1
-        CMD="tmux ls -F '#{session_name} #{session_windows} #{?session_attached,Attached,Detached}'"
-    else
-        CMD="tmux ls"
-    fi
+    CMD="tmux ls -F '#{session_name} #{session_windows} #{?session_attached,Attached,Detached}'"
     LL=$(eval $CMD 2> /dev/null | sort)
 
-    if [[ "x$LL" != "x" && ! -z $LONG ]]; then
+    if [[  "x$LL" != "x" ]]; then
         echo "tmux sessions:"
         listawkout "name wins status"
         listawkout "------------ ------ ----------"
-        listawkout $LL
-    elif [[  "x$LL" != "x" ]]; then
-        echo $LL
+        listawkout "$LL"
     else 
         echo "  No tmux sessions running."
     fi
