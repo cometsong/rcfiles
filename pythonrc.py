@@ -7,13 +7,22 @@ This began with dotfiles from Seth House <seth@eseth.com> (whiteinge)
 then continued with Benjamin (Cometsong).
 """
 # Imports we need
+from __future__ import print_function
 import sys
 import os
-import readline, rlcompleter
+#import readline, rlcompleter
 import atexit
 import pprint
 from tempfile import mkstemp
 from code import InteractiveConsole
+
+try:
+    import readline
+except ImportError:
+    print("Module readline not available.")
+else:
+    import rlcompleter
+    readline.parse_and_bind("tab: complete")
 
 # Imports we want
 import datetime
@@ -102,9 +111,9 @@ sys.displayhook = my_displayhook
 # Welcome message
 #################
 WELCOME = """\
-%(LightBlue)sHere be dragons, %(LightRed)sc%(Green)so%(LightGray)sl%(Purple)so%(Yellow)sr\
-%(LightBlue)ss, history, \
-(and with .inputrc:) completion, vi-keybinds.
+%(LightBlue)sHere be dragons, \
+%(LightRed)sc%(Green)so%(LightGray)sl%(Purple)so%(Yellow)sr%(DarkGray)ss, \
+%(LightBlue)shistory, (and with .inputrc:) completion, vi-keybinds.
 %(Brown)sType \e to get an external editor.%(Normal)s""" % _c
 
 atexit.register(lambda: sys.stdout.write("""%(LightGray)s See ya later!
