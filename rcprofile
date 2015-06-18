@@ -27,9 +27,9 @@ source $RCPATH/aliases         # load aliases
 source $RCPATH/sh_functions    # load sh functions
 
 ##### Config Vars #####
-TZ="Europe/Zurich"
+TZ="America/New_York"
 HISTFILE=$HOME/.history
-HISTSIZE=2000
+HISTSIZE=54321
 SAVEHIST=$HISTSIZE
 PAGER='less'
 HOSTNAME=`uname -n`
