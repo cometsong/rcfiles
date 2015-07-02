@@ -8,9 +8,10 @@ DESTDIR := $(HOME)
 MYALIAS = '../my_aliases'
 
 
-all: init normals gits
+all: init normals gits hg
 normals: rcfiles bins myaliases
 gits: git-init submodules
+hg: mercurials 
 
 RCFILES = rcprofile $(SHFILES) $(LANGFILES) $(OTHERFILES)
 SHFILES = $(ZSHFILES) $(BASHFILES)
@@ -20,6 +21,7 @@ LANGFILES = inputrc perltidyrc pythonrc.py pylintrc Rprofile
 OTHERFILES = toprc inputrc screenrc tmux.conf osx
 
 GITFILES = gitconfig gitignore_global git_template_global
+HGFILES = hgrc hgignore
 BINFILES=$(shell ls -1 $(SRCDIR)/bin)
 
 
@@ -51,6 +53,10 @@ bins:
 	@echo Link all files in bin
 	@if [ ! -d $(DESTDIR)/bin ]; then mkdir -p $(DESTDIR)/bin; fi
 	@$(call links,$(BINFILES),$(SRCDIR)/bin,$(DESTDIR)/bin)
+
+mercurials:
+	@echo Link all hg files
+	@$(call links,$(HGFILES),$(SRCDIR),$(DESTDIR),.)
 
 git-init:
 	@echo Source git user setup
