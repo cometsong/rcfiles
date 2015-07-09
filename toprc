@@ -6,7 +6,7 @@ CPU	fieldscur=ABEKNOqTWMXicdfghjlprsuvyz
 Tim	fieldscur=cefgjlrstuvyzAbMKNhIWOPQDX
 	winflags=65337, sortindx=12, maxtasks=0
 	summclr=6, msgsclr=6, headclr=7, taskclr=6
-Mem	fieldscur=ANOPQRSTUVbcdefgjlmyzWHiKX
+Mem	fieldscur=ANOPQRSTUVbcdEfgjlmyzWHiKX
 	winflags=65337, sortindx=13, maxtasks=0
 	summclr=5, msgsclr=5, headclr=4, taskclr=5
 UID	fieldscur=ABDECGfhijlopqrstuvyzMKNWX
