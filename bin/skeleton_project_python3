@@ -1,16 +1,46 @@
 #!/usr/bin/env bash
-#===============================================================================
+#==============================================================================
 #         FILE: skeleton_project_python [projectname [submodule_name]]
-#  DESCRIPTION: Creates python3 virtual env and skeleton_project folder structure
+#  DESCRIPTION: Create py3 virtual env and skeleton_project folder structure
 #       AUTHOR: B. Leopold (cometsong), benjamin(at)cometsong(dot)net
 #    COPYRIGHT: Copyright (c) 2015, B. Leopold
 #      LICENSE: GNU General Public License v3+
 #      CREATED: 2015-05-01 11:39:32-0400
-#===============================================================================
-set -o nounset                                # Treat unset variables as an error
+#==============================================================================
+set -o nounset                          # Treat unset variables as an error
 
 projectname=${1:-'skeleton_project'}
 module_name=${2:-'app_module'}
+
+### Gittin It
+git init $projectname
+
+### .gitignore
+cat <<EOF >> .gitignore
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+build/
+dist/
+lib/
+lib64/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+EOF
 
 ### Dirs
 mkdir -p ${projectname}/{${module_name},bin,docs,tests};
@@ -21,6 +51,8 @@ touch ${projectname}/tests/{__init__.py,${module_name}_tests.py}
 touch ${projectname}/setup.py
 
 ### Contents
+
+### setup.py
 cat <<EOF > ${projectname}/setup.py
 try:
     from setuptools import setup
@@ -43,6 +75,17 @@ except ImportError:
     setup(**config)
 EOF
 
+### __init__.py
+cat <<EOF > ${projectname}/${module_name}/__init__.py
+from os import path
+from glob import glob
+
+__all__ = [ path.basename(f)[:-3]
+    for f in glob(path.dirname(__file__)+"/*.py")
+    ]
+EOF
+
+### module_tests.py
 cat <<EOF > ${projectname}/tests/${module_name}_tests.py
 from __future__ import print_function
 
@@ -69,5 +112,6 @@ pyvenv ${projectname}
 ### nosetests
 #echo << EOF >&1
 cd ${projectname}
-bash -c ". ./bin/activate && pip install nose && nosetests"
+bash -c ". ./bin/activate && pip install --upgrade pip && deactivate"
+bash -c ". ./bin/activate && pip install nose && nosetests && deactivate"
 #EOF
