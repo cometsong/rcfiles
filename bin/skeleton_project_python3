@@ -9,18 +9,34 @@
 #==============================================================================
 set -o nounset                          # Treat unset variables as an error
 
+AUTHOR='Benjamin Leopold (cometsong)'
+EMAIL='benjamin(at)cometsong(dot)net'
+
 projectname=${1:-'skeleton_project'}
-module_name=${2:-'app_module'}
+
+### more than 1 module?
+declare -a module_names
+if [[ $# -gt 2 ]]; then
+    # remove 'projectname', get all remaining args in array mode
+    shift;
+    module_names=( "${@}" )
+else
+    module_names="${2:-app_module}"
+fi
+echo "Creating skeleton project folder...
+    for ${projectname}
+    with ${module_names[*]}
+"
 
 ### Gittin It
-git init $projectname
+git init ${projectname}
 
 ### .gitignore
-cat <<EOF >> .gitignore
+cat <<EOF >> ${projectname}/.gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*$py.class
+*\$py.class
 
 build/
 dist/
@@ -42,15 +58,42 @@ pip-delete-this-directory.txt
 docs/_build/
 EOF
 
-### Dirs
-mkdir -p ${projectname}/{${module_name},bin,docs,tests};
+### Dirs, Files
+mkdir -p ${projectname}/{bin,docs,tests};
+touch ${projectname}/{setup,defaults,utils}.py
+touch ${projectname}/tests/__init__.py
 
-### Files
-touch ${projectname}/${module_name}/{__init__.py,${module_name}.py}
-touch ${projectname}/tests/{__init__.py,${module_name}_tests.py}
-touch ${projectname}/setup.py
+### projectname.py
+cat <<EOF > ${projectname}/${projectname}.py
+# -*- coding: utf-8 -*-
+""" Project: ${projectname}
+    Description, functional fun, purpose.
+"""
 
-### Contents
+import sys
+import argparse
+
+def parse_args(argv):
+    """parse sys argv"""
+    desc = '${projectname}'
+    parser = argparse.ArgumentParser(description=desc)
+    add = parser.add_argument
+    add('input_file',
+        metavar='FILE',
+        help="File of rRNA sequencing data to use")
+    return parser.parse_args()
+    
+def main(*argv):
+    """main entrypoint"""
+    args = parse_args(argv)
+    return True
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))
+EOF
+
+### 'array' list for setup.py
+module_names_py=$(echo -e "'${module_names// /\',\\n            \'}',")
 
 ### setup.py
 cat <<EOF > ${projectname}/setup.py
@@ -61,13 +104,17 @@ except ImportError:
 
     config = {
         'description': 'The coolest ${projectname} project!',
-        'author': 'Benjamin Leopold (cometsong)',
+        'author': '${AUTHOR}',
         'url': 'URL to get it at.',
         'download_url': 'Where to download it.',
-        'author_email': 'benjamin(at)cometsong(dot)net',
+        'author_email': '${EMAIL}',
         'version': '0.1',
-        'install_requires': ['nose'],
-        'packages': ['${module_name}'],
+        'install_requires': [
+            'nose',
+            ],
+        'packages': [
+            ${module_names_py}
+            ],
         'scripts': [],
         'name': '${projectname}'
     }
@@ -75,8 +122,24 @@ except ImportError:
     setup(**config)
 EOF
 
-### __init__.py
+### Module Contents
+for module_name in "${module_names[@]}" ; do
+    echo " --- Adding module: '$module_name' ..."
+    mkdir -p ${projectname}/${module_name}
+    touch ${projectname}/${module_name}/{__init__,${module_name}}.py
+    touch ${projectname}/tests/${module_name}_tests.py
+
+    ### module/module_name.py
+cat <<EOF > ${projectname}/${module_name}/${module_name}.py
+# -*- coding: utf-8 -*-
+""" Docstring for ${module_name}
+"""
+EOF
+
+    ### module/__init__.py
 cat <<EOF > ${projectname}/${module_name}/__init__.py
+# -*- coding: utf-8 -*-
+
 from os import path
 from glob import glob
 
@@ -85,7 +148,7 @@ __all__ = [ path.basename(f)[:-3]
     ]
 EOF
 
-### module_tests.py
+    ### module_tests.py
 cat <<EOF > ${projectname}/tests/${module_name}_tests.py
 from __future__ import print_function
 
@@ -100,18 +163,18 @@ def teardown():
     """tear down test fixtures"""
     print("TEAR DOWN!")
 
-#@with_setup(setup, teardown)
+@with_setup(setup, teardown)
 def test_basic():
     """test nosetests running"""
     print("I RAN!")
 EOF
 
-### pyvenv
-pyvenv ${projectname}
+done
 
-### nosetests
-#echo << EOF >&1
-cd ${projectname}
-bash -c ". ./bin/activate && pip install --upgrade pip && deactivate"
-bash -c ". ./bin/activate && pip install nose && nosetests && deactivate"
-#EOF
+# ### pyvenv
+# pyvenv ${projectname}
+# 
+# ### nosetests
+# cd ${projectname}
+# bash -c ". ./bin/activate && pip install --upgrade pip && deactivate"
+# bash -c ". ./bin/activate && pip install nose && nosetests && deactivate"
