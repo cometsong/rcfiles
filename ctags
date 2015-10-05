@@ -1,0 +1,7 @@
+
+--regex-c=/^(        YAML langdef config        )/\1/k,t/
+--langdef=yaml
+--langmap=yaml:.yml.yaml
+--regex-yaml=/^[ \t]*-[ \t]*.*:[ \t]*(.+)/\1/k,tasks/
+--languages=+yaml
+
