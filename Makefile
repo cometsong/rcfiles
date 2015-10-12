@@ -18,7 +18,7 @@ SHFILES = $(ZSHFILES) $(BASHFILES)
 ZSHFILES = zshrc
 BASHFILES = bash_profile bashrc bash_completion bash_completion_alias
 LANGFILES = inputrc perltidyrc pythonrc.py pylintrc Rprofile
-OTHERFILES = toprc inputrc screenrc tmux.conf osx
+OTHERFILES = toprc inputrc screenrc tmux.conf osx ctags npmrc
 
 GITFILES = gitconfig gitignore_global git_template_global
 HGFILES = hgrc hgignore
