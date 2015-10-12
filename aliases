@@ -3,9 +3,9 @@
 
 ##### ls, the common ones I use a lot shortened for rapid fire usage
 if [[ -n $APPLE && ! -d /usr/local/Cellar/coreutils ]]; then 
-    alias ls='ls -G'; 
+    alias ls='ls -G --time-style=long-iso' # date=CCYY-MM-DD HH:MI
 else
-    alias ls='ls --color=auto';
+    alias ls='ls --color=auto --time-style=long-iso' # date=CCYY-MM-DD HH:MI
 fi
 alias l="ls --time-style='+%F %R:%S'"  # simplest
 alias l1='ls -1'           # short,1 column
