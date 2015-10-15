@@ -10,26 +10,28 @@ source $HOME/.rcpath_env
 ##### Operating Situations #####
 case $OSTYPE in
   darwin*)
-   export APPLE=TRUE 
+   export APPLE=TRUE
     ;;
   *)
-   export LINUX=TRUE 
+   export LINUX=TRUE
     ;;
 esac
 
 # for tput to complain less
 export TERM=xterm
 
-##### multi-dotfile setup ##### 
+##### multi-dotfile setup #####
 source $RCPATH/colors          # load color vars
 source $RCPATH/man_colors      # load man_colors
-source $RCPATH/aliases         # load aliases 
+source $RCPATH/aliases         # load aliases
 source $RCPATH/sh_functions    # load sh functions
 
 ##### Config Vars #####
 TZ="America/New_York"
-HISTFILE=$HOME/.history
-HISTSIZE=54321
+HISTCONTROL=ignoredups:erasedups
+#HISTFILE=$HOME/.history
+export HISTFILE=$(hist_uname)
+HISTSIZE=-1                    # less than zero = infinite
 SAVEHIST=$HISTSIZE
 PAGER='less'
 HOSTNAME=`uname -n`
@@ -45,7 +47,7 @@ LC_CTYPE=$LANG
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 ##### Brews... #####
-if [[ -n $APPLE ]]; then 
+if [[ -n $APPLE ]]; then
     # for ruby
     PATH="/usr/local/Cellar/ruby/1.9.3-p362/bin:$PATH"
     # for coreutils
