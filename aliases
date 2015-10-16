@@ -5,7 +5,7 @@
 if [[ -n $APPLE && ! -d /usr/local/Cellar/coreutils ]]; then 
     alias ls='ls -G --time-style=+"%Y-%M-%d %H:%m:%S"' # date=CCYY-MM-DD HH:MI
 else
-    alias ls='ls --color=auto --time-style=+"%Y-%M-%d %H:%m:%S"' # date=CCYY-MM-DD HH:MI
+    alias ls='ls --color=auto --time-style=+"%Y-%m-%d %H:%M:%S"' # date=CCYY-MM-DD HH:MI:SS
 fi
 alias l="ls --time-style='+%F %R:%S'"  # simplest
 alias l1='ls -1'           # short,1 column
