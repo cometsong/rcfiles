@@ -2,19 +2,16 @@
 
 function hist_uname() {
     ### Define HISTFILE specific to server's uname for simple separation
-
-    history -a # append to current history file
+    history -r # read from current histfile
     HISTFILE="$HOME/.history.$(uname -n)" # set new history file
     # ya don't got the histfile? touch it, happily
     if [[ ! -f $HISTFILE ]]; then touch $HISTFILE; fi
-
-    history -c # clear memory
-    history -r # read from current histfile
+    history -a # append to current history file
 
     # return value of HISTFILE
     echo $HISTFILE
 }
-export HISTFILE=$(hist_uname)
+#export HISTFILE=$(hist_uname)
 
 
 

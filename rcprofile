@@ -29,9 +29,8 @@ source $RCPATH/sh_functions    # load sh functions
 ##### Config Vars #####
 TZ="America/New_York"
 HISTCONTROL=ignoredups:erasedups
-#HISTFILE=$HOME/.history
 export HISTFILE=$(hist_uname)
-HISTSIZE=-1                    # less than zero = infinite
+HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 PAGER='less'
 HOSTNAME=`uname -n`
