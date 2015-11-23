@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # ---------------------------------------------------------------------------- #
 #                                bashrc of rcfiles                             #
 # ---------------------------------------------------------------------------- #
@@ -33,12 +34,11 @@ set editing-mode vi
 ## Use bash-completion, if available
 BCOMPS="/etc/bash_completion /usr/local/etc/bash_completion"
 if [[ -n $APPLE ]]; then BCOMPS+=" $(brew --prefix)/share/bash-completion/bash_completion"; fi
-  
 for B in ${BCOMPS}; do
-    [[ $PS1 && -f $B ]] && . $B && break
+    [[ -f $B ]] && . $B
 done
 unset B BCOMPS
-source $RCPATH/bash_completion
+#source $RCPATH/bash_completion
 
 # set cmd prompt:
 # based on https://wiki.archlinux.org/index.php/Color_Bash_Prompt#Wolfman.27s (with some mods)
