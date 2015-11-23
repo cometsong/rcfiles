@@ -99,12 +99,6 @@ sys.ps2 = '%s... %s' % (_c['Red'], _c['Normal'])
 ###################################
 def my_displayhook(value):
     if value is not None:
-        try:
-            import __builtin__
-            __builtin__._ = value
-        except ImportError:
-            __builtins__._ = value
-
         pprint.pprint(value)
 sys.displayhook = my_displayhook
 
