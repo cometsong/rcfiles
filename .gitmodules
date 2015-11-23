@@ -1,0 +1,3 @@
+[submodule "vcprompt"]
+	path = vcprompt
+	url = https://github.com/maverickwoo/vcprompt
