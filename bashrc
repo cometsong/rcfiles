@@ -61,10 +61,10 @@ function setPWD {
 source $RCPATH/prompt_colors
 
 # vc-awesome prompt format
-export VCPROMPT_TIMEOUT=2
-export VCPROMPT_FORMAT="-${DC}(${FG_B}%s:%b:%m%u${DC})"
+export VCPROMPT_TIMEOUT=100
+export VCPROMPT_FORMAT="-${DC}(${FG_B}%s:%b:%m%u%a${DC})"
 
-# (date-mnth 24h)-(!hist)-(user@hostname)-(shell)-[~pwd]\n=>
+# (date-mnth 24h)-(!hist)-(user@hostname)-(shell)-[~pwd]-(vcprompt)\n=>
 PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
 PS1L+="-(\[${RCy}\]\u\[${DC}\]@\[${RCy}\]\h\[${DC}\])"
 PS1L+="-(\[${RCy}\]\s\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
