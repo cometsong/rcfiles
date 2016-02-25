@@ -26,9 +26,12 @@
 [alias]
     com   = commit -m
     p     = push --tags
+    po    = push --tags origin
     pom   = push --tags origin master
     u     = pull --tags
+    uo    = pull --tags origin
     uom   = pull --tags origin master
+    ua    = pull --all
     f     = fetch
     mg    = merge
     mgf   = merge FETCH_HEAD
