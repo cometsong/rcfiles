@@ -52,6 +52,10 @@ BG_M=$(tput setab 5)    # magenta
 BG_C=$(tput setab 6)    # cyan
 BG_W=$(tput setab 7)    # white
 
+# Base16 Shell Terminal Colors
+BASE16_SHELL="$RCPATH/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
 # function 'colors' from https://wiki.archlinux.org/index.php/Color_Bash_Prompt
 function colors() {
 	local fgc bgc vals seq0

@@ -46,6 +46,12 @@ alias tmls='tmlists'        # list out tmux sessions (default format)
 alias sessls='sclists; tmlists'
 alias sls=sessls
 
+##### MariaDB/MySQL ##### 
+alias my='mysql'
+alias myr='mysql -uroot'
+alias myusers='mysql -uroot -e "SELECT User, Host FROM mysql.user;"'
+
+
 ##### Ruby/Rails/Rake ##### 
 alias rsrv='./script/server -u'
 alias rsrvp='ss -p'
@@ -85,6 +91,7 @@ alias qs4='qsub -l walltime=48:00:00,nodes=1:ppn=4 -d $PWD'
 
 ##### ssh #####
 alias ssx='ssh -X'
+for H in $(grep '^Host [a-z]' ~/.ssh/config | cut -d' ' -f2,3 | tr '\n' ' '); do alias $H="ssh $H"; done
 
 alias dmesg='sudo dmesg'
 alias h='history'
