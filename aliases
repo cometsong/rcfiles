@@ -50,7 +50,7 @@ alias sls=sessls
 alias my='mysql'
 alias myr='mysql -uroot'
 alias myusers='mysql -uroot -e "SELECT User, Host FROM mysql.user;"'
-
+alias mydbs='myr -e "show databases;"'
 
 ##### Ruby/Rails/Rake ##### 
 alias rsrv='./script/server -u'
