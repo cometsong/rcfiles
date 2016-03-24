@@ -21,8 +21,10 @@ esac
 export TERM=xterm
 
 ##### multi-dotfile setup #####
-source $RCPATH/colors          # load color vars
-source $RCPATH/man_colors      # load man_colors
+if [[ $- == *i* ]]; then 
+    source $RCPATH/colors          # load color vars
+    source $RCPATH/man_colors      # load man_colors
+fi
 source $RCPATH/aliases         # load aliases
 source $RCPATH/sh_functions    # load sh functions
 
@@ -57,7 +59,7 @@ if [[ -n $APPLE ]]; then
 fi
 
 ##### prepend $PATH with $HOME bins
-PATH="$HOME/bin:$HOME/.vim/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+PATH="$HOME/bin:$HOME/local/bin:$HOME/.vim/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 # parse $PATH, remove duplicate entries, then remove trailing ORS and \n
 PATH=$(echo $PATH | awk 'BEGIN{RS=ORS=":"}{ if (a[$0] == 0){ a[$0] += 1; print $0}}' | awk '{sub(/:$/,"");print}' | tr -d '\n')
 
