@@ -63,11 +63,19 @@ source $RCPATH/prompt_colors
 # vc-awesome prompt format
 export VCPROMPT_TIMEOUT=100
 export VCPROMPT_FORMAT="-${DC}(${FG_B}%s:%b:%m%u%a${DC})"
+# oython version check, as vcprompt requires Py 2.7+
+PY_VER="$(python -c 'import sys; print(sys.version[0:3])' | sed 's/\.//')"
+if (( "$PY_VER" <= "27" )) ; then
+    VCPROMPT_BIN='echo -n ""'
+else
+    VCPROMPT_BIN='vcprompt'
+fi
+
 
 # (date-mnth 24h)-(!hist)-(user@hostname)-(shell)-[~pwd]-(vcprompt)\n=>
 PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
 PS1L+="-(\[${RCy}\]\u\[${DC}\]@\[${RCy}\]\h\[${DC}\])"
 PS1L+="-(\[${RCy}\]\s\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
-PS1="${PS1L}\$(vcprompt)
+PS1="${PS1L}\$($VCPROMPT_BIN)
 => \[${NORM}\]"
 unset PS1L
