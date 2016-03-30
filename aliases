@@ -91,7 +91,7 @@ alias qs4='qsub -l walltime=48:00:00,nodes=1:ppn=4 -d $PWD'
 
 ##### ssh #####
 alias ssx='ssh -X'
-for H in $(grep '^Host [a-z]' ~/.ssh/config | cut -d' ' -f2,3 | tr '\n' ' '); do alias $H="ssh $H"; done
+for H in $(grep '^Host [a-z]' ~/.ssh/config | cut -d' ' -f2,3,4 | tr '\n' ' '); do alias $H="ssh $H"; done
 
 alias dmesg='sudo dmesg'
 alias h='history'
