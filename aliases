@@ -81,7 +81,7 @@ QINFO="'[Jj]ob( Id|_Name|_state)|[Rr]esource.*(\.mem|\.walltime|\.nodes)|depend|
 QNAME='batch'
 alias  qu='qstat -u $USER'
 alias  qj="qstat -f | grep -E $QINFO"
-alias quj="qstat -u bleopold -f | grep -E $QINFO"
+alias quj="qstat -u $USER -f | grep -E $QINFO"
 alias qcnt="qstat -u $USER | grep $QNAME | grep -v ' C ' | wc -l"
 alias  qi='qsub -l walltime=333:33:33,nodes=1:ppn=4 -I -d $PWD'
 alias qi2='qsub -l walltime=24:00:00,nodes=1:ppn=4 -I -d $PWD'
