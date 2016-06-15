@@ -10,19 +10,25 @@ then continued with Benjamin (Cometsong).
 from __future__ import print_function
 import sys
 import os
-#import readline, rlcompleter
 import atexit
 import pprint
 from tempfile import mkstemp
 from code import InteractiveConsole
 
+# from: http://jedi.jedidjah.ch/en/latest/docs/usage.html#repl-completion
 try:
-    import readline
+    from jedi.utils import setup_readline
+    setup_readline()
 except ImportError:
-    print("Module readline not available.")
-else:
-    import rlcompleter
-    readline.parse_and_bind("tab: complete")
+    # Fallback to the stdlib readline completer if it is installed.
+    # Taken from http://docs.python.org/2/library/rlcompleter.html
+    print("Jedi is not installed, falling back to readline")
+    try:
+        import readline
+        import rlcompleter
+        readline.parse_and_bind("tab: complete")
+    except ImportError:
+        print("Readline is not installed either. No tab completion is enabled.")
 
 # Imports we want
 import datetime
@@ -78,6 +84,7 @@ HISTFILE = "%s/.pyhistory" % os.environ["HOME"]
 
 # Read the existing history if there is one
 if os.path.exists(HISTFILE):
+    import readline
     readline.read_history_file(HISTFILE)
 
 # Set maximum number of items that will be written to the history file
