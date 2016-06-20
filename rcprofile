@@ -47,7 +47,7 @@ LC_CTYPE=$LANG
 ##### Python #####
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
-##### Brews... #####
+##### Brews, etc... #####
 if [[ -n $APPLE ]]; then
     # for ruby
     PATH="/usr/local/Cellar/ruby/1.9.3-p362/bin:$PATH"
@@ -56,6 +56,8 @@ if [[ -n $APPLE ]]; then
     MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     # for java
     JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+    # for iTerm2
+    test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 fi
 
 ##### prepend $PATH with $HOME bins
