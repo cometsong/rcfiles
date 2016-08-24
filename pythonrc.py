@@ -15,6 +15,10 @@ import pprint
 from tempfile import mkstemp
 from code import InteractiveConsole
 
+# Imports we want
+import datetime
+import pdb
+
 # from: http://jedi.jedidjah.ch/en/latest/docs/usage.html#repl-completion
 try:
     from jedi.utils import setup_readline
@@ -28,11 +32,7 @@ except ImportError:
         import rlcompleter
         readline.parse_and_bind("tab: complete")
     except ImportError:
-        print("Readline is not installed either. No tab completion is enabled.")
-
-# Imports we want
-import datetime
-import pdb
+        print("Readline is not installed either. No tab completion enabled.")
 
 
 AUTHOR = 'Benjamin Leopold <benjamin@cometsong.net>'
@@ -68,13 +68,16 @@ class TermColors(dict):
     _base = '\033[%sm'
 
     def __init__(self):
-        PRE='\001'
-        SUF='\002'
-        if os.environ.get('TERM') in ('xterm', 'xterm-color', 'xterm-256color', 'linux',
-                                      'screen', 'screen-256color', 'screen-bce'):
-            self.update(dict([(k, ''.join([PRE,self._base,SUF]) % v) for k, v in self.COLOR_TEMPLATES]))
+        PRE = '\001'
+        SUF = '\002'
+        if os.environ.get('TERM') in ('xterm', 'xterm-color', 'xterm-256color',
+                                      'linux', 'screen', 'screen-256color',
+                                      'screen-bce'):
+            self.update(dict([(k, ''.join([PRE, self._base, SUF]) % v)
+                              for k, v in self.COLOR_TEMPLATES]))
         else:
-            self.update(dict([(k, self.NoColor) for k, v in self.COLOR_TEMPLATES]))
+            self.update(dict([(k, self.NoColor)
+                              for k, v in self.COLOR_TEMPLATES]))
 _c = TermColors()
 
 
@@ -105,6 +108,7 @@ sys.ps2 = '%s... %s' % (_c['Red'], _c['Normal'])
 # Enable Pretty Printing for stdout
 ###################################
 def my_displayhook(value):
+    """Enable Pretty Printing for stdout"""
     if value is not None:
         pprint.pprint(value)
 sys.displayhook = my_displayhook
@@ -117,14 +121,13 @@ sys.displayhook = my_displayhook
 def ppdict(d):
     """Pretty Print for Dicts"""
     print('{')
-    keys=d.keys()
+    keys = d.keys()
     keys.sort()
     maxKeyLen = max([len(str(x)) for x in keys])
     for k in keys:
-        spacing=" " * (maxKeyLen-(len(repr(k))-3)) # -3 for "'' "
-        print("  {}{}: {},".format(repr(k),spacing,repr(d[k])) )
+        spacing = " " * (maxKeyLen-(len(repr(k))-3)) # -3 for "'' "
+        print("  {}{}: {},".format(repr(k), spacing, repr(d[k])) )
     print('}')
-
 
 
 # Welcome message
@@ -178,8 +181,8 @@ if 'DJANGO_SETTINGS_MODULE' in os.environ:
         S.DEBUG_PROPAGATE_EXCEPTIONS = True
 
         WELCOME += """%(LightPurple)s
-            Warning: the Django test environment has been set up; to restore the
-            normal environment call `teardown_test_environment()`.
+            Warning: the Django test environment has been set up; to restore
+            the normal environment call `teardown_test_environment()`.
 
             Warning: DEBUG_PROPAGATE_EXCEPTIONS has been set to True.
             %(Normal)s""" % _c
