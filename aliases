@@ -119,7 +119,8 @@ if [[ -n $APPLE ]]; then {
   alias htr='sudo /etc/init.d/httpd restart'
 
   # brew upgrade all apps and reinstall all dev apps
-  alias brew-upgrade="brew upgrade --all && for D in $(find /usr/local/Cellar -type d -name HEAD); do APP=$(echo ${D} | cut -d\/ -f5); echo Upgrading $APP; brew reinstall $APP ;done"
+  alias brew-upgrade="brew upgrade --all && for D in \$(find /usr/local/Cellar -type d -name HEAD | tr '\n' ' ');
+  do APP=\$(echo \${D} | cut -d\/ -f5); echo Upgrading \$APP; brew reinstall \$APP ;done"
 }; fi
 
 alias psmem="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"
