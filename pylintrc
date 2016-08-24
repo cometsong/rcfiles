@@ -1,7 +1,6 @@
 # ... cometsong's pylint coolness ...
 
 [MASTER]
-profile=no
 persistent=yes
 ignore=CVS
 
@@ -75,7 +74,6 @@ no-docstring-rgx=__.*__
 deprecated-modules=regsub,string,TERMIOS,Bastion,rexec,md5
 
 [CLASSES]
-ignore-iface-methods=
 defining-attr-methods=__init__,__new__,setUp
 valid-classmethod-first-arg=cls,klass
 
