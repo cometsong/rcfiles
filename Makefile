@@ -13,12 +13,13 @@ normals: rcfiles bins myaliases
 gits: git-init submodules
 hg: mercurials 
 
-RCFILES = rcprofile $(SHFILES) $(LANGFILES) $(OTHERFILES)
+RCFILES = rcprofile $(SHFILES) $(LANGFILES) $(OTHERFILES) $(CONFIGFILES)
 SHFILES = $(ZSHFILES) $(BASHFILES)
 ZSHFILES = zshrc
 BASHFILES = bash_profile bashrc bash_completion bash_completion_alias
 LANGFILES = inputrc perltidyrc pythonrc.py pylintrc Rprofile
 OTHERFILES = toprc inputrc screenrc tmux.conf osx ctags npmrc my.cnf
+CONFIGFILES = yamllint
 
 GITFILES = gitconfig gitignore_global git_template_global
 HGFILES = hgrc hgignore
@@ -68,6 +69,14 @@ submodules:
 	@echo Git submodule init and update
 	@git submodule init
 	@git submodule update
+
+configs:
+	@echo Link files into .config folder
+	@if [ ! -d $(DESTDIR)/.config ]; then mkdir -p $(DESTDIR)/.config; fi
+	#
+	@echo ...yamllint
+	@if [ ! -d $(DESTDIR)/.config/yamllint ]; then mkdir -p $(DESTDIR)/.config; fi
+	@ln -svf $(SRCDIR)/yamllint $(DESTDIR)/.config/yamllint/config
 
 
 #clean: remove_links
