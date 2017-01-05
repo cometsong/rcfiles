@@ -37,7 +37,6 @@ except ImportError:
 
 AUTHOR = 'Benjamin Leopold <benjamin@cometsong.net>'
 
-
 # Color Support
 ###############
 class TermColors(dict):
@@ -202,6 +201,11 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
     def __init__(self, *args, **kwargs):
         self.last_buffer = []  # This holds the last executed statement
         InteractiveConsole.__init__(self, *args, **kwargs)
+        try:
+            from ptpython.repl import embed
+            embed(globals(), locals())  # 'callable?': configure=None)
+        except Exception as e:
+            pass
 
     def runsource(self, source, *args):
         self.last_buffer = [source.encode('utf-8')]
@@ -225,6 +229,14 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
 
 c = EditableBufferInteractiveConsole(locals=locals())
 c.interact(banner=WELCOME)
+
+# Embed ptpython REPL
+#####################
+# try:
+#     from ptpython.repl import embed
+#     embed(globals(), locals())
+# except Exception as e:
+#     pass
 
 # Exit the Python shell on exiting the InteractiveConsole
 sys.exit()
