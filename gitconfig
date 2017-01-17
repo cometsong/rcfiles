@@ -19,6 +19,8 @@
     ss    = status --short
     unadd = reset HEAD
 [alias]
+    rmbranch = "!f(){ git branch -D \"$1\";  git push origin --delete \"$1\"; };f"
+[alias]
     sub   = submodule
     subrm = !~/.git_template_global/git-submodule-rm.sh
     subnames = "!git submodule status -- | cut -d' ' -f3 | sort"
@@ -76,9 +78,11 @@
 [git-up "rebase"]
     show-hashes = true
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+    required = true
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+
+# vim: set ft=config ts=4 sw=4 tw=100 et :
