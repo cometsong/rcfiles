@@ -50,8 +50,6 @@ export PYTHONSTARTUP=$HOME/.pythonrc.py
 
 ##### Brews, etc... #####
 if [[ -n $APPLE ]]; then
-    # for ruby
-    PATH="/usr/local/Cellar/ruby/1.9.3-p362/bin:$PATH"
     # for coreutils
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
