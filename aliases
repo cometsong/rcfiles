@@ -86,7 +86,9 @@ QNAME='batch'
 alias  qu='qstat -u $USER'
 alias  qj="qstat -f | grep -E $QINFO"
 alias quj="qstat -u $USER -f | grep -E $QINFO"
+alias squ="showq -n -v -u $USER"
 alias qcnt="qstat -u $USER | grep $QNAME | grep -v ' C ' | wc -l"
+alias qcnt='echo "$(qu -r|wc -l)+$(qu -i|wc -l)" | bc'                #TODO: remove number of header lines?!
 alias  qi='qsub -l walltime=333:33:33,nodes=1:ppn=4 -I -d $PWD'
 alias qi2='qsub -l walltime=24:00:00,nodes=1:ppn=4 -I -d $PWD'
 alias qi4='qsub -l walltime=48:00:00,nodes=1:ppn=4 -I -d $PWD'
@@ -108,6 +110,7 @@ alias psc="ps f -o pid,cputime,cmd -C"
 alias datey='date +"%Y-%m-%d %H:%M:%S"'
 alias treef='tree -FuCh' # /*, user, colors, human sizes
 alias duh='du -csh'
+alias dfs="df -h 2>/dev/null | grep ^[\ F]| sed -e 's/^ \{20\}//' -e 's/^Filesystem \{10\}//'"
 
 # Mac aliases...
 if [[ -n $APPLE ]]; then {
