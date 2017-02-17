@@ -7,8 +7,15 @@ SRCDIR := $(PWD)
 DESTDIR := $(HOME)
 MYALIAS = '../my_aliases'
 
+# OS check for file link locations:
+uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
+ifeq ($(uname_S),Darwin)
+	# TODO: for future use of diff config file locations on osx
+	DESTCFG := $(HOME)/Library/
+endif
 
-all: init normals gits hg
+
+all: init normals configs gits hg
 normals: rcfiles bins myaliases
 gits: git-init submodules
 hg: mercurials 
@@ -75,8 +82,12 @@ configs:
 	@if [ ! -d $(DESTDIR)/.config ]; then mkdir -p $(DESTDIR)/.config; fi
 	#
 	@echo ...yamllint
-	@if [ ! -d $(DESTDIR)/.config/yamllint ]; then mkdir -p $(DESTDIR)/.config; fi
+	@if [ ! -d $(DESTDIR)/.config/yamllint ]; then mkdir -p $(DESTDIR)/.config/yamllint; fi
 	@ln -svf $(SRCDIR)/yamllint $(DESTDIR)/.config/yamllint/config
+	#
+	@echo ...pip.conf
+	@if [ ! -d $(DESTDIR)/.config/pip ]; then mkdir -p $(DESTDIR)/.config/pip; fi
+	@ln -svf $(SRCDIR)/pip.conf $(DESTDIR)/.config/pip/pip.conf
 
 
 #clean: remove_links
