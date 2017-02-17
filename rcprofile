@@ -35,6 +35,7 @@ export HISTFILE=$(hist_uname)
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 PAGER='less'
+LESS="-SKiM"
 HOSTNAME=`uname -n`
 EDITOR=vim
 umask 002

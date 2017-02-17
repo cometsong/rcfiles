@@ -1,0 +1,17 @@
+---
+extends: default
+rules:
+  indentation:
+    spaces: 4
+    indent-sequences: whatever
+  line-length:
+    max: 100
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
+  new-line-at-end-of-file: enable
+  new-lines:
+    type: unix
+  trailing-spaces: disable
+  empty-lines:
+    max: 5
+

@@ -41,6 +41,8 @@ alias tma='tmux attach'     # resume most recent tmux session
 alias tmr='tmux attach -t'  # resume a tmux session by name
 alias tmll='tmlists long'   # list out tmux sessions (long format)
 alias tmls='tmlists'        # list out tmux sessions (default format)
+alias mux='tmuxinator'      # shotcut for tmuxinator wonders
+alias muxls='echo -e "tmuxinator configs:\n-------------------" && ls -1 ~/.tmuxinator/ | sed -e "s;.yml;;"'  # list all mux configs
 
 # Session List of screen and tmux
 alias sessls='sclists; tmlists'
@@ -122,7 +124,8 @@ if [[ -n $APPLE ]]; then {
   alias htr='sudo /etc/init.d/httpd restart'
 
   # brew upgrade all apps and reinstall all dev apps
-  alias brew-upgrade="brew upgrade --all && for D in $(find /usr/local/Cellar -type d -name HEAD); do APP=$(echo ${D} | cut -d\/ -f5); echo Upgrading $APP; brew reinstall $APP ;done"
+  alias brew-upgrade="brew upgrade && for D in \$(find /usr/local/Cellar -type d -name HEAD | tr '\n' ' ');
+      do APP=\$(echo \${D} | cut -d\/ -f5); echo Upgrading \$APP; brew reinstall \$APP ;done"
 }; fi
 
 alias psmem="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# orig found on: https://www.linuxforum.com/threads/use-command-line-to-browse.1689/#post-4518
+
+_search_terms=""
+
+if [ $# -gt 0 ]
+then
+  _search_terms=$( echo "$@" | awk -F\- 'BEGIN { OFS=" -" } { for (i=3;i<=NF;i++) { gsub(/^[a-z] /,"&@",$i) ; gsub(/ $/,"",$i );gsub (/$/,"@",$i); gsub(/ /,"+",$i)  }; print $0 }' | tr '@' \' )
+fi
+w3m "duckduckgo.com/?q=$_search_terms"
