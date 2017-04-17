@@ -25,6 +25,9 @@ alias ll.='ls -ld .[^.]*'  # long,.dotfiles only
 alias lg="ls -lhgG"        # long,human,no group/owner shown
 alias lsd="ls -ldhgG"      # long,human,no group/owner shown, do not recurse directories
 
+##### chdir aliases #####
+alias cdp='cd $(pwd -P)'
+
 ##### Screen aliases #####
 alias scn='screen'          # start a new screen session
 alias scs='screen -S'       # start a new screen session with name $1
