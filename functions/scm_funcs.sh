@@ -55,7 +55,7 @@ function gpam() {
 
 # queries config for all remote repos, pushes current_branch to all
 function gpab() { 
-    REMOTES=`git remote -v | cut -f 1 | uniq`
+    REMOTES=`git remote | uniq`
     gbranch
     for R in $REMOTES; do 
         echo Pushing \"$current_branch\" to \"$R\"
