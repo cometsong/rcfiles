@@ -7,37 +7,38 @@ source $HOME/.bash_completion_alias
 
 # For use with vim and ctags
 # from http://vim.wikia.com/wiki/Using_bash_completion_with_ctags_and_Vim, with 'mvim' added to last line
-_vim_ctags() {
-  local cur prev
+_vim_search() {
+    ex -N -u NONE -i NONE -c 'let &tags="'$2'"' -c 'echo "\\n"' -c 'for tag in taglist("^".escape("'$1'","."))|echo tag["name"]|endfor' -cq |
+    tr -s '\r' '\n' |
+    sed -n '/^[a-zA-Z_]/p'
+}
 
-  COMPREPLY=()
-  cur="${COMP_WORDS[COMP_CWORD]}"
-  prev="${COMP_WORDS[COMP_CWORD-1]}"
+_vim() {
+    local cur prev
 
-  case "${prev}" in
-    -t)
-      while [ "${PWD}" != "/" ]; do
-        if [ -r ./tags ]; then
-          # Escape slashes to avoid confusing awk
-          cur=${cur////\\/}
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
 
-          COMPREPLY=( $(compgen -W "`awk -v ORS=" "  "/^${cur}/ { print \\$1 }" tags`" ) )
-          return
-        fi
+    case "${prev}" in
+        -t)
+            local tagsdir=$PWD
+            while [[ "$tagsdir" && ! -f "$tagsdir/tags" ]]; do
+                tagsdir=${tagsdir%/*}
+            done
+            [[ -f "$tagsdir/tags" ]] || return
 
-        cd ..
-      done
-
-      return
-      ;;
-    *)
-      # Perform usual completion mode
-      ;;
-  esac
+            COMPREPLY=( $(_vim_search "$cur" "$tagsdir/tags" ) )
+            return
+            ;;
+        *)
+            # Perform usual completion mode
+            ;;
+    esac
 }
 # Files matching this pattern are excluded
 tags_excludelist='*.@(o|O|so|SO|so.!(conf)|SO.!(CONF)|a|A|rpm|RPM|deb|DEB|gif|GIF|jp?(e)g|JP?(E)G|mp3|MP3|mp?(e)g|MP?(E)G|avi|AVI|asf|ASF|ogg|OGG|class|CLASS)'
-complete -F _vim_ctags -f -X "${tags_excludelist}" vi vim gvim mvim rvim view rview rgvim rgview gview
+complete -F _vim -f -X "${tags_excludelist}" vi vim gvim mvim nvim
 
 # pip bash completion start
 _pip_completion()
