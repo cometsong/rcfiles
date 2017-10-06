@@ -23,7 +23,7 @@ hg: mercurials
 RCFILES = rcprofile $(SHFILES) $(LANGFILES) $(OTHERFILES) $(CONFIGFILES)
 SHFILES = $(ZSHFILES) $(BASHFILES)
 ZSHFILES = zshrc
-BASHFILES = bash_profile bashrc bash_completion bash_completion_alias
+BASHFILES = bash_profile bashrc bash_completion bash_complete_alias
 LANGFILES = inputrc perltidyrc pythonrc.py pylintrc Rprofile
 OTHERFILES = toprc inputrc screenrc tmux.conf osx ctags npmrc my.cnf
 CONFIGFILES = yamllint

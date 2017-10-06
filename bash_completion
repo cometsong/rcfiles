@@ -3,7 +3,12 @@
 # ---------------------------------------------------------------------------- #
 
 # source Completion function for all aliases
-source $HOME/.bash_completion_alias
+source $HOME/.bash_complete_alias
+# init aliases' completions:
+for Als in $(alias | grep '^alias' | cut -d= -f1 | cut -d' ' -f2); do
+    complete -F _complete_alias ${Als}
+done
+
 
 # For use with vim and ctags
 # from http://vim.wikia.com/wiki/Using_bash_completion_with_ctags_and_Vim, with 'mvim' added to last line

@@ -129,6 +129,9 @@ if [[ -n $APPLE ]]; then {
   alias htc='sudo vim /etc/apache2/httpd.conf'
   alias htr='sudo /etc/init.d/httpd restart'
 
+  # coreutils
+  alias sed='gsed'
+
   # brew upgrade all apps and reinstall all dev apps
   alias brew-upgrade="brew upgrade && for D in \$(find /usr/local/Cellar -type d -name 'HEAD*' | cut -d\/ -f5 | sort -u | tr '\n' ' ');
       do APP=\$(echo \${D}); echo Upgrading \$APP; brew reinstall \$APP --HEAD ;done"
