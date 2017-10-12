@@ -32,11 +32,11 @@ set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
 
 # Use bash-completion, if available
-BCOMPS="/etc/bash_completion"
-[[ -n $APPLE ]] && BCOMPS+=" /usr/local/etc/bash_completion"
-for B in ${BCOMPS}; do
-    [[ -r $B ]] && . $B
-done && unset B BCOMPS
+#BCOMPS="/etc/bash_completion"
+#[[ -n $APPLE ]] && BCOMPS+=" /usr/local/etc/bash_completion"
+#for B in ${BCOMPS}; do
+#    [[ -r $B ]] && . $B
+#done && unset B BCOMPS
 
 # set cmd prompt:
 # based on https://wiki.archlinux.org/index.php/Color_Bash_Prompt#Wolfman.27s (with some mods)
