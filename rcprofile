@@ -60,6 +60,10 @@ if [[ -n $APPLE ]]; then
     # for iTerm2
 # CHECK SHELL?!
     #test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+    # for Go
+    GOPATH=~/code/go
+    PATH=$PATH:${GOPATH}/bin:/usr/local/opt/go/libexec/bin
 fi
 
 ##### prepend $PATH with $HOME bins
