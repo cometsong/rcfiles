@@ -56,8 +56,7 @@ alias my='mysql'
 alias myr='mysql -uroot'
 alias myusers='echo "MySQL Users (as ''root'' user)"; myr -p -e "SELECT User, Host FROM mysql.user;"'
 alias mydbs='myr -p -e "show databases;"'
-alias myprivs="echo 'User Database Privileges:' && mysql -uroot -p mysql -e \"select user, db, concat_ws(' ',Insert_priv, Select_priv, Update_priv, Delete_priv) as 'C R U D', concat_ws(' ',Create_priv,Drop_priv,Index_priv) as CrDpIx, Grant_priv as Grt, concat_ws(' ',Create_view_priv,Show_view_priv) as 'CrSh Vw', concat_ws(' ',Create_routine_priv,Alter_routine_priv,Execute_priv) as 'CrtAltExe Rtne', concat_ws(' ',Event_priv,Trigger_priv) as EvtTrg  from
-db order by db,user;\""
+alias myprivs="echo 'User Database Privileges:' && mysql -uroot -p -e \"select user, db, concat_ws(' ',Insert_priv, Select_priv, Update_priv, Delete_priv) as 'C R U D', concat_ws(' ',Create_priv,Drop_priv,Index_priv) as CrDpIx, Grant_priv as Grt, concat_ws(' ',Create_view_priv,Show_view_priv) as 'CrSh Vw', concat_ws(' ',Create_routine_priv,Alter_routine_priv,Execute_priv) as 'CrtAltExe Rtne', concat_ws(' ',Event_priv,Trigger_priv) as EvtTrg from db order by db,user;\" -Dmysql"
 
 ##### Ruby/Rails/Rake ##### 
 alias rsrv='./script/server -u'
@@ -85,14 +84,13 @@ alias htc='sudo vim /etc/httpd/conf/httpd.conf'
 alias htr='sudo service httpd restart'
 
 ##### qsub #####
-QINFO="'[Jj]ob( Id|_Name|_state)|[Rr]esource.*(\.mem|\.walltime|\.nodes)|depend|euser'"
+QINFO="'[Jj]ob( Id|_Name|_state)|qtime|[Rr]esource.*(\.mem|\.walltime|\.nodes)|depend|e(user|group)'"
 QNAME='batch'
 alias  qu='qstat -u $USER'
 alias  qj="qstat -f | grep -E $QINFO"
 alias quj="qstat -u $USER -f | grep -E $QINFO"
 alias squ="showq -n -v -u $USER"
-alias qcnt="qstat -u $USER | grep $QNAME | grep -v ' C ' | wc -l"
-alias qcnt='echo "$(qu -r|wc -l)+$(qu -i|wc -l)" | bc'                #TODO: remove number of header lines?!
+alias qcnts='qur=$(qu -r | tail -n +6 | wc -l);qui=$(qu -i | tail -n +6 | wc -l);echo -n "Running: $qur, idle: $qui, total: "; echo "$qur+$qui"| bc'
 alias  qi='qsub -l walltime=333:33:33,nodes=1:ppn=4 -I -d $PWD'
 alias qi2='qsub -l walltime=24:00:00,nodes=1:ppn=4 -I -d $PWD'
 alias qi4='qsub -l walltime=48:00:00,nodes=1:ppn=4 -I -d $PWD'
@@ -115,6 +113,7 @@ alias datey='date +"%Y-%m-%d %H:%M:%S"'
 alias treef='tree -FuCh' # /*, user, colors, human sizes
 alias duh='du -csh'
 alias dfs="df -h 2>/dev/null | grep ^[\ F]| sed -e 's/^ \{20\}//' -e 's/^Filesystem \{10\}//'"
+alias cdp='cd $(pwd -P)'
 
 # Mac aliases...
 if [[ -n $APPLE ]]; then {
