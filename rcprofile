@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # ---------------------------------------------------------------------------- #
 #                      shell profile of Cometsong rcfiles                      #
 #    (This file is sourced by .bashrc and by .zshrc in interactive sessions.)  #
 # ---------------------------------------------------------------------------- #
 
 ##### load RCPATH env var #####
-source $HOME/.rcpath_env
+source ${HOME}/.rcpath_env
 
 ##### Operating Situations #####
 case $OSTYPE in
@@ -24,6 +24,7 @@ export TERM=xterm
 if [[ $- == *i* ]]; then 
     source $RCPATH/colors          # load color vars
     source $RCPATH/man_colors      # load man_colors
+    source $RCPATH/set_prompt      # configure PWD
 fi
 source $RCPATH/aliases         # load aliases
 source $RCPATH/sh_functions    # load sh functions
@@ -57,7 +58,8 @@ if [[ -n $APPLE ]]; then
     # for java
     JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
     # for iTerm2
-    test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+# CHECK SHELL?!
+    #test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 fi
 
 ##### prepend $PATH with $HOME bins
