@@ -38,37 +38,8 @@ set editing-mode vi
 #    [[ -r $B ]] && . $B
 #done && unset B BCOMPS
 
-# set cmd prompt:
-# based on https://wiki.archlinux.org/index.php/Color_Bash_Prompt#Wolfman.27s (with some mods)
-function setPWD {
-    #   How many characters of the $PWD should be kept
-    local pwdmaxlen=30
-    #   Indicator that there has been directory truncation:
-    local trunc_symbol="..."
-    local DIR=$PWD
-    [[ "$DIR" =~ ^"$HOME"(/|$) ]] && DIR="~${DIR#$HOME}"
-    if [ ${#DIR} -gt $pwdmaxlen ]
-    then
-        local pwdoffset=$(( ${#DIR} - $pwdmaxlen ))
-        DIR="${trunc_symbol}${DIR:$pwdoffset:$pwdmaxlen}"
-    fi
-    echo $DIR
-}
-
-# set colors
-source $RCPATH/prompt_colors
-
-# vc-awesome prompt format
-export VCPROMPT_TIMEOUT=100
-export VCPROMPT_FORMAT="-${DC}(${FG_B}%s:%b:%m%u%a${DC})"
-# oython version check, as vcprompt requires Py 2.7+
-PY_VER="$(python -c 'import sys; print(sys.version[0:3])' | sed 's/\.//')"
-if (( "$PY_VER" <= "27" )) ; then
-    VCPROMPT_BIN='echo -n ""'
-else
-    VCPROMPT_BIN='vcprompt'
-fi
-
+# start setup prompting stuff
+source $RCPATH/set_prompt
 
 # (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]-(vcprompt)\n=>
 PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
