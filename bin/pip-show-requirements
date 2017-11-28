@@ -1,0 +1,2 @@
+echo "Showing Requirements for 'pip' installations"
+for P in $(pip list | tail -n +3 | awk '{print $1}'); do echo -n "$P "; pip show $P | grep "^Requires" ;done
