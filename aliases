@@ -56,7 +56,7 @@ alias my='mysql'
 alias myr='mysql -uroot'
 alias myusers='echo "MySQL Users (as ''root'' user)"; myr -p -e "SELECT User, Host FROM mysql.user;"'
 alias mydbs='myr -p -e "show databases;"'
-alias myprivs="echo 'User Database Privileges:' && mysql -uroot -p -e \"select user, db, concat_ws(' ',Insert_priv, Select_priv, Update_priv, Delete_priv) as 'C R U D', concat_ws(' ',Create_priv,Drop_priv,Index_priv) as CrDpIx, Grant_priv as Grt, Lock_tables_priv as Lok, concat_ws(' ',Create_view_priv,Show_view_priv) as 'CrSh Vw', concat_ws(' ',Create_routine_priv,Alter_routine_priv,Execute_priv) as 'CrtAltExe Rtne', concat_ws(' ',Event_priv,Trigger_priv) as EvtTrg from db order by db,user;\" -Dmysql"
+alias myprivs="echo 'User Database Privileges:' && mysql -uroot -p -e \"select user, db, host, concat_ws(' ',Insert_priv, Select_priv, Update_priv, Delete_priv) as 'C R U D', concat_ws(' ',Create_priv,Drop_priv,Index_priv) as CrDpIx, Grant_priv as Grt, Lock_tables_priv as Lok, concat_ws(' ',Create_view_priv,Show_view_priv) as 'CrSh Vw', concat_ws(' ',Create_routine_priv,Alter_routine_priv,Execute_priv) as 'CrtAltExe Rtne', concat_ws(' ',Event_priv,Trigger_priv) as EvtTrg from db order by db,user;\" -Dmysql"
 
 ##### Ruby/Rails/Rake ##### 
 alias rsrv='./script/server -u'
@@ -91,11 +91,9 @@ alias  qj="qstat -f | grep -E $QINFO"
 alias quj="qstat -u $USER -f | grep -E $QINFO"
 alias squ="showq -n -v -u $USER"
 alias qcnts='qur=$(qu -r | tail -n +6 | wc -l);qui=$(qu -i | tail -n +6 | wc -l);echo -n "Running: $qur, idle: $qui, total: "; echo "$qur+$qui"| bc'
-alias  qi='qsub -l walltime=333:33:33,nodes=1:ppn=4 -I -d $PWD'
-alias qi2='qsub -l walltime=24:00:00,nodes=1:ppn=4 -I -d $PWD'
-alias qi4='qsub -l walltime=48:00:00,nodes=1:ppn=4 -I -d $PWD'
-alias qsd='qsub -l walltime=24:00:00,nodes=1:ppn=4 -d $PWD'
-alias qs4='qsub -l walltime=48:00:00,nodes=1:ppn=4 -d $PWD'
+alias  qi='qsub -l walltime=1:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
+alias qi2='qsub -l walltime=2:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
+alias qi4='qsub -l walltime=4:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
 
 ##### ssh #####
 alias ssx='ssh -X'
