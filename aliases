@@ -106,6 +106,7 @@ alias h='history'
 alias vi='vim'
 
 alias grep="grep --color"
+alias greps='grep --color -I --no-group-separator'
 alias psx='ps xf -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias psc="ps f -o pid,cputime,cmd -C"
