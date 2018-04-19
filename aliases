@@ -7,23 +7,25 @@ if [[ -n $APPLE && ! -d /usr/local/Cellar/coreutils ]]; then
 else
     alias ls='ls --color=auto --time-style=+"%Y-%m-%d %H:%M:%S"' # date=CCYY-MM-DD HH:MI:SS
 fi
-alias l="ls --time-style='+%F %R:%S'"  # simplest
-alias l1='ls -1'           # short,1 column
-alias la='ls -A'           # short,show almost all
-alias lsa='ls -A'          # short,show almost all
-alias lsf='ls -FLsh1'      # single col, show human sizes, append slashes
-alias laf='ls -FLAsh1'     # single col, show human sizes, append slashes, almost-all
-alias ll='ls -lh'          # long,human readable
-alias llb='ls -l'          # long,show all bytes
-alias lll='ls -lhL'        # long,human readable, resolve sym links
-alias lla='ls -lAph'       # long,show almost all,show type,human readable
-alias lrt='ls -tRh'        # short,sorted by date,recursive,show type,human readable
-alias llr='ls -lRh'        # long,recursive,show type,human readable
-alias lt='ls -lthr'        # long,sorted by date,show type,human readable,reverse
-alias l.='ls -d .[^.]*'    # short,.dotfiles only
-alias ll.='ls -ld .[^.]*'  # long,.dotfiles only
-alias lg="ls -lhgG"        # long,human,no group/owner shown
-alias lsd="ls -ldhgG"      # long,human,no group/owner shown, do not recurse directories
+
+alias l1='ls -1'        # short,1 column
+alias la='ls -A'        # short,show almost all
+alias lsa='la'          # short,show almost all
+alias lla='la -lh'      # long,show almost all,show type,human readable
+alias lsf='ls -FLsh1'   # single col, show human sizes, append slashes
+alias laf='ls -FLAsh1'  # single col, show human sizes, append slashes, almost-all
+alias ll='ls -lh'       # long,human readable
+alias llb='ls -l'       # long,show all bytes
+alias lll='ls -lhL'     # long,human readable, resolve sym links
+alias lt=' ls -lthr'    # long,sorted by date,show type,human readable,reverse
+alias lrt='lt -R'       # short,sorted by date,recursive,show type,human readable
+alias llr='ll -R'       # long,recursive,human readable
+alias l.='ls -d .[^.]*' # short,.dotfiles only
+alias ll.='l. -lh'      # long,.dotfiles only
+alias lg="ls -hog"      # long,human,no group/owner shown
+alias lsd="ls -d"       # short,human,no group/owner shown, do not recurse directories
+alias lld="lg -d"       # long,human,no group/owner shown, do not recurse directories
+alias l="lg"            # single-key for `lg`
 
 ##### chdir aliases #####
 alias cdp='cd $(pwd -P)'
