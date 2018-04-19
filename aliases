@@ -122,6 +122,7 @@ if [[ -n $APPLE ]]; then {
   alias errcode='grep -e"$1" /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Headers/MacErrors.h | more'
   alias macvim='open -a MacVim'
   alias excel='open -a "Microsoft Excel"'
+  alias libre='open -a "LibreOffice"'
   alias finder='open -R'
   alias psx="ps -x -h -o pid,ppid,pcpu,pmem,vsz,cputime,user,command"
   alias psa="ps -x -h -o pid,ppid,pcpu,pmem,vsz,cputime,user,command -a"
