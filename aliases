@@ -88,7 +88,8 @@ alias htr='sudo service httpd restart'
 ##### qsub #####
 QINFO="'[Jj]ob( Id|_Name|_state)|qtime|[Rr]esource.*(\.mem|\.walltime|\.nodes)|depend|e(user|group)'"
 QNAME='batch'
-alias  qu='qstat -u $USER'
+alias  qs='qstat -u $USER -n -1 -t'     # qstat showing nodes in one line, plus array (-t) info
+alias  qu='qstat -u $USER'              # qstat specific to user account
 alias  qj="qstat -f | grep -E $QINFO"
 alias quj="qstat -u $USER -f | grep -E $QINFO"
 alias squ="showq -n -v -u $USER"
