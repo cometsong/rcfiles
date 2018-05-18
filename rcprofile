@@ -48,6 +48,7 @@ LC_CTYPE=$LANG
 
 ##### Python #####
 export PYTHONSTARTUP=$HOME/.pythonrc.py
+export PYTHONUSERBASE=$HOME/.local/
 
 ##### Brews, etc... #####
 if [[ -n $APPLE ]]; then
