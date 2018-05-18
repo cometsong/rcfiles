@@ -4,29 +4,49 @@
 [alias]
     a     = add
     aa    = add .
-    br    = branch --verbose
-    bra   = branch --abbrev
+# config
     cfg   = config
     cfl   = config -l
+    aliases = "!f(){ git config -l | grep '^alias.'; };f"
+# checkout
     chk   = checkout
     cb    = checkout -b
-    d     = diff
-    dh    = diff HEAD
+# diffs
+    dh    = diff HEAD       # show all mods
+    d     = diff            # show unstaged mods
+    dc    = diff --cached   # show staged mods
     vimdiff = difftool -y -t vimdiff -R
-    rh    = reset HEAD
-    s     = status
-    st    = status
-    ss    = status --short
-    unadd = reset HEAD
-[alias]
-    rmbranch = "!f(){ git branch -D \"$1\";  git push origin --delete \"$1\"; };f"
-[alias]
-    sub   = submodule
-    subrm = !~/.git_template_global/git-submodule-rm.sh
+# status
+    s     = status                  # full list of 
+    ss    = status --short          # concise columnar
+    sb    = status --short --branch # show branch names
+# stash
+    st    = stash        # stash current changes
+    stl   = stash list   # list stashes
+    stls  = stash list   # list stashes
+    sta   = stash apply  # apply stash (restore changes)
+    std   = stash drop   # drop stashes (destroy changes)
+    stbr  = stash branch # checkout new branch with stash
+# branches
+    b     = branch
+    br    = branch --verbose
+    bra   = branch --abbrev
+    rmbr  = "!f(){ git branch -D \"$1\";  git push origin --delete \"$1\"; };f"
+# resets
+    unadd    = reset HEAD
+    unstage  = reset HEAD
+    uncommit = reset --soft HEAD^
+    filelog  = log -u # show changes to a file
+# subs
+    sub      = submodule
+    subrm    = !~/.git_template_global/git-submodule-rm.sh
     subnames = "!git submodule status -- | cut -d' ' -f3 | sort"
-    suburls = "!git submodule foreach -q git config remote.origin.url"
-[alias]
+    suburls  = "!git submodule foreach -q git config remote.origin.url"
+# commits
+    c     = commit -m
     com   = commit -m
+    amend = commit --amend
+# pushy
     p     = push --tags
     po    = push --tags origin
     pom   = push --tags origin master
@@ -37,7 +57,7 @@
     f     = fetch
     mg    = merge
     mgf   = merge FETCH_HEAD
-[alias]
+# logs
     log   = log --decorate
     l     = log --pretty=format:'%C(yellow)%h %C(blue)%an %C(green)%ad %C(yellow)| %C(white)%s%C(yellow)%d' --graph --date=short
     ll    = log --decorate --pretty='Commit:%Creset %C(yellow)%h%C(green)%d%Creset %C(white)%ci%nAuthor:%Creset %C(blue)%an %Creset<%ae>%nTitle:  %C(white)%s%n'
