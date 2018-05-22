@@ -120,7 +120,6 @@ alias cdp='cd $(pwd -P)'
 # Mac aliases...
 if [[ -n $APPLE ]]; then {
   alias top='top -n40 -ocpu -Orsize'
-  alias errcode='grep -e"$1" /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Headers/MacErrors.h | more'
   alias macvim='open -a MacVim'
   alias excel='open -a "Microsoft Excel"'
   alias libre='open -a "LibreOffice"'
