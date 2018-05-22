@@ -1,18 +1,16 @@
-#!/usr/bin/env sh
-
 ##### Find a file with a pattern in name ##### 
-function ff() {
+ff() {
     find . -type f -iname '*'$*'*' -ls ; 
 }
 
 ##### Find a file with pattern $1 in name and Execute $2 on it ##### 
-function fe() {
+fe() {
     find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \;  ; 
 }
 
 ##### Find a pattern in a set of files and highlight them #####
 # (needs a recent version of egrep)
-function fstr()
+fstr()
 {
     OPTIND=1
     local case=""

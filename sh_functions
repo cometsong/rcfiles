@@ -1,5 +1,3 @@
-#!/usr/bin/env sh
-
 #source all function files in `functions` dir
 for F in $RCPATH/functions/*; do
     #echo Sourcing $F

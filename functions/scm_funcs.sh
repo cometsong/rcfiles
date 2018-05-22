@@ -1,20 +1,18 @@
-#!/usr/bin/env sh
-
 ##### git ##### 
 ## Also see ~/.gitconfig ##
 alias g="git"
 
-function gfm() {
+gfm() {
   git fetch $*
   git merge FETCH_HEAD
 }
-function gfms() {
+gfms() {
   git fetch
   git merge FETCH_HEAD
   git submodule init
   git-sub-pull
 }
-function git-sub-pull() {
+git-sub-pull() {
   REPO=${1:-origin}
   BRANCH=${2:-master}
   git submodule foreach --recursive '
@@ -24,28 +22,28 @@ function git-sub-pull() {
     git submodule sync -- $path;
     cd $path;'
 }
-function gbranch() {
+gbranch() {
   current_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 }
-function gpo() {
+gpo() {
   # pushes the current branch; whatever that is
   gbranch
   git push origin $current_branch
 }
-function guo() {
+guo() {
   # pulls the current branch; whatever that is
   gbranch
   git pull origin $current_branch
 }
-function gpom() {
+gpom() {
   git push origin master
 }
-function guom() {
+guom() {
   git pull origin master
 }
 
 # queries config for all remote repos, pushes master to all
-function gpam() { 
+gpam() { 
     REMOTES=( $(git remote) )
     for R in $REMOTES; do 
         echo Pushing to $R
@@ -54,7 +52,7 @@ function gpam() {
 }
 
 # queries config for all remote repos, pushes current_branch to all
-function gpab() { 
+gpab() { 
     REMOTES=`git remote | uniq`
     gbranch
     for R in $REMOTES; do 

@@ -1,7 +1,5 @@
-#!/usr/bin/env sh
-
 ##### ls -l which app #####
-function lw() {
+lw() {
     USAGE="Usage:  lw app-name. \n        Shows 'ls -lh' of app-name."
     if [ -z "$1" ]; then
         echo "$USAGE"

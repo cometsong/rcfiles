@@ -1,7 +1,5 @@
-#!/usr/bin/env sh
-
 ##### move filenames to lowercase #####
-function lowercase()  
+lowercase()  
 {
     for file ; do
         filename=${file##*/}

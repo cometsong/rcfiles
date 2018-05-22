@@ -1,6 +1,4 @@
-#!/usr/bin/env sh
-
-function extract()
+extract()
 {
     if [[ "x$1" == "x-h" || "x$1" == "x--help" || "x$1" == "x" ]]; then
         echo "Usage: extract filename"
