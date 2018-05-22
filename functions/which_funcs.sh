@@ -8,7 +8,7 @@ function lw() {
         #exit 1
     else
         WAPP=$(which ${1}) 
-        if  [[ $WAPP =~ not\ found ]]; then
+        if  [[ $? ]]; then
             echo $WAPP
         else
             ls -lh $WAPP
