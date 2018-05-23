@@ -1,5 +1,5 @@
 #source all function files in `functions` dir
-for F in $RCPATH/functions/*; do
+for F in $RCPATH/functions/*.sh; do
     #echo Sourcing $F
     source $F
 done
