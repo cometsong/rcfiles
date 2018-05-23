@@ -16,7 +16,7 @@ sclists() {
 }
 
 # from tmux-list.sh (more comments for readability in there)
-tmlists {
+tmlists() {
     CMD="tmux ls -F '#{session_name} #{session_windows} #{?session_attached,Attached,Detached}'"
     LL=$(eval $CMD 2> /dev/null | sort)
 
