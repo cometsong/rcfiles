@@ -50,6 +50,11 @@ $endif
 "\eOd": backward-word #ctl-leftarrow
 "\eOc": forward-word #ctl-rightarrow
 
+# set up file-completion by cycling through the options
+TAB: menu-complete
+"\e[Z": menu-complete-backward   # Shift-Tab
+set show-all-if-ambiguous on
+set menu-complete-display-prefix on
 
 # IPython needs this to appear at the bottom of the
 # file for clear-screen to work
