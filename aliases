@@ -27,8 +27,9 @@ alias lsd="ls -d"       # short,human,no group/owner shown, do not recurse direc
 alias lld="lg -d"       # long,human,no group/owner shown, do not recurse directories
 alias l="lg"            # single-key for `lg`
 
-##### chdir aliases #####
-alias cdp='cd $(pwd -P)'
+##### chdir func #####
+# func to cd to another dir (or .), then cd to abspath 
+cdp () { d=${1:-.}; cd "$d" && cd "$(pwd -P)" || echo "does '$d' exist?"; };
 
 ##### Screen aliases #####
 alias scn='screen'          # start a new screen session
@@ -115,7 +116,6 @@ alias datey='date +"%Y-%m-%d %H:%M:%S"'
 alias treef='tree -FuCh' # /*, user, colors, human sizes
 alias duh='du -csh'
 alias dfs="df -h 2>/dev/null | grep ^[\ F]| sed -e 's/^ \{20\}//' -e 's/^Filesystem \{10\}//'"
-alias cdp='cd $(pwd -P)'
 
 # Mac aliases...
 if [[ -n $APPLE ]]; then {
