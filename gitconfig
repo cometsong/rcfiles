@@ -59,10 +59,11 @@
     mgf   = merge FETCH_HEAD
 # logs
     log   = log --decorate
-    l     = log --pretty=format:'%C(yellow)%h %C(blue)%an %C(green)%ad %C(yellow)| %C(white)%s%C(yellow)%d' --graph --date=short
-    ll    = log --decorate --pretty='Commit:%Creset %C(yellow)%h%C(green)%d%Creset %C(white)%ci%nAuthor:%Creset %C(blue)%an %Creset<%ae>%nTitle:  %C(white)%s%n'
-    la    = log --decorate --date=short --pretty='%C(yellow)%h%Creset %C(blue)%cn%Creset %C(green)%cd %Creset%s%C(yellow)%d'
-    ls    = log --decorate --oneline --date=short
+    l     = log --pretty='%C(yellow)%h %C(blue)%an %C(green)%ad %C(yellow)| %C(white)%s%C(yellow)%d' --graph --date=short
+    lf    = log --pretty='%C(yellow)%h %C(blue)%an %C(green)%ad %C(yellow)| %C(white)%s%C(yellow)%d' --date=short --stat -m  # show stat changes in files
+    ll    = log --pretty='Commit:%Creset %C(yellow)%h%C(green)%d%Creset %C(white)%ci%nAuthor:%Creset %C(blue)%an %Creset<%ae>%nTitle:  %C(white)%s%n' --decorate
+    la    = log --pretty='%C(yellow)%h%Creset %C(blue)%cn%Creset %C(green)%cd %Creset%s%C(yellow)%d' --decorate --date=short
+    ls    = log --oneline --decorate --date=short
 [init]
     templatedir = ~/.git_template_global
 [core]
