@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-function hist_uname() {
+hist_uname() {
     ### Define HISTFILE specific to server's uname for simple separation
     history -r # read from current histfile
     HISTFILE="$HOME/.history.$(uname -n)" # set new history file
@@ -14,8 +12,7 @@ function hist_uname() {
 #export HISTFILE=$(hist_uname)
 
 
-
-function mycd() { # recd from Jethro 20150825
+mycd() { # recd from Jethro 20150825
     history -w # write current history file
     builtin cd "$@" # do actual cd
     local HISTDIR="$HOME/.dir_bash_history$PWD" # use nested folders

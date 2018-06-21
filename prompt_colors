@@ -4,16 +4,16 @@
 # usage: $(RootColor $root $other)
 # default: root = red, other users = yellow
 function RootColor {
-    rootClr=${1:-$FG_R}
-    dfltClr=${2:-$FG_Y}
+    rootClr=${1:-$f_Rd}
+    dfltClr=${2:-$f_Yl}
     if [[ $UID == 0 ]];
     then echo $rootClr
     else echo $dfltClr
     fi;
 }
 # short color names for prompt uses
-RCy=$(RootColor $FG_R $FG_Y)
-RCw=$(RootColor $FG_R $FG_W)
+RCy=$(RootColor $f_Rd $f_Yl)
+RCw=$(RootColor $f_Rd $f_Wh)
 
 # delimiter color ()-
-DC=${FG_G}
+DC=${f_Gr}

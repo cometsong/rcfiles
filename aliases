@@ -7,26 +7,29 @@ if [[ -n $APPLE && ! -d /usr/local/Cellar/coreutils ]]; then
 else
     alias ls='ls --color=auto --time-style=+"%Y-%m-%d %H:%M:%S"' # date=CCYY-MM-DD HH:MI:SS
 fi
-alias l="ls --time-style='+%F %R:%S'"  # simplest
-alias l1='ls -1'           # short,1 column
-alias la='ls -A'           # short,show almost all
-alias lsa='ls -A'          # short,show almost all
-alias lsf='ls -FLsh1'      # single col, show human sizes, append slashes
-alias laf='ls -FLAsh1'     # single col, show human sizes, append slashes, almost-all
-alias ll='ls -lh'          # long,human readable
-alias llb='ls -l'          # long,show all bytes
-alias lll='ls -lhL'        # long,human readable, resolve sym links
-alias lla='ls -lAph'       # long,show almost all,show type,human readable
-alias lrt='ls -tRh'        # short,sorted by date,recursive,show type,human readable
-alias llr='ls -lRh'        # long,recursive,show type,human readable
-alias lt='ls -lthr'        # long,sorted by date,show type,human readable,reverse
-alias l.='ls -d .[^.]*'    # short,.dotfiles only
-alias ll.='ls -ld .[^.]*'  # long,.dotfiles only
-alias lg="ls -lhgG"        # long,human,no group/owner shown
-alias lsd="ls -ldhgG"      # long,human,no group/owner shown, do not recurse directories
 
-##### chdir aliases #####
-alias cdp='cd $(pwd -P)'
+alias l1='ls -1'        # short,1 column
+alias la='ls -A'        # short,show almost all
+alias lsa='la'          # short,show almost all
+alias lla='la -lh'      # long,show almost all,show type,human readable
+alias lsf='ls -FLsh1'   # single col, show human sizes, append slashes
+alias laf='ls -FLAsh1'  # single col, show human sizes, append slashes, almost-all
+alias ll='ls -lh'       # long,human readable
+alias llb='ls -l'       # long,show all bytes
+alias lll='ls -lhL'     # long,human readable, resolve sym links
+alias lt=' ls -lthr'    # long,sorted by date,show type,human readable,reverse
+alias lrt='lt -R'       # short,sorted by date,recursive,show type,human readable
+alias llr='ll -R'       # long,recursive,human readable
+alias l.='ls -d .[^.]*' # short,.dotfiles only
+alias ll.='l. -lh'      # long,.dotfiles only
+alias lg="ls -hog"      # long,human,no group/owner shown
+alias lsd="ls -d"       # short,human,no group/owner shown, do not recurse directories
+alias lld="lg -d"       # long,human,no group/owner shown, do not recurse directories
+alias l="lg"            # single-key for `lg`
+
+##### chdir func #####
+# func to cd to another dir (or .), then cd to abspath 
+cdp () { d=${1:-.}; cd "$d" && cd "$(pwd -P)" || echo "does '$d' exist?"; };
 
 ##### Screen aliases #####
 alias scn='screen'          # start a new screen session
@@ -86,7 +89,8 @@ alias htr='sudo service httpd restart'
 ##### qsub #####
 QINFO="'[Jj]ob( Id|_Name|_state)|qtime|[Rr]esource.*(\.mem|\.walltime|\.nodes)|depend|e(user|group)'"
 QNAME='batch'
-alias  qu='qstat -u $USER'
+alias  qs='qstat -u $USER -n -1 -t'     # qstat showing nodes in one line, plus array (-t) info
+alias  qu='qstat -u $USER'              # qstat specific to user account
 alias  qj="qstat -f | grep -E $QINFO"
 alias quj="qstat -u $USER -f | grep -E $QINFO"
 alias squ="showq -n -v -u $USER"
@@ -104,6 +108,7 @@ alias h='history'
 alias vi='vim'
 
 alias grep="grep --color"
+alias greps='grep --color -I --no-group-separator'
 alias psx='ps xf -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias psc="ps f -o pid,cputime,cmd -C"
@@ -111,14 +116,13 @@ alias datey='date +"%Y-%m-%d %H:%M:%S"'
 alias treef='tree -FuCh' # /*, user, colors, human sizes
 alias duh='du -csh'
 alias dfs="df -h 2>/dev/null | grep ^[\ F]| sed -e 's/^ \{20\}//' -e 's/^Filesystem \{10\}//'"
-alias cdp='cd $(pwd -P)'
 
 # Mac aliases...
 if [[ -n $APPLE ]]; then {
   alias top='top -n40 -ocpu -Orsize'
-  alias errcode='grep -e"$1" /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/CarbonCore.framework/Headers/MacErrors.h | more'
   alias macvim='open -a MacVim'
   alias excel='open -a "Microsoft Excel"'
+  alias libre='open -a "LibreOffice"'
   alias finder='open -R'
   alias psx="ps -x -h -o pid,ppid,pcpu,pmem,vsz,cputime,user,command"
   alias psa="ps -x -h -o pid,ppid,pcpu,pmem,vsz,cputime,user,command -a"

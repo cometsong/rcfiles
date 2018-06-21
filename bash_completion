@@ -2,114 +2,26 @@
 #                  Bash Completion Options of Cometsong rcfiles                #
 # ---------------------------------------------------------------------------- #
 
+# source all files in bash_completion.d
+bashcompdir="~/.bash_completion.d"
+#if ! find ${bashcompdir}/. ! -name . -prune -exec false {} +
+#then
+#    for f in ${bashcompdir}
+#    do
+#        source "$f"
+#    done
+#fi
+sourceror() {
+    Usage="source all files in list passed, IFF readable"
+    files="$@"
+    for f in files; do [[ -r "$f" ]] && . "$f"; done
+}
+[[ -d ${bashcompdir} ]] && sourceror ${bashcompdir}/*
+
 # source Completion function for all aliases
-source $HOME/.bash_complete_alias
-# init aliases' completions:
-for Als in $(alias | grep '^alias' | cut -d= -f1 | cut -d' ' -f2); do
+# init aliases' completions, all except ssh hosts:
+for Als in $(alias|grep -v "='ssh"|sed "s/^\w* \(.*\)='.*/\1/"); do
     complete -F _complete_alias ${Als}
 done
 
 
-# For use with vim and ctags
-# from http://vim.wikia.com/wiki/Using_bash_completion_with_ctags_and_Vim, with 'mvim' added to last line
-_vim_search() {
-    ex -N -u NONE -i NONE -c 'let &tags="'$2'"' -c 'echo "\\n"' -c 'for tag in taglist("^".escape("'$1'","."))|echo tag["name"]|endfor' -cq |
-    tr -s '\r' '\n' |
-    sed -n '/^[a-zA-Z_]/p'
-}
-
-_vim() {
-    local cur prev
-
-    COMPREPLY=()
-    cur=${COMP_WORDS[COMP_CWORD]}
-    prev=${COMP_WORDS[COMP_CWORD-1]}
-
-    case "${prev}" in
-        -t)
-            local tagsdir=$PWD
-            while [[ "$tagsdir" && ! -f "$tagsdir/tags" ]]; do
-                tagsdir=${tagsdir%/*}
-            done
-            [[ -f "$tagsdir/tags" ]] || return
-
-            COMPREPLY=( $(_vim_search "$cur" "$tagsdir/tags" ) )
-            return
-            ;;
-        *)
-            # Perform usual completion mode
-            ;;
-    esac
-}
-# Files matching this pattern are excluded
-tags_excludelist='*.@(o|O|so|SO|so.!(conf)|SO.!(CONF)|a|A|rpm|RPM|deb|DEB|gif|GIF|jp?(e)g|JP?(E)G|mp3|MP3|mp?(e)g|MP?(E)G|avi|AVI|asf|ASF|ogg|OGG|class|CLASS)'
-complete -F _vim -f -X "${tags_excludelist}" vi vim gvim mvim nvim
-
-# pip bash completion start
-_pip_completion()
-{
-    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
-                   COMP_CWORD=$COMP_CWORD \
-                   PIP_AUTO_COMPLETE=1 $1 ) )
-}
-complete -o default -F _pip_completion pip
-complete -o default -F _pip_completion pip3
-# pip bash completion end
-
-###-begin-npm-completion-###
-#
-# npm command completion script
-#
-# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
-# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
-#
-
-if type complete &>/dev/null; then
-  _npm_completion () {
-    local words cword
-    if type _get_comp_words_by_ref &>/dev/null; then
-      _get_comp_words_by_ref -n = -n @ -w words -i cword
-    else
-      cword="$COMP_CWORD"
-      words=("${COMP_WORDS[@]}")
-    fi
-
-    local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
-                           COMP_LINE="$COMP_LINE" \
-                           COMP_POINT="$COMP_POINT" \
-                           npm completion -- "${words[@]}" \
-                           2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  complete -o default -F _npm_completion npm
-elif type compdef &>/dev/null; then
-  _npm_completion() {
-    local si=$IFS
-    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-                 COMP_LINE=$BUFFER \
-                 COMP_POINT=0 \
-                 npm completion -- "${words[@]}" \
-                 2>/dev/null)
-    IFS=$si
-  }
-  compdef _npm_completion npm
-elif type compctl &>/dev/null; then
-  _npm_completion () {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                       COMP_LINE="$line" \
-                       COMP_POINT="$point" \
-                       npm completion -- "${words[@]}" \
-                       2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  compctl -K _npm_completion npm
-fi
-###-end-npm-completion-###

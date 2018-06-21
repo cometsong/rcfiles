@@ -1,3 +1,3 @@
-function calc () {
+calc () {
     echo "scale=5;$@" | bc -l
 }

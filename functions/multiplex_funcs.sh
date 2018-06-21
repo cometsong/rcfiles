@@ -1,7 +1,5 @@
-#!/usr/bin/env sh
-
 # from screen-list.sh (more comments for readability in there)
-function sclists() {
+sclists() {
     LL=$(screen -ls | \
         grep "^[[:space:]][0-9]." | \
         sed "s'\([0-9]*\)\.\([-_~.A-Za-z]*\).*\(..tached\).*'\2 \1 \3'" |\
@@ -18,7 +16,7 @@ function sclists() {
 }
 
 # from tmux-list.sh (more comments for readability in there)
-function tmlists {
+tmlists() {
     CMD="tmux ls -F '#{session_name} #{session_windows} #{?session_attached,Attached,Detached}'"
     LL=$(eval $CMD 2> /dev/null | sort)
 
@@ -32,7 +30,7 @@ function tmlists {
     fi
 }
 
-function listawkout() {
+listawkout() {
     # expects a string with three args to be split on whitespace
     if [ "$*" ]; then
         echo "$*" |\
