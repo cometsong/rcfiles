@@ -137,3 +137,4 @@ if [[ -n $APPLE ]]; then {
 alias psmem="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"
 alias ws='w -h -s | sort'
 alias greps='grep --color -I --no-group-separator'
+alias ctags='ctags --options=$HOME/.ctags'
