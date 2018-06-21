@@ -33,24 +33,24 @@ ITALOFF=$(tput rmso)
 UNDLOFF=$(tput rmul)
 
 # FOREGROUND colors
-FG_K=$(tput setaf 0)    # black
-FG_R=$(tput setaf 1)    # red
-FG_G=$(tput setaf 2)    # green
-FG_Y=$(tput setaf 3)    # yellow
-FG_B=$(tput setaf 4)    # blue
-FG_M=$(tput setaf 5)    # magenta
-FG_C=$(tput setaf 6)    # cyan
-FG_W=$(tput setaf 7)    # white
+f_Rd=$(tput setaf 1)    # red
+f_Gr=$(tput setaf 2)    # green
+f_Bl=$(tput setaf 4)    # blue
+f_Cy=$(tput setaf 6)    # cyan
+f_Ma=$(tput setaf 5)    # magenta
+f_Yl=$(tput setaf 3)    # yellow
+f_Bk=$(tput setaf 0)    # black
+f_Wh=$(tput setaf 7)    # white
 
 # BACKGROUND colors
-BG_K=$(tput setab 0)    # black
-BG_R=$(tput setab 1)    # red
-BG_G=$(tput setab 2)    # green
-BG_Y=$(tput setab 3)    # yellow
-BG_B=$(tput setab 4)    # blue
-BG_M=$(tput setab 5)    # magenta
-BG_C=$(tput setab 6)    # cyan
-BG_W=$(tput setab 7)    # white
+b_Rd=$(tput setab 1)    # red
+b_Gr=$(tput setab 2)    # green
+b_Bl=$(tput setab 4)    # blue
+b_Cy=$(tput setab 6)    # cyan
+b_Ma=$(tput setab 5)    # magenta
+b_Yl=$(tput setab 3)    # yellow
+b_Bk=$(tput setab 0)    # black
+b_Wh=$(tput setab 7)    # white
 
 # Base16 Shell Terminal Colors
 BASE16_SHELL="$RCPATH/base16-shell/base16-default.dark.sh"
