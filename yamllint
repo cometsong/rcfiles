@@ -2,7 +2,7 @@
 extends: default
 rules:
   indentation:
-    spaces: 4
+    spaces: consistent
     indent-sequences: whatever
   line-length:
     max: 100
@@ -13,5 +13,8 @@ rules:
     type: unix
   trailing-spaces: disable
   empty-lines:
+    level: warning
     max: 5
-
+    max-end: 1
+  document-start: disable
+  document-end: disable
