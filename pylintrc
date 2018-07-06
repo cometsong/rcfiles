@@ -8,7 +8,7 @@ ignore=CVS
 notes=FIXME,XXX,TODO
 
 [FORMAT]
-max-line-length=80
+max-line-length=100
 max-module-lines=1000
 indent-string='    '
 
