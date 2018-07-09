@@ -102,9 +102,9 @@ alias  qj="qstat -f | grep -E $QINFO"
 alias quj="qstat -u $USER -f | grep -E $QINFO"
 alias squ="showq -n -v -u $USER"
 alias qcnts='qur=$(qu -r | tail -n +6 | wc -l);qui=$(qu -i | tail -n +6 | wc -l);echo -n "Running: $qur, idle: $qui, total: "; echo "$qur+$qui"| bc'
-alias  qi='qsub -l walltime=1:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
-alias qi2='qsub -l walltime=2:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
-alias qi4='qsub -l walltime=4:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
+alias  qi='qsub -l walltime=4:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
+alias qi1='qsub -l walltime=1:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
+alias qi2='qsub -l walltime=2:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
 
 ##### ssh #####
 alias ssx='ssh -X'
