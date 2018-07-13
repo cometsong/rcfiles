@@ -1,12 +1,12 @@
 ##### ls -l which app #####
 lw() {
-    USAGE="Usage:  lw app-name. \n        Shows 'ls -lh' of app-name."
+    USAGE="Usage:  lw app-name.\n\tShows 'ls -lh' of app-name."
     if [ -z "$1" ]; then
-        echo "$USAGE"
+        echo -e "$USAGE"
         #exit 1
     else
         WAPP=$(which ${1}) 
-        if  [[ $? ]]; then
+        if  [[ $? -gt 0 ]]; then
             echo $WAPP
         else
             ls -lh $WAPP
