@@ -27,3 +27,21 @@ mycd() { # recd from Jethro 20150825
 #export HISTFILE="$HOME/.dir_bash_history$PWD/bash_history.txt"
 
 
+# forget most recent command
+forgetcmd() {
+    history -d $((HISTCMD-1));
+}
+
+O
+# delete a series of cmds from shell history
+delhist() {
+    USAGE="Usage delhist <old_hist_num> <newer_hist_num>";
+    Old=${1?"$USAGE"};
+    New=${2?"$USAGE"};
+    for h in $(seq $New -1 $Old); do
+        echo -n "forgetting $h: " && \
+        if history -d "$h" ; then
+        echo "gone"; fi;
+    done
+}
+
