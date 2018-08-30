@@ -1,5 +1,9 @@
 echo "Showing Requirements for 'pip' installations"
+
+goodbye() { echo "Exiting"; exit 1; }
+trap goodbye int exit
+
 for P in $(pip list | tail -n +3 | awk '{print $1}'); do
-printf '%-25s : ' "$P";
-pip show $P | grep "^Requires" | cut -c10-100;
+    printf '%-25s : ' "$P";
+    pip show $P | grep "^Requires" | cut -c10-100;
 done
