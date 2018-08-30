@@ -100,6 +100,7 @@ alias  qs='qstat -u $USER -n -1 -t'     # qstat showing nodes in one line, plus 
 alias  qu='qstat -u $USER'              # qstat specific to user account
 alias  qj="qstat -f | grep -E $QINFO"
 alias quj="qstat -u $USER -f | grep -E $QINFO"
+alias qns="quj | grep '^Job\|Job_Name'" # show user job IDs and names
 alias squ="showq -n -v -u $USER"
 alias qcnts='qur=$(qu -r | tail -n +6 | wc -l);qui=$(qu -i | tail -n +6 | wc -l);echo -n "Running: $qur, idle: $qui, total: "; echo "$qur+$qui"| bc'
 alias  qi='qsub -l walltime=4:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
@@ -138,7 +139,7 @@ if [[ -n $APPLE ]]; then {
   alias htr='sudo /etc/init.d/httpd restart'
 
   # coreutils
-  alias sed='gsed'
+  PATH="/usr/local/opt/coreutils/libexec/gnubin/:$PATH"
 
   # brew upgrade all apps and reinstall all dev apps
   alias brew-upgrade="brew upgrade && for D in \$(find /usr/local/Cellar -type d -name 'HEAD*' | cut -d\/ -f5 | sort -u | tr '\n' ' ');
