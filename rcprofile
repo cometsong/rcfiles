@@ -31,7 +31,7 @@ source $RCPATH/sh_functions    # load sh functions
 
 ##### Config Vars #####
 TZ="America/New_York"
-HISTCONTROL=ignoredups:erasedups
+HISTCONTROL=ignoredups:erasedups:ignorespaces
 export HISTFILE=$(hist_uname)
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
@@ -48,7 +48,7 @@ LC_CTYPE=$LANG
 
 ##### Python #####
 export PYTHONSTARTUP=$HOME/.pythonrc.py
-export PYTHONUSERBASE=$HOME/.local/
+export PYTHONUSERBASE=$HOME/local/
 
 ##### Brews, etc... #####
 if [[ -n $APPLE ]]; then
