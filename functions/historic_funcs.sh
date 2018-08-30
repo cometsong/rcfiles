@@ -1,4 +1,4 @@
-hist_uname() {
+hist_uname() { #{{{ 
     ### Define HISTFILE specific to server's uname for simple separation
     history -r # read from current histfile
     HISTFILE="$HOME/.history.$(uname -n)" # set new history file
@@ -8,11 +8,11 @@ hist_uname() {
 
     # return value of HISTFILE
     echo $HISTFILE
-}
+} #}}} 
 #export HISTFILE=$(hist_uname)
 
 
-mycd() { # recd from Jethro 20150825
+mycd() { #{{{ # recd from Jethro 20150825 
     history -w # write current history file
     builtin cd "$@" # do actual cd
     local HISTDIR="$HOME/.dir_bash_history$PWD" # use nested folders
@@ -22,19 +22,19 @@ mycd() { # recd from Jethro 20150825
     export HISTFILE="$HISTDIR/bash_history.txt" # set new history file
     history -c # clear memory
     history -r # read from current histfile
-}
+} #}}} 
 #alias cd="mycd"
 #export HISTFILE="$HOME/.dir_bash_history$PWD/bash_history.txt"
 
 
 # forget most recent command
-forgetcmd() {
+forgetcmd() { #{{{ 
     history -d $((HISTCMD-1));
-}
+} #}}} 
 
-O
+
 # delete a series of cmds from shell history
-delhist() {
+delhist() { #{{{ 
     USAGE="Usage delhist <old_hist_num> <newer_hist_num>";
     Old=${1?"$USAGE"};
     New=${2?"$USAGE"};
@@ -43,5 +43,5 @@ delhist() {
         if history -d "$h" ; then
         echo "gone"; fi;
     done
-}
+} #}}} 
 
