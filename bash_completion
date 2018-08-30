@@ -14,7 +14,11 @@ bashcompdir="~/.bash_completion.d"
 sourceror() {
     Usage="source all files in list passed, IFF readable"
     files="$@"
-    for f in files; do [[ -r "$f" ]] && . "$f"; done
+    for f in files; do
+        [[ -r "$f" ]] \
+        && echo "Sourcing $f" \
+        && . "$f";
+    done
 }
 [[ -d ${bashcompdir} ]] && sourceror ${bashcompdir}/*
 
