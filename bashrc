@@ -35,9 +35,7 @@ set editing-mode vi
 # Use bash-completion, if available
 #BCOMPS="/etc/bash_completion"
 #[[ -n $APPLE ]] && BCOMPS+=" /usr/local/etc/bash_completion"
-#for B in ${BCOMPS}; do
-#    [[ -r $B ]] && . $B
-#done && unset B BCOMPS
+#for B in ${BCOMPS}; do [[ -r $B ]] && . $B done && unset B BCOMPS
 
 # start setup prompting stuff
 source $RCPATH/set_prompt
