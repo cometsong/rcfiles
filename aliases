@@ -142,8 +142,11 @@ if [[ -n $APPLE ]]; then {
   PATH="/usr/local/opt/coreutils/libexec/gnubin/:$PATH"
 
   # brew upgrade all apps and reinstall all dev apps
-  alias brew-upgrade="brew upgrade && for D in \$(find /usr/local/Cellar -type d -name 'HEAD*' | cut -d\/ -f5 | sort -u | tr '\n' ' ');
-      do APP=\$(echo \${D}); echo Upgrading \$APP; brew reinstall \$APP --HEAD ;done"
+  alias brew-upgrade="export HOMEBREW_INSTALL_CLEANUP=1 && \
+      export HOMEBREW_UPGRADE_CLEANUP=2 && \
+      brew upgrade --display-times && \
+      for D in \$(find /usr/local/Cellar -type d -name 'HEAD*' | cut -d\/ -f5 | sort -u | tr '\n' ' ');
+      do APP=\$(echo \${D}); echo Upgrading \$APP; brew upgrade \$APP --HEAD ;done"
 }; fi
 
 alias psmem="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"
