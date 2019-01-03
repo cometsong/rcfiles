@@ -19,7 +19,8 @@
 # status
     s     = status                  # full list of 
     ss    = status --short          # concise columnar
-    sb    = status --short --branch # show branch names
+    sb    = status --short --branch -uno # don't show untracked
+    sbu   = status --short --branch # show branch names and untracked
 # stash
     st    = stash        # stash current changes
     stl   = stash list   # list stashes
@@ -29,8 +30,10 @@
     stbr  = stash branch # checkout new branch with stash
 # branches
     b     = branch
-    br    = branch --verbose
-    bra   = branch --abbrev
+    br    = b --verbose --verbose
+    bra   = br --all
+    brt   = branch --set-upstream-to
+    btrk  = branch --set-upstream-to
     rmbr  = "!f(){ git branch -D \"$1\";  git push origin --delete \"$1\"; };f"
 # resets
     unadd    = reset HEAD
@@ -46,6 +49,9 @@
     c     = commit -m
     com   = commit -m
     amend = commit --amend
+# tagged
+    t     = tag -ln
+    tn    = tag -ln
 # pushy
     p     = push --tags
     po    = push --tags origin
