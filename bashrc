@@ -35,15 +35,18 @@ set editing-mode vi
 # Use bash-completion, if available
 #BCOMPS="/etc/bash_completion"
 #[[ -n $APPLE ]] && BCOMPS+=" /usr/local/etc/bash_completion"
-#for B in ${BCOMPS}; do [[ -r $B ]] && . $B done && unset B BCOMPS
+#for B in ${BCOMPS}; do
+#    [[ -r $B ]] && . $B
+#done && unset B BCOMPS
 
 # start setup prompting stuff
 source $RCPATH/set_prompt
 
-# (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]-(vcprompt)\n=>
-PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
-PS1L+="-(\[${RCy}\]\u\[${DC}\]@\[${RCy}\]\h\[${DC}\])"
-PS1L+="-(\[${RCy}\]\s-\v\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
-PS1="${PS1L}\$($VCPROMPT_BIN)
-=> \[${NORM}\]"
-unset PS1L
+set_ps1() {
+    # (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]-(vcprompt)\n=>
+    PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
+    PS1L+="-(\[${RCy}\]\u\[${DC}\]@\[${RCy}\]${HOSTNAME}\[${DC}\])"
+    PS1L+="-(\[${RCy}\]\s-\v\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
+    export PS1="${PS1L}\$($VCPROMPT_BIN)\n=> \[${NORM}\]"
+    unset PS1L
+}; set_ps1
