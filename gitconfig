@@ -29,11 +29,9 @@
     std   = stash drop   # drop stashes (destroy changes)
     stbr  = stash branch # checkout new branch with stash
 # branches
-    b     = branch
-    br    = b --verbose --verbose
-    bra   = br --all
-    brt   = branch --set-upstream-to
-    btrk  = branch --set-upstream-to
+    br    = branch --verbose --verbose
+    bra   = branch --verbose --verbose --all
+    bru   = branch --set-upstream-to
     rmbr  = "!f(){ git branch -D \"$1\";  git push origin --delete \"$1\"; };f"
 # resets
     unadd    = reset HEAD
