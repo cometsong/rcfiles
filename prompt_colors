@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # root-specificity for colors
 # usage: $(RootColor $root $other)
 # default: root = red, other users = yellow
