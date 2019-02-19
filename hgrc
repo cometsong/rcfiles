@@ -2,6 +2,7 @@
 [ui]
 username = cometsong <benjamin@cometsong.net>
 editor = vim
+ignore = ~/.hgignore
 
 [extensions]
 pager = less
@@ -20,3 +21,9 @@ status.removed = red bold
 status.deleted = cyan bold
 status.unknown = blue bold
 status.ignored = black bold
+
+[defaults]
+log = --graph
+
+[diff]
+unified = 2
