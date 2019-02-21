@@ -50,6 +50,8 @@
 # tagged
     t     = tag -ln
     tn    = tag -ln
+    latest = "!git for-each-ref refs/tags --sort=-taggerdate --format=\"%(refname:short)\" --count=1"
+    recent = "!t(){ git for-each-ref refs/tags --sort=-taggerdate --format=\"%(refname:short)     %(objectname:short)     %(contents:subject)\" --count=${1:-5}; };t $1"
 # pushy
     p     = push --tags
     po    = push --tags origin
