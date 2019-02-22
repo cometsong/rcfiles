@@ -120,6 +120,7 @@ alias datey='date +"%Y-%m-%d %H:%M:%S"'
 alias treef='tree -FuCh' # /*, user, colors, human sizes
 alias duh='du -csh'
 alias dfs="df -h 2>/dev/null | grep ^[\ F]| sed -e 's/^ \{20\}//' -e 's/^Filesystem \{10\}//'"
+alias dfm="df -h 2>/dev/null | grep '^[\/F]'"; # show only header and Filesystems starting with '/' (mounts)
 
 ##### Mac aliases... #####
 if [[ -n $APPLE ]]; then {
