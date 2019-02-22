@@ -45,14 +45,14 @@ alias muxls='echo -e "tmuxinator configs:\n-------------------" && ls -1 ~/.tmux
 alias sessls='sclists; tmlists'
 alias sls=sessls
 
-##### MariaDB/MySQL ##### 
+##### MariaDB/MySQL #####
 alias my='mysql'
 alias myr='mysql -uroot'
 alias myusers='echo "MySQL Users (as ''root'' user)"; myr -p -e "SELECT User, Host FROM mysql.user;"'
 alias mydbs='myr -p -e "show databases;"'
 alias myprivs="echo 'User Database Privileges:' && mysql -uroot -p -e \"select user, db, host, concat_ws(' ',Insert_priv, Select_priv, Update_priv, Delete_priv) as 'C R U D', concat_ws(' ',Create_priv,Drop_priv,Index_priv) as CrDpIx, Grant_priv as Grt, Lock_tables_priv as Lok, concat_ws(' ',Create_view_priv,Show_view_priv) as 'CrSh Vw', concat_ws(' ',Create_routine_priv,Alter_routine_priv,Execute_priv) as 'CrtAltExe Rtne', concat_ws(' ',Event_priv,Trigger_priv) as EvtTrg from db order by db,user;\" -Dmysql"
 
-##### Ruby/Rails/Rake ##### 
+##### Ruby/Rails/Rake #####
 alias rsrv='./script/server -u'
 alias rsrvp='ss -p'
 alias rcon='./script/console'
@@ -61,7 +61,7 @@ alias rdbf='rake db:recreate db:fixtures:load RAILS_ENV=development'
 # setup rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-##### Python ##### 
+##### Python #####
 alias  py=python
 alias py2=python2
 alias py3=python3
@@ -78,7 +78,7 @@ pip_upgrade () {
 }
 alias pip3_upgrade="pip_upgrade pip3"
 
-##### Django ##### 
+##### Django #####
 # assumes 'manage.py' is symlinked to venv bin dir
 alias       migrate='manage.py makemigrations && manage.py migrate'
 alias collectstatic='manage.py collectstatic --noinput --clear'
@@ -102,10 +102,11 @@ alias  qi='qsub -l walltime=4:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
 alias qi1='qsub -l walltime=1:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
 alias qi2='qsub -l walltime=2:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
 
-##### ssh #####
+##### ssh plus hosts #####
 alias ssx='ssh -X'
 for H in $(grep '^Host [a-z]' ~/.ssh/config | cut -d' ' -f2,3,4 | tr '\n' ' '); do alias $H="ssh $H"; done
 
+##### others #####
 alias dmesg='sudo dmesg'
 alias h='history'
 alias vi='vim'
@@ -120,7 +121,7 @@ alias treef='tree -FuCh' # /*, user, colors, human sizes
 alias duh='du -csh'
 alias dfs="df -h 2>/dev/null | grep ^[\ F]| sed -e 's/^ \{20\}//' -e 's/^Filesystem \{10\}//'"
 
-# Mac aliases...
+##### Mac aliases... #####
 if [[ -n $APPLE ]]; then {
   alias top='top -n40 -ocpu -Orsize'
   alias macvim='open -a MacVim'
