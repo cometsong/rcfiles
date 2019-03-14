@@ -49,8 +49,6 @@ elif [[ -d $HOME/local/bash_completion ]]; then
 fi
 # /completion
 
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
 # start setup prompting stuff
 source $RCPATH/set_prompt
 

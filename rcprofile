@@ -59,8 +59,6 @@ if [[ -n $APPLE ]]; then
     # for java
     JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
     # for iTerm2
-# CHECK SHELL?!
-    #test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
     # for Go
     GOPATH=~/code/go
