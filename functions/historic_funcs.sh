@@ -1,7 +1,8 @@
 hist_uname() { #{{{ 
     ### Define HISTFILE specific to server's uname for simple separation
     history -r # read from current histfile
-    HISTFILE="$HOME/.history.$(uname -n)" # set new history file
+    host=${HOSTNAME:="$(uname -n)"} # if HOSTNAME else uname
+    HISTFILE="$HOME/.history.${host// /}" # set new history file
     # ya don't got the histfile? touch it, happily
     if [[ ! -f $HISTFILE ]]; then touch $HISTFILE; fi
     history -a # append to current history file
@@ -29,7 +30,7 @@ mycd() { #{{{ # recd from Jethro 20150825
 
 # forget most recent command
 forgetcmd() { #{{{ 
-    history -d $((HISTCMD-1));
+    history -d $((HISTCMD-2));
 } #}}} 
 
 
