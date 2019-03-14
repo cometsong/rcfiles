@@ -27,17 +27,29 @@ shopt -s extglob        # extended pattern matching in file-globbing, e.g. +([A-
 ulimit -S -c 0          # Don't want any coredumps.
 set -o noclobber        # prevent overwriting files with cat
 #set -o ignoreeof        # stops ctrl+d from logging me out
-set -o allexport        # auto export all vars for subsequent cmds
+#set -o allexport        # auto export all vars for subsequent cmds #disble for _completion
 
 set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
 
 # Use bash-completion, if available
-#BCOMPS="/etc/bash_completion"
-#[[ -n $APPLE ]] && BCOMPS+=" /usr/local/etc/bash_completion"
-#for B in ${BCOMPS}; do
-#    [[ -r $B ]] && . $B
-#done && unset B BCOMPS
+if type brew &>/dev/null; then  # if [[ -n $APPLE ]]
+  for COMPLETION in $(brew --prefix)/etc/bash_completion.d/*; do
+    [[ -f $COMPLETION ]] && \
+        source "$COMPLETION"
+        #printf ' sourcing %s\n' $COMPLETION && \
+  done
+  [[ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]] && \
+        . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+        #printf ' sourcing %s\n' "porofile.d/bash_completion.sh" && \
+elif [[ -d $HOME/local/bash_completion ]]; then
+    [[ -f $HOME/local/bash_completion/bash_completion ]] && \
+        . "$HOME/local/bash_completion/bash_completion"
+        #printf ' sourcing %s\n' "home-local bash_completion.sh" && \
+fi
+# /completion
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 # start setup prompting stuff
 source $RCPATH/set_prompt

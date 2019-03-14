@@ -4,28 +4,20 @@
 
 # source all files in bash_completion.d
 bashcompdir="~/.bash_completion.d"
-#if ! find ${bashcompdir}/. ! -name . -prune -exec false {} +
-#then
-#    for f in ${bashcompdir}
-#    do
-#        source "$f"
-#    done
-#fi
-sourceror() {
-    Usage="source all files in list passed, IFF readable"
-    files="$@"
-    for f in files; do
-        [[ -r "$f" ]] \
-        && echo "Sourcing $f" \
-        && . "$f";
-    done
-}
-[[ -d ${bashcompdir} ]] && sourceror ${bashcompdir}/*
+if [[ -d ${bashcompdir} ]]; then
+  for compl in ${bashcompdir}; do
+    [ -f $compl ] && . "$compl"
+  done
+fi
 
 # source Completion function for all aliases
 # init aliases' completions, all except ssh hosts:
-for Als in $(alias|grep -v "='ssh"|sed "s/^\w* \(.*\)='.*/\1/"); do
-    complete -F _complete_alias ${Als}
-done
+#for Als in $(alias|grep -v "='ssh"|sed "s/^\w* \(.*\)='.*/\1/"); do
+#for Als in $(alias|grep -Ev "(^\s|='ssh)"|sed -E "s/.* (.*)='.*/\1/"); do
+#  echo "completing $Als"
+#  complete -F _complete_alias ${Als}
+#done
+
+. $RCPATH/bash_completion_alias
 
 

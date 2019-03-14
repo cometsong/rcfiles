@@ -1,2 +1,2 @@
 vimopts="$(vim --help | awk '/^ +[-+]/ {print $1;}') --help"
-complete -W "$vimopts"
+complete -W "$vimopts" vim
