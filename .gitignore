@@ -1,7 +1,5 @@
 #  rcfiles ignores
 my_aliases
-vim/perl-support/*
-vim/bash-support/*
 
 # override gitignore_global
 !bin/**
