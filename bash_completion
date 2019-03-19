@@ -9,15 +9,3 @@ if [[ -d ${bashcompdir} ]]; then
     [ -f $compl ] && . "$compl"
   done
 fi
-
-# source Completion function for all aliases
-# init aliases' completions, all except ssh hosts:
-#for Als in $(alias|grep -v "='ssh"|sed "s/^\w* \(.*\)='.*/\1/"); do
-#for Als in $(alias|grep -Ev "(^\s|='ssh)"|sed -E "s/.* (.*)='.*/\1/"); do
-#  echo "completing $Als"
-#  complete -F _complete_alias ${Als}
-#done
-
-. $RCPATH/bash_completion_alias
-
-

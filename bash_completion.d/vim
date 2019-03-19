@@ -1,2 +1,2 @@
-vimopts="$(vim --help | awk '/^ +[-+]/ {print $1;}') --help"
+vimopts="$(vim --help | awk '/^ +[-+]/ {t=$1; if(match($2,"<")==1)t=$1"\\ "$2;print t;}') --help"
 complete -W "$vimopts" vim
