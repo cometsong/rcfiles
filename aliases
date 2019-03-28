@@ -52,15 +52,6 @@ alias myusers='echo "MySQL Users (as ''root'' user)"; myr -p -e "SELECT User, Ho
 alias mydbs='myr -p -e "show databases;"'
 alias myprivs="echo 'User Database Privileges:' && mysql -uroot -p -e \"select user, db, host, concat_ws(' ',Insert_priv, Select_priv, Update_priv, Delete_priv) as 'C R U D', concat_ws(' ',Create_priv,Drop_priv,Index_priv) as CrDpIx, Grant_priv as Grt, Lock_tables_priv as Lok, concat_ws(' ',Create_view_priv,Show_view_priv) as 'CrSh Vw', concat_ws(' ',Create_routine_priv,Alter_routine_priv,Execute_priv) as 'CrtAltExe Rtne', concat_ws(' ',Event_priv,Trigger_priv) as EvtTrg from db order by db,user;\" -Dmysql"
 
-##### Ruby/Rails/Rake #####
-alias rsrv='./script/server -u'
-alias rsrvp='ss -p'
-alias rcon='./script/console'
-alias rmig='rake db:migrate db:test:clone'
-alias rdbf='rake db:recreate db:fixtures:load RAILS_ENV=development'
-# setup rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
 ##### Python #####
 alias  py=python
 alias py2=python2
@@ -77,12 +68,6 @@ pip_upgrade () {
             ${pip} install -U ${up_opts} {}
 }
 alias pip3_upgrade="pip_upgrade pip3"
-
-##### Django #####
-# assumes 'manage.py' is symlinked to venv bin dir
-alias       migrate='manage.py makemigrations && manage.py migrate'
-alias collectstatic='manage.py collectstatic --noinput --clear'
-alias     runserver='manage.py runserver'
 
 ##### apache2 #####
 alias htc='sudo vim /etc/httpd/conf/httpd.conf'
@@ -115,12 +100,18 @@ alias grep="grep --color"
 alias greps='grep --color -I --no-group-separator'
 alias psx='ps xf -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
+alias pst='ps xf -o pid,ppid,pcpu,lstart,etime,euser,cmd --sort etime,pid,pcpu' # sort user process by elapsed time
 alias psc="ps f -o pid,cputime,cmd -C"
+alias psmem="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"
+
 alias datey='date +"%Y-%m-%d %H:%M:%S"'
 alias treef='tree -FuCh' # /*, user, colors, human sizes
 alias duh='du -csh'
 alias dfs="df -h 2>/dev/null | grep ^[\ F]| sed -e 's/^ \{20\}//' -e 's/^Filesystem \{10\}//'"
 alias dfm="df -h 2>/dev/null | grep '^[\/F]'"; # show only header and Filesystems starting with '/' (mounts)
+alias ctags='ctags --options=$HOME/.ctags'
+alias ws="w | awk 'NR<3{print} NR>2{s=\"sort\";print|s}'" # show header, then sort userneames
+alias linelengths='awk '\''BEGIN{print "Lengths of lines:"}{printf("Line %6i: %i\n", FNR,length($0))}'\'' '
 
 ##### Mac aliases... #####
 if [[ -n $APPLE ]]; then {
@@ -146,7 +137,3 @@ if [[ -n $APPLE ]]; then {
       do APP=\$(echo \${D}); echo Upgrading \$APP; brew upgrade \$APP --HEAD ;done"
 }; fi
 
-alias psmem="ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS"
-alias ws="w | awk 'NR<3{print} NR>2{s=\"sort\";print|s}'" # show header, then sort userneames
-alias greps='grep --color -I --no-group-separator'
-alias ctags='ctags --options=$HOME/.ctags'
