@@ -7,9 +7,10 @@ This began with dotfiles from Seth House <seth@eseth.com> (whiteinge)
 then continued with Benjamin (Cometsong).
 """
 # Imports we need
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
 import sys
 import os
+import site
 import atexit
 import pprint
 from tempfile import mkstemp
@@ -90,11 +91,11 @@ if os.path.exists(HISTFILE):
     readline.read_history_file(HISTFILE)
 
 # Set maximum number of items that will be written to the history file
-readline.set_history_length(300)
+readline.set_history_length(3000)
 
 
-def savehist():
-    readline.write_history_file(HISTFILE)
+def savehist(histfile=HISTFILE):
+    readline.write_history_file(histfile)
 
 atexit.register(savehist)
 
@@ -110,6 +111,7 @@ def my_displayhook(value):
     """Enable Pretty Printing for stdout"""
     if value is not None:
         pprint.pprint(value)
+
 sys.displayhook = my_displayhook
 
 # Enable Pretty Printing for dicts
@@ -151,6 +153,7 @@ def SECRET_KEY(key_length=50):
         [choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)')
          for i in range(key_length)])
 
+
 # If we're working with a Django project, set up the environment
 if 'DJANGO_SETTINGS_MODULE' in os.environ:
     try:
@@ -185,9 +188,8 @@ if 'DJANGO_SETTINGS_MODULE' in os.environ:
 
             Warning: DEBUG_PROPAGATE_EXCEPTIONS has been set to True.
             %(Normal)s""" % _c
-    except ImportError as ie:
+    except ImportError as e:
         pass
-        #raise( "Django ImportError: {}".format(ie.message) )
 
 
 # Start an external editor with \e
@@ -200,12 +202,18 @@ EDIT_CMD = '\e'
 class EditableBufferInteractiveConsole(InteractiveConsole):
     def __init__(self, *args, **kwargs):
         self.last_buffer = []  # This holds the last executed statement
+        hist_file = kwargs.pop('history_filename', None)
         InteractiveConsole.__init__(self, *args, **kwargs)
         try:
             from ptpython.repl import embed
-            embed(globals(), locals())  # 'callable?': configure=None)
-        except Exception as e:
-            pass
+
+        except ImportError:
+            print("ptpython is not available: falling back to standard prompt")
+        else:
+            embed(globals=globals(), locals=locals()
+                  , history_filename=hist_file
+                  , configure=configure
+                  )
 
     def runsource(self, source, *args):
         self.last_buffer = [source.encode('utf-8')]
@@ -227,16 +235,71 @@ class EditableBufferInteractiveConsole(InteractiveConsole):
             line = lines[-1]
         return line
 
-c = EditableBufferInteractiveConsole(locals=locals())
-c.interact(banner=WELCOME)
+
+# c = EditableBufferInteractiveConsole(locals=locals(), history_filename=HISTFILE)
+# c.interact(banner=WELCOME)
+
+# Exit the Python shell on exiting the InteractiveConsole
+# sys.exit()
 
 # Embed ptpython REPL
 #####################
-# try:
-#     from ptpython.repl import embed
-#     embed(globals(), locals())
-# except Exception as e:
-#     pass
 
-# Exit the Python shell on exiting the InteractiveConsole
-sys.exit()
+# PTPython Config:
+def configure(repl, config_file=None):
+    """
+    Configuration method. This is called during the start-up of ptpython.
+    Default configuration settings are here, and can be modified by entries
+    in a TOML file if desired for local or general use.
+
+    :param repl: `PythonRepl` instance.
+    :config_file: TOML text file with configuration
+    """
+
+    def read_config_file(toml_file):
+        """read config settings from TOML file"""
+        try:
+            from toml import load
+        except ImportError:
+            return {"config_file_error":
+                    "'toml' module must be installed to use config file"}
+        else:
+            return load(toml_file)
+
+    if not config_file: # use default config.toml path:
+        config_file = '~/.ptpython/config.toml'
+        config_file = os.path.expanduser(config_file)
+
+    if os.path.exists(config_file):
+        configs = read_config_file(config_file)
+
+        comp_vis = configs.get('completion_visualisation', 'POP_UP')
+        configs['completion_visualisation'] = \
+            getattr(CompletionVisualisation, comp_vis)
+
+        code_colorscheme = configs.pop('use_code_colorscheme', None)
+        if code_colorscheme:
+            repl.use_code_colorscheme(code_colorscheme)
+
+        # Set all the  other attributes:
+        for opt, val in configs.items():
+            setattr(repl, opt, val)
+    else:
+        print('Impossible to read %r' % config_file)
+        return
+
+
+try:
+    from ptpython.repl import embed
+    from ptpython.layout import CompletionVisualisation
+except ImportError:
+    print("ptpython is not available: falling back to standard prompt")
+except Exception as e:
+    raise e
+else:
+    sys.exit(
+        embed(globals(), locals()
+              , history_filename=HISTFILE
+              , configure=configure
+              )
+    )

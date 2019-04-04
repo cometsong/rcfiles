@@ -1,0 +1,97 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#             Configuration example file for `ptpython`.             #
+#             Copy this file to ~/.ptpython/config.toml              #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+# Show function signature (bool).
+show_signature = true
+
+# Show docstring (bool).
+show_docstring = false
+
+# Show the "[Meta+Enter] Execute" message when pressing [Enter] only
+# inserts a newline instead of executing the code.
+show_meta_enter_message = true
+
+# Show completions. (NONE, POP_UP, MULTI_COLUMN or TOOLBAR)
+completion_visualisation = 'POP_UP'
+# completion_visualisation = 'MULTI_COLUMN'
+
+# When CompletionVisualisation.POP_UP has been chosen, use this
+# scroll_offset in the completion menu.
+completion_menu_scroll_offset = 0
+
+# Show line numbers (when the input contains multiple lines.)
+show_line_numbers = true
+
+# Show status bar.
+show_status_bar = true
+
+# When the sidebar is visible, also show the help text.
+show_sidebar_help = true
+
+# Highlight matching parethesis.
+highlight_matching_parenthesis = true
+
+# Line wrapping. (Instead of horizontal scrolling.)
+wrap_lines = true
+
+# Mouse support.
+enable_mouse_support = true
+
+# Complete while typing. (Don't require tab before the
+# completion menu is shown.)
+complete_while_typing = true
+
+# Vi mode.
+vi_mode = true
+
+# Paste mode. (When true, don't insert whitespace after new line.)
+paste_mode = false
+
+# 'classic' or 'ipython'
+# '>>>'     or 'In [1]'
+prompt_style = 'classic'
+
+# Don't insert a blank line after the output.
+insert_blank_line_after_output = false
+
+# History Search.
+# When true, going back in history will filter the history on the records
+# starting with the current input. (Like readline.)
+# Note = When enable, please disable the `complete_while_typing` option.
+#       otherwise, when there is a completion available, the arrows will
+#       browse through the available completions instead of the history.
+enable_history_search = false
+
+# Enable auto suggestions. (Pressing right arrow will complete the input,
+# based on the history.)
+enable_auto_suggest = true
+
+# Enable open-in-editor. Pressing C-X C-E in emacs mode or 'v' in
+# Vi navigation mode will open the input in the current editor.
+enable_open_in_editor = true
+
+# Enable system prompt. Pressing meta-! will display the system prompt.
+# Also enables Control-Z suspend.
+enable_system_bindings = true
+
+# Ask for confirmation on exit.
+confirm_exit = false
+
+# Enable input validation. (Don't try to execute when the input contains
+# syntax errors.)
+enable_input_validation = true
+
+# Use this colorscheme for the code.
+use_code_colorscheme = 'pastie'
+
+# Set color depth (keep in mind that not all terminals support True color).
+# color_depth = 'DEPTH_1_BIT'  # Monochrome.
+# color_depth = 'DEPTH_4_BIT'  # ANSI colors only.
+color_depth = 'DEPTH_8_BIT'  # The default, 256 colors.
+# color_depth = 'DEPTH_24_BIT'  # true color.
+
+# Syntax.
+enable_syntax_highlighting = true
+
