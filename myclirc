@@ -1,0 +1,78 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     INI file for MyCLI     ~~~~~
+[main]
+smart_completion = True           # Enables context sensitive auto-completion. If this is disabled the all possible completions will be listed.
+multi_line = False                # Multi-line mode allows breaking up the sql statements into multiple lines.
+destructive_warning = True        # Destructive warning mode will alert you before executing a sql statement
+key_bindings = emacs              # Keybindings: Possible values: emacs, vi.
+wider_completion_menu = True      # will show the suggestions in a wider menu. Thus more items are suggested.
+timing = True                     # Timing of sql statments and table rendering.
+less_chatty = False               # Skip intro info on startup and outro info on exit
+login_path_as_host = False        # Use alias from --login-path instead of host name in prompt
+keyword_casing = auto             # keyword casing preference. Possible values "lower", "upper", "auto"
+
+log_file = ~/.mycli.log           # log_file location.
+log_level = INFO                  # Default log level. Possible values: "CRITICAL", "ERROR", "WARNING", "INFO" and "DEBUG". "NONE" disables logging.
+# audit_log = ~/.mycli-audit.log        # Log every query and its results to a file. Enable this by uncommenting the line below.
+
+table_format = ascii              # Table format. # Recommended: ascii
+                                  # Possible values: ascii, double, github, psql, plain, simple, grid, fancy_grid, pipe, orgtbl, rst,
+                                  #                  mediawiki, html, latex, latex_booktabs, textile, moinmoin, jira, vertical, tsv, csv. 
+
+syntax_style = default            # Syntax coloring style. Screenshots at http://mycli.net/syntax
+                                  # Possible values (many support the "-dark" suffix):
+                                  #         manni, igor, xcode, vim, autumn, vs, rrt, native, perldoc, borland, tango, emacs, friendly,
+                                  #         monokai, paraiso, colorful, murphy, bw, pastie, paraiso, trac, default, fruity.
+
+# MySQL prompt
+#        \D - The full current date      \R - current time, in 24-hour time (0–23)
+#        \d - Database name              \r - current time, 12-hour time (1–12)
+#        \h - Hostname of the server     \s - Seconds of the current time
+#        \m - Minutes of current time    \t - Product type (Percona, MySQL, Mariadb)
+#        \n - Newline                    \u - Username
+#        \P - AM/PM                      \p - Port
+prompt = '\t \u@\h:\d> '
+prompt_continuation = '-> '
+
+auto_vertical_output = False      # Cause result sets to be displayed vertically
+#                                   if they are too wide for the current window,
+#                                   and using normal tabular format otherwise.
+#                                   (This applies to statements terminated by ; or \G.)
+
+# Custom colors for the completion menu, toolbar, etc.
+[colors]
+# Completion menus.
+Token.Menu.Completions.Completion.Current = 'bg:#00aaaa #000000'
+Token.Menu.Completions.Completion = 'bg:#008888 #ffffff'
+Token.Menu.Completions.MultiColumnMeta = 'bg:#aaffff #000000'
+Token.Menu.Completions.ProgressButton = 'bg:#003333'
+Token.Menu.Completions.ProgressBar = 'bg:#00aaaa'
+
+# Query results
+Token.Output.Header = 'bold'
+Token.Output.OddRow = ''
+Token.Output.EvenRow = ''
+
+# Selected text.
+Token.SelectedText = '#ffffff bg:#6666aa'
+
+# Search matches. (reverse-i-search)
+Token.SearchMatch = '#ffffff bg:#4444aa'
+Token.SearchMatch.Current = '#ffffff bg:#44aa44'
+
+# The bottom toolbar.
+Token.Toolbar = 'bg:#222222 #aaaaaa'
+Token.Toolbar.Off = 'bg:#222222 #888888'
+Token.Toolbar.On = 'bg:#222222 #ffffff'
+
+# Search/arg/system toolbars.
+Token.Toolbar.Search = 'noinherit bold'
+Token.Toolbar.Search.Text = 'nobold'
+Token.Toolbar.System = 'noinherit bold'
+Token.Toolbar.Arg = 'noinherit bold'
+Token.Toolbar.Arg.Text = 'nobold'
+
+[favorite_queries]
+# e.g.
+tables = show tables
+
+# vim: set ft=dosini ts=2 sw=2 tw=100 et:
