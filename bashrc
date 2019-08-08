@@ -12,9 +12,7 @@ done
 unset BRC
 
 # source .rcprofile as base shell config
-if [ -r "$HOME/.rcprofile" ]; then
-    . "$HOME/.rcprofile"
-fi
+if [ -r "$HOME/.rcprofile" ]; then . "$HOME/.rcprofile"; fi
 
 ## sh-options
 shopt -s cdspell        # This will correct minor spelling errors in a cd command.
@@ -49,9 +47,7 @@ elif [[ -d $HOME/local/bash_completion ]]; then
 fi
 # /completion
 
-# start setup prompting stuff
-source $RCPATH/set_prompt
-
+# setup prompting stuff
 set_ps1() {
     # (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]-(vcprompt)\n=>
     PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
@@ -59,4 +55,6 @@ set_ps1() {
     PS1L+="-(\[${RCy}\]\s-\v\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
     export PS1="${PS1L}\$($VCPROMPT_BIN)\n=> \[${NORM}\]"
     unset PS1L
+    [[ -z "${VIRTUAL_ENV}" ]] || PS1="${PS1/=>/=(${b_Yl}${f_Bk}$(basename "$VIRTUAL_ENV")${NORM}${DC})=>}"
 }; set_ps1
+
