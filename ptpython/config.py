@@ -49,5 +49,5 @@ def configure(repl, config_file=None):
         for opt, val in configs.items():
             setattr(repl, opt, val)
     else:
-        print('Impossible to read %r' % config_file)
+        print('Impossible to read {}'.format(config_file))
         return
