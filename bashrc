@@ -48,6 +48,11 @@ fi
 # /completion
 
 # setup prompting stuff
+set_ps1_venv() {
+  [[ -z "${VIRTUAL_ENV}" ]] \
+  || local VENVPS1="=(\[${b_Yl}\]\[${f_Bk}\]$(basename "$VIRTUAL_ENV")\[${NORM}\]\[${DC}\])=>" \
+  && PS1="${PS1/=>/$VENVPS1}"
+}
 set_ps1() {
     # (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]-(vcprompt)\n=>
     PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
@@ -55,6 +60,6 @@ set_ps1() {
     PS1L+="-(\[${RCy}\]\s-\v\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
     export PS1="${PS1L}\$($VCPROMPT_BIN)\n=> \[${NORM}\]"
     unset PS1L
-    [[ -z "${VIRTUAL_ENV}" ]] || PS1="${PS1/=>/=(${b_Yl}${f_Bk}$(basename "$VIRTUAL_ENV")${NORM}${DC})=>}"
+    set_ps1_venv
 }; set_ps1
 
