@@ -74,6 +74,7 @@
     templatedir = ~/.git_template_global
 [core]
     excludesfile = ~/.gitignore_global
+    pager = less -FRSX
 [status]
     submodulesummary = true
 [color]
