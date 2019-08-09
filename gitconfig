@@ -108,9 +108,9 @@
 [filter "media"]
     clean = git-media-clean %f
     smudge = git-media-smudge %f
-[filter "lfs"]
-    required = true
-    clean = git-lfs clean %f
-    smudge = git-lfs smudge %f
+#[filter "lfs"]
+#    required = false
+#    clean = git-lfs clean %f
+#    smudge = git-lfs smudge %f
 
 # vim: set ft=config ts=4 sw=4 tw=100 et :
