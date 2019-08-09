@@ -9,12 +9,9 @@ source ${HOME}/.rcpath_env
 
 ##### Operating Situations #####
 case $OSTYPE in
-  darwin*)
-   export APPLE=TRUE
-    ;;
-  *)
-   export LINUX=TRUE
-    ;;
+  darwin*) export APPLE=TRUE ;;
+   linux*) export LINUX=TRUE ;;
+        *) export OS_UNK=TRUE ;;
 esac
 
 # for tput to complain less
@@ -30,21 +27,28 @@ source $RCPATH/aliases         # load aliases
 source $RCPATH/sh_functions    # load sh functions
 
 ##### Config Vars #####
-TZ="America/New_York"
-HISTCONTROL=ignoredups:erasedups:ignorespaces
+export TZ="America/New_York"
+export HISTCONTROL=ignoredups:erasedups:ignorespaces
 export HISTFILE=$(hist_uname)
-HISTSIZE=999999999
-SAVEHIST=$HISTSIZE
-PAGER='less'
-LESS="-SKiM"
-HOSTNAME=`uname -n`
-EDITOR=vim
+export HISTSIZE=999999999
+export SAVEHIST=$HISTSIZE
+export PAGER='less'
+export HOSTNAME=`uname -n`
+export EDITOR=vim
 umask 002
 
+##### LESS is more #####
+if [[ -x $(command -v pygmentize) ]]; then
+  export LESS="-SKiRM"
+  export LESSOPEN='|pygmentize -f terminal256 -g -P style=stata-dark %s'
+else
+  export LESS="-SKiM"
+fi
+
 ##### LANGUAGE #####
-LANG='en_US.UTF-8'
-LC_ALL=$LANG
-LC_CTYPE=$LANG
+export LANG='en_US.UTF-8'
+export LC_ALL=$LANG
+export LC_CTYPE=$LANG
 
 ##### Python #####
 export PYTHONSTARTUP=$HOME/.pythonrc.py
@@ -53,9 +57,9 @@ export PYTHONUSERBASE=$HOME/local/
 ##### Brews, etc... #####
 if [[ -n $APPLE ]]; then
     # for coreutils
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
-    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+    #PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    #PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+    #MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
     # for java
     JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
     # for iTerm2
