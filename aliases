@@ -86,6 +86,7 @@ alias qcnts='qur=$(qu -r | tail -n +6 | wc -l);qui=$(qu -i | tail -n +6 | wc -l)
 alias  qi='qsub -l walltime=4:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
 alias qi1='qsub -l walltime=1:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
 alias qi2='qsub -l walltime=2:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
+alias qi8='qsub -l walltime=8:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
 
 ##### ssh plus hosts #####
 alias ssx='ssh -X'
@@ -96,8 +97,11 @@ alias dmesg='sudo dmesg'
 alias h='history'
 alias vi='vim'
 
+alias rg1='rg --max-depth 1'
 alias grep="grep --color"
 alias greps='grep --color -I --no-group-separator'
+
+##### process list #####
 alias psx='ps xf -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias psa='ps -A f -o pid,ppid,pcpu,pmem,vsz,cputime,euser,cmd --sort pid,pcpu --heading --lines=50'
 alias pst='ps xf -o pid,ppid,pcpu,lstart,etime,euser,cmd --sort etime,pid,pcpu' # sort user process by elapsed time
