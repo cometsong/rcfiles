@@ -49,9 +49,10 @@ fi
 
 # setup prompting stuff
 set_ps1_venv() {
-  [[ -z "${VIRTUAL_ENV}" ]] \
-  || local VENVPS1="=(\[${b_Yl}\]\[${f_Bk}\]$(basename "$VIRTUAL_ENV")\[${NORM}\]\[${DC}\])=>" \
-  && PS1="${PS1/=>/$VENVPS1}"
+  local VENVPS1
+  [[ -z "${VIRTUAL_ENV}" ]] || {
+  VENVPS1="=(\[${b_Yl}\]\[${f_Bk}\]$(basename "$VIRTUAL_ENV")\[${NORM}\]\[${DC}\])=>"
+  PS1="${PS1/=>/$VENVPS1}"; }
 }
 set_ps1() {
     # (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]-(vcprompt)\n=>
