@@ -70,6 +70,9 @@
     ll    = log --pretty='Commit:%Creset %C(yellow)%h%C(green)%d%Creset %C(white)%ci%nAuthor:%Creset %C(blue)%an %Creset<%ae>%nTitle:  %C(white)%s%n' --decorate
     la    = log --pretty='%C(yellow)%h%Creset %C(blue)%cn%Creset %C(green)%cd %Creset%s%C(yellow)%d' --decorate --date=short
     ls    = log --oneline --decorate --date=short
+# subdirectories
+    all = '!f() { ls -R -d */.git | xargs -I{} -P5 bash -c "echo {} && git -C {}/../ $1"; }; f'  # git do action on all repo subdirs when Not submodules, in parallel x5
+
 [init]
     templatedir = ~/.git_template_global
 [core]
