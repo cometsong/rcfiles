@@ -29,6 +29,10 @@
     sta   = stash apply  # apply stash (restore changes)
     std   = stash drop   # drop stashes (destroy changes)
     stbr  = stash branch # checkout new branch with stash
+# remotes
+    rv    = remote --verbose
+    rad   = remote --verose add 
+    rat   = remote --verose add -t # =track <branch name>
 # branches
     br    = branch --verbose --verbose
     bra   = branch --verbose --verbose --all
