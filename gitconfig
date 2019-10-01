@@ -4,6 +4,7 @@
 [alias]
     a     = add
     aa    = add .
+    ai    = add --interactive
 # config
     cfg   = config
     cfl   = config -l
