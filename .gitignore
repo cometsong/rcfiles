@@ -1,5 +1,6 @@
 #  rcfiles ignores
-my_aliases
+my_aliases # my = my private schtuff
+myclirc
 
 # override gitignore_global
 !bin/**
