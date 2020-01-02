@@ -2,10 +2,11 @@
 #                            bash_profile of rcfiles                           #
 # ---------------------------------------------------------------------------- #
 
-# source bashrc if interactive
-if [[ $- == *i* ]]; then 
-    . ~/.bashrc
-    echo Welcome to ${HOSTNAME} in ${SHELL##*/}!
-else
-    . $HOME/.rcprofile
-fi
+# If not running interactively, setup background-able files
+case $- in
+  *i*)
+    . ~/.bashrc;
+    echo Welcome to ${HOSTNAME} in ${SHELL##*/}!;
+    ;;
+  *) . $HOME/.rcprofile; return;;
+esac
