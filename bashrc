@@ -35,7 +35,7 @@ if type brew &>/dev/null; then  # if [[ -n $APPLE ]]
   [[ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]] && \
      . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 elif [[ -r $HOME/local/bash-completion/bash_completion ]]; then
-  . "$HOME/local/bash_completion/bash_completion"
+        . "$HOME/local/bash_completion/bash_completion"
 fi
 # /completion
 
