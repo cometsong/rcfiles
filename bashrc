@@ -32,18 +32,10 @@ set editing-mode vi
 
 # Use bash-completion, if available
 if type brew &>/dev/null; then  # if [[ -n $APPLE ]]
-  for COMPLETION in $(brew --prefix)/etc/bash_completion.d/*; do
-    [[ -f $COMPLETION ]] && \
-        source "$COMPLETION"
-        #printf ' sourcing %s\n' $COMPLETION && \
-  done
-  [[ -f $(brew --prefix)/etc/profile.d/bash_completion.sh ]] && \
-        . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-        #printf ' sourcing %s\n' "porofile.d/bash_completion.sh" && \
-elif [[ -d $HOME/local/bash_completion ]]; then
-    [[ -f $HOME/local/bash_completion/bash_completion ]] && \
-        . "$HOME/local/bash_completion/bash_completion"
-        #printf ' sourcing %s\n' "home-local bash_completion.sh" && \
+  [[ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]] && \
+     . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+elif [[ -r $HOME/local/bash-completion/bash_completion ]]; then
+  . "$HOME/local/bash_completion/bash_completion"
 fi
 # /completion
 
