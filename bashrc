@@ -11,6 +11,9 @@ for BRC in bashrc bash.bashrc; do
 done
 unset BRC
 
+# init BashIt
+[ -r "$HOME/.bashit.sh" ] && . "$HOME/.bashit.sh";
+
 # source .rcprofile as base shell config
 if [ -r "$HOME/.rcprofile" ]; then . "$HOME/.rcprofile"; fi
 
@@ -30,29 +33,19 @@ set -o noclobber        # -C prevent overwriting files with cat
 set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
 
-# Use bash-completion, if available
-if type brew &>/dev/null; then  # if [[ -n $APPLE ]]
-  [[ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]] && \
-     . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-elif [[ -r $HOME/local/bash-completion/bash_completion ]]; then
-        . "$HOME/local/bash_completion/bash_completion"
+[ -r "$RCPATH/fasd/fasd" ] \
+  && PATH=$RCPATH/fasd:$PATH \
+  && eval "$(fasd --init auto)"
+
+# Prompt Blastoff!
+if type starship &>/dev/null ; then
+  if type brew &>/dev/null; then
+    _BREWBIN="$(brew --prefix)/bin/"
+  fi
+  export STARSHIP_CONFIG="$HOME/.starship.toml"
+  eval "$(${_BREWBIN}starship init bash)"
+  unset _BREWBIN
+else
+  # base prompting stuff
+  source $RCPATH/set_prompt
 fi
-# /completion
-
-# setup prompting stuff
-set_ps1_venv() {
-  local VENVPS1
-  [[ -z "${VIRTUAL_ENV}" ]] || {
-  VENVPS1="=(\[${b_Yl}\]\[${f_Bk}\]$(basename "$VIRTUAL_ENV")\[${NORM}\]\[${DC}\])=>"
-  PS1="${PS1/=>/$VENVPS1}"; }
-}
-set_ps1() {
-    # (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]-(vcprompt)\n=>
-    PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
-    PS1L+="-(\[${RCy}\]\u\[${DC}\]@\[${RCy}\]${HOSTNAME}\[${DC}\])"
-    PS1L+="-(\[${RCy}\]\s-\v\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
-    export PS1="${PS1L}\$($VCPROMPT_BIN)\n=> \[${NORM}\]"
-    unset PS1L
-    set_ps1_venv
-}; set_ps1
-

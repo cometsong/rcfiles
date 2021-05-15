@@ -18,13 +18,18 @@ setPWD() {
 # set colors
 source $RCPATH/prompt_colors
 
-# vc-awesome prompt format
-export VCPROMPT_TIMEOUT=100
-export VCPROMPT_FORMAT="-${DC}(${f_Bl}%s:%b:%m%u%a${DC})"
-# oython version check, as vcprompt requires Py 2.7+
-PY_VER="$(python -c 'import sys; print(sys.version[0:3])' | sed 's/\.//')"
-if (( $PY_VER < 27 )) ; then
-    VCPROMPT_BIN='echo -n ""'
-else
-    VCPROMPT_BIN='vcprompt'
-fi
+set_ps1_venv() {
+    local VENVPS1
+    [[ -z "${VIRTUAL_ENV}" ]] || {
+    VENVPS1="=(\[${b_Yl}\]\[${f_Bk}\]$(basename "$VIRTUAL_ENV")\[${NORM}\]\[${DC}\])=>"
+    PS1="${PS1/=>/$VENVPS1}"; }
+}
+set_ps1() {
+    # (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]-(vcprompt)\n=>
+    PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
+    PS1L+="-(\[${RCy}\]\u\[${DC}\]@\[${RCy}\]${HOSTNAME}\[${DC}\])"
+    PS1L+="-(\[${RCy}\]\s-\v\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
+    export PS1="${PS1L}\n=> \[${NORM}\]"
+    unset PS1L
+    set_ps1_venv
+}; set_ps1
