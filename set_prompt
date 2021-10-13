@@ -25,7 +25,7 @@ set_ps1_venv() {
     PS1="${PS1/=>/$VENVPS1}"; }
 }
 set_ps1() {
-    # (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]-(vcprompt)\n=>
+    # (date-mnth 24h)-(!hist)-(user@hostname)-(shell-ver)-[~pwd]\n=>
     PS1L="\[${DC}\](\[${RCy}\]\D{%d-%b %T}\[${DC}\])-(!\[${RCw}\]\!\[${DC}\])"
     PS1L+="-(\[${RCy}\]\u\[${DC}\]@\[${RCy}\]${HOSTNAME}\[${DC}\])"
     PS1L+="-(\[${RCy}\]\s-\v\[${DC}\])-[\[${RCw}\]\$(setPWD)\[${DC}\]]"
