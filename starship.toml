@@ -1,0 +1,151 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Cometsong's Starship ~~~~~
+
+# Prompt format
+format = """
+[╭──▶](white)\
+  $time\
+  $shlvl\
+  $username\
+  $hostname\
+  $directory\
+  $java\
+  $python\
+  $nodejs\
+  $git_branch$git_commit$git_state$git_status\
+  $jobs\
+  $battery\
+  $cmd_duration\
+  $status\
+  $line_break\
+  [╰${character}▶](white) \
+  """
+# ${custom.pwd}\
+
+add_newline = false   # Disable the blank line at the start of the prompt
+scan_timeout = 25     # Timeout for starship to scan files (in milliseconds).
+command_timeout = 300 # Timeout for commands executed by starship (in milliseconds).
+
+[character]
+  #success_symbol = "[➜](bold green)"
+  success_symbol = "─"
+  error_symbol = "[✗](bold red)"
+  format = "[$symbol](white)"
+
+[time]
+  disabled = false
+  style = "yellow"
+  format = '[\($time\)]($style) '
+  time_format = "%d-%b %T"
+
+[shlvl]
+  threshold = 1
+  symbol = "^"
+  format = "[$symbol](red)"
+  repeat = true
+  disabled = false
+
+[username]
+  show_always = true
+  style_user = "cyan"
+  style_root = "red bold"
+  format = "[$user]($style)"
+
+[hostname]
+  ssh_only = true
+  style = "dimmed green"
+  format = "[@](bold $style)[$hostname]($style):"
+  trim_at = "."
+
+[directory]
+  read_only = "🔒"
+  read_only_style = "bg:red"
+  format = '[$read_only]($read_only_style)[\[$path\]]($style) '
+  style = "bold cyan"
+  truncate_to_repo = false
+  truncation_length = 8
+  truncation_symbol = "…/"
+
+[java]
+  symbol = "🍵"
+
+[nodejs]
+  symbol = ""
+  format = "[$symbol($version )]($style)"
+  style = "bold green"
+
+[python]
+  symbol = "🐍"
+  format = '[$symbol${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+  style = "yellow bold"
+  python_binary = ["python3","python"]
+  pyenv_version_name = false
+  detect_extensions = [".py", ".pip"]
+  detect_folders = ["requirements", "__pycache__"]
+
+[git_branch]
+  style = "purple"
+  format = "[](bold dimmed $style)[$branch(@$remote_name)](bold $style) "
+  always_show_remote = false
+
+[git_commit]
+  style = "bold purple"
+  #format = "[\\($hash\\)]($style) [\\($tag\\)]($style)"
+  format = '[$hash](dimmed $style) (\($tag\))($style)'
+  tag_disabled = false
+  only_detached = false
+  commit_hash_length = 7
+
+[singularity]
+  symbol = "📦"
+
+[jobs]
+  number_threshold = 1
+  style = 'blue'
+  format = '[<$symbol${number}>]($style) '
+
+[battery]
+  full_symbol = "🔋"
+  charging_symbol = "⚡️"
+  discharging_symbol = "💀"
+[[battery.display]]
+  threshold = 10
+  style = "bold red"
+[[battery.display]]
+  threshold = 20
+  style = "bold yellow"
+
+[cmd_duration]
+  min_time = 5_000 # 5 secs
+  show_milliseconds = false
+  style = "yellow"
+  format = "took [$duration]($style) "
+
+[status]
+  style = "bg:blue fg:bold white"
+  sigint_symbol = "💣"
+  format = '[\[[$symbol]($style fg:bold red)$status $common_meaning$signal_name\]]($style) '
+  map_symbol = true
+  disabled = false
+
+[custom.pwd]
+  description = "Show complete path."
+  disabled = true
+  command = "echo $PWD/"
+  when = "true"
+  style = "bold cyan"
+  #format = "[$output]($style) "
+  format = "[\\[$output\\]]($style) "
+
+[env_var]
+  # conv to custom if *needed*;
+  disabled = true
+  #variable = "VIRTUAL_ENV"
+  variable = "SHELL"
+  #symbol = '\\$'
+  default = ""
+  style = "yellow"
+  format = '->[\${$env_value}]($style) '
+  #format = '[\${$env_value}]($style)}'
+  #format = '(\${$env_value})($style) '
+  #format = '(@$env_value)($style) '
+
