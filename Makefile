@@ -20,13 +20,11 @@ normals: rcfiles bins myaliases
 gits: git-init submodules
 hg: mercurials 
 
-RCFILES = rcprofile $(SHFILES) $(LANGFILES) $(OTHERFILES) $(CONFIGFILES)
-SHFILES = $(ZSHFILES) $(BASHFILES)
-ZSHFILES = zshrc
-BASHFILES = bash_profile bashrc bash_completion bash_completion.d
+RCFILES = rcprofile $(BASHFILES) $(LANGFILES) $(OTHERFILES)
+BASHFILES = bash_profile bashrc bash_completion bash_completion.d bashit.sh
 LANGFILES = inputrc perltidyrc pythonrc.py pylintrc Rprofile
-OTHERFILES = toprc inputrc screenrc tmux.conf osx ctags npmrc my.cnf
-CONFIGFILES = yamllint
+OTHERFILES = toprc inputrc screenrc tmux.conf osx ctags npmrc my.cnf starship.toml
+CONFIGFILES = yamllint pip.conf
 
 GITFILES = gitconfig gitignore_global git_template_global
 HGFILES = hgrc hgignore
@@ -48,6 +46,13 @@ endef
 init:
 	@echo Create file defining var RCPATH for config scripts to read
 	@echo "RCPATH=$(SRCDIR)" > $(DESTDIR)/.rcpath_env
+	#
+	@echo Setting up 'bash-it'
+	# Only install $BASH_IT if it's not already setup
+	if [ -z "$BASH_IT" ]; then
+	  source $RCPATH/bashit_setup.sh
+	fi
+
 
 rcfiles:
 	@echo Link all rcfiles

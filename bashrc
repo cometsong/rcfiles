@@ -5,17 +5,18 @@
 
 # source base etc files, varying based on OS
 for BRC in bashrc bash.bashrc; do
+  # shellcheck disable=SC1090
     if [  -r /etc/$BRC ]; then
         . /etc/$BRC
     fi
 done
 unset BRC
 
-# init BashIt
-[ -r "$HOME/.bashit.sh" ] && . "$HOME/.bashit.sh";
-
 # source .rcprofile as base shell config
 if [ -r "$HOME/.rcprofile" ]; then . "$HOME/.rcprofile"; fi
+
+# init BashIt
+[ -r "$HOME/.bashit.sh" ] && . "$HOME/.bashit.sh";
 
 ## sh-options
 shopt -s cdspell        # This will correct minor spelling errors in a cd command.
@@ -32,10 +33,6 @@ set -o noclobber        # -C prevent overwriting files with cat
 
 set -o vi               # run bash in vi editing mode (instead of default emacs)
 set editing-mode vi
-
-[ -r "$RCPATH/fasd/fasd" ] \
-  && PATH=$RCPATH/fasd:$PATH \
-  && eval "$(fasd --init auto)"
 
 # Prompt Blastoff!
 if type starship &>/dev/null ; then
