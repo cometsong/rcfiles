@@ -1,83 +1,60 @@
-##### git ##### 
+##### git #####
 ## Also see ~/.gitconfig ##
-alias g="git"
+alias g="git";
 
 gfm() {
-  git fetch $*
-  git merge FETCH_HEAD
+  git fetch $*;
+  git merge FETCH_HEAD;
 }
 gfms() {
-  git fetch
-  git merge FETCH_HEAD
-  git submodule init
-  git-sub-pull
+  gfm "$@";
+  git submodule init;
+  git_sub_pull;
 }
-git-sub-pull() {
-  REPO=${1:-origin}
-  BRANCH=${2:-master}
+git_sub_pull() {
+  REPO=${1:-'origin'};
+  BRANCH=${2:-'master'};
   git submodule foreach --recursive '
     git checkout $BRANCH;
     git pull $REPO $BRANCH;
     cd $toplevel;
     git submodule sync -- $path;
-    cd $path;'
+    cd $path;';
 }
-gbranch() {
-  current_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-}
-gpo() {
-  # pushes the current branch; whatever that is
-  gbranch
-  git push origin $current_branch
-}
-guo() {
-  # pulls the current branch; whatever that is
-  gbranch
-  git pull origin $current_branch
-}
-gpom() {
-  git push origin master
-}
-guom() {
-  git pull origin master
+gbranch() (
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/';
+)
+
+# queries config for all remote repos, pushes git_current_branch to all
+gpa() {
+    REMOTES="$(git remote | uniq)";
+    branch=$(gbranch);
+    for R in ${REMOTES}; do
+        echo "Pushing '${branch}' to '${R}'";
+        echo git push --tags ${R} ${branch};
+    done;
 }
 
-# queries config for all remote repos, pushes master to all
-gpam() { 
-    REMOTES=( $(git remote) )
-    for R in $REMOTES; do 
-        echo Pushing to $R
-        git push --tags $R master
-    done
-}
-
-# queries config for all remote repos, pushes current_branch to all
-gpab() { 
-    REMOTES=`git remote | uniq`
-    gbranch
-    for R in $REMOTES; do 
-        echo Pushing \"$current_branch\" to \"$R\"
-        git push --tags $R $current_branch
-    done
-}
-
-gshow( ) {
+gshow() {
   # Summarize git details:
   #   Remotes, Branches, Status, Logs (-$1), Tags
   # unset/reset local core.pager (avoid 'less')
-  msgs="${1:-11}"
-  orig_pager="$(git config --local --get core.pager)" && \
-  git config core.pager '';
-  echo "${b_Rd} == Remotes == ${NORM}" \
-    && git remote -v;
-  echo "${b_Rd} == Branches == ${NORM}" \
-    && git branch -avv;
-  echo "${b_Rd} == Status == ${NORM}" \
-    && git status --short --branch;
-  echo "${b_Rd} == Log == ${NORM}" \
-    && git log --oneline --decorate --date=short -$msgs && \
-  echo "${b_Rd} == Tags == ${NORM}" \
-    && git describe --tags --long && \
-  git config --local core.pager "$orig_pager"
+  local msgs="${1:-11}";
+  local IFS=$'\n';
+  local orig_pager="$(git config --local --get core.pager)";
+  local bRed=$(tput setab 1);
+  local Norm=$(tput sgr0);
+  declare -A sections=(
+     [Remotes]='git remote -v'
+      [Status]='git status --short --branch'
+         [Log]="git log --oneline --decorate --date=short -${msgs}"
+    [Branches]='git branch -avv'
+        [Tags]='git describe --tags --long'
+  ) && \
+  git config --local core.pager '' && \
+  for sec in ${!sections[*]}; do
+    printf "${bRed} == %b == ${Norm}\n" "$sec";
+    eval "${sections[$sec]}" 2>&1;
+  done && \
+  git config --local core.pager "$orig_pager";
 }
-
