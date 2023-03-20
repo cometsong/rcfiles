@@ -19,50 +19,45 @@ export XDG_CONFIG_HOME="$HOME/.config"
 ##### Brews, etc... #####
 if [[ -n $APPLE ]]; then
 
-    # if /usr/local not writable...
-    if [ -d "$HOME/local/homebrew/bin" ]; then
-        PATH="$HOME/local/bin:$PATH"
-    fi
+  # if /usr/local not writable...
+  if [ -d "$HOME/local/homebrew/bin" ]; then
+    PATH="$HOME/local/homebrew/bin:$PATH"
+  fi
 
-    if type brew &>/dev/null; then
-        BREW_PREFIX="$(brew --prefix)"
-        _BREW_PATHS=[]
-         _BREW_MANS=[]
+  if type brew &>/dev/null; then
+      BREW_PREFIX="$(brew --prefix)"
+      _brew_opts=[]
+      _brew_mans=[]
+      # add paths for brew apps bottled poured to opt
+      _brew_opts+=" opt/sqlite3/bin"
+      _brew_mans+=" opt/sqlite3/share/man"
+      _brew_opts+=" opt/go/libexec/bin"
+      _brew_mans+=" opt/go/share/man"
+      _brew_opts+=" opt/gnu-getopt/bin"
+      _brew_mans+=" opt/gnu-getopt/share/man"
+      _brew_opts+=" opt/coreutils/libexec/gnubin"
+      _brew_mans+=" opt/coreutils/libexec/gnuman"
+      _brew_opts+=" opt/python@3.10/bin"
+      _brew_opts+=" opt/ruby3/bin"
+      _brew_opts+=" opt/php@7.4/bin"
+      _brew_opts+=" opt/php@7.4/sbin"
 
-         # add paths for brew apps bottled poured to opt
-        _BREW_PATHS+=" opt/sqlite3/bin"
-         _BREW_MANS+=" opt/sqlite3/share/man"
-        _BREW_PATHS+=" opt/go/libexec/bin"
-         _BREW_MANS+=" opt/go/share/man"
-        _BREW_PATHS+=" opt/gnu-getopt/bin"
-         _BREW_MANS+=" opt/gnu-getopt/share/man"
-        _BREW_PATHS+=" opt/coreutils/libexec/gnubin"
-         _BREW_MANS+=" opt/coreutils/libexec/gnuman"
-
-        for _path in ${_BREW_PATHS[@]}; do
-            if [ -d ${BREW_PREFIX}/${_path} ]; then
-              PATH="${BREW_PREFIX}/${_path}:$PATH";
-            fi
-        done
-        for _man in ${_BREW_MANS[@]}; do
-            if [ -d ${BREW_PREFIX}/${_man} ]; then
-              MANPATH="${BREW_PREFIX}/${_man}:$MANPATH";
-            fi
-        done
-        unset _BREW_PATHS _BREW_MANS
-
-        # for Go
-        if type go &>/dev/null; then
-            GOPATH=~/code/go && PATH=${GOPATH}/bin/:$PATH
+      for _path in ${_brew_opts[@]}; do
+        if [ -d ${BREW_PREFIX}/${_path} ]; then
+          PATH="${BREW_PREFIX}/${_path}:$PATH";
         fi
+      done
+      for _man in ${_brew_mans[@]}; do
+        if [ -d ${BREW_PREFIX}/${_man} ]; then
+          MANPATH="${BREW_PREFIX}/${_man}:$MANPATH";
+        fi
+      done
+      unset _brew_opts_brew_mans _path _man
 
-    fi
-
-    # for java
-    if type java_home &>/dev/null; then
-        JAVA_HOME=$(command java_home -v 1.7)
-    fi
-
+      [ ! -r ${XDG_CONFIG_HOME}/fzf/fzf.bash ] \
+        && ${BREW_PREFIX}/opt/fzf/install --xdg --key-bindings --completion \
+        --no-update-rc --xdg --key-bindings --completion --no-update-rc > /dev/null
+  fi
 fi
 
 # for tput to complain less
