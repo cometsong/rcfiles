@@ -95,10 +95,49 @@ if [[ -x $(command -v pygmentize) ]]; then
   export LESSOPEN='|pygmentize -f terminal256 -g %s'
 fi
 
-##### LANGUAGE #####
-export LANG='en_US.UTF-8'
-export LC_ALL=$LANG
-export LC_CTYPE=$LANG
+##### bat the cat #####
+if type bat &>/dev/null; then
+  alias cat="bat"
+fi
+
+##### for finding things: fd + fzf #####
+if type fzf &>/dev/null; then
+  if [ -r "${XDG_CONFIG_HOME}/fzf" ] ; then
+    _fzf_cfgs=(
+      fzf.bash
+      fzf-keybindings.bash
+    )
+
+    for _cfg in ${_fzf_cfgs[*]}; do
+      [ -f ${XDG_CONFIG_HOME}/fzf/${_cfg} ] && source ${XDG_CONFIG_HOME}/fzf/${_cfg}
+    done
+  fi
+  unset _fzf_cfgs _cfg
+
+  if type fd &>/dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git --follow --color=auto --full-path'
+  fi
+  export FZF_DEFAULT_OPTS="\
+    --inline-info \
+    --height=40% \
+    --ansi \
+    --multi \
+    --cycle \
+    --border \
+    --history=${HOME}/.fzf.history \
+    --preview='bat -f {+}' \
+    --marker='>>'"
+fi
+
+##### Go #####
+if type go &>/dev/null; then
+  GOPATH=~/code/go && PATH=${GOPATH}/bin/:$PATH
+fi
+
+##### java #####
+if type java_home &>/dev/null; then
+    JAVA_HOME=$(command java_home -v 1.7)
+fi
 
 ##### Python #####
 export PYTHONSTARTUP=$HOME/.pythonrc.py
@@ -109,5 +148,10 @@ PATH="$HOME/bin:$HOME/local/bin:$HOME/.vim/bin:/usr/local/bin:/usr/local/sbin:$P
 # parse $PATH, remove duplicate entries, then remove trailing ORS and \n
 PATH=$(echo $PATH | awk 'BEGIN{RS=ORS=":"}{ if (a[$0] == 0){ a[$0] += 1; print $0}}' | awk '{sub(/:$/,"");print}' | tr -d '\n')
 
+# Path shortcuts init (future mods in my_aliases for specific hosts)
+[ -z "$CDPATH" ] && export CDPATH=".:~"
+
 # if 'my' server-specific rc file exists, source it.
 if [[ -e $RCPATH/my_aliases ]]; then source $RCPATH/my_aliases; fi
+
+#  vim: set ft=sh ts=2 sw=0 tw=100 et fdm=indent:
