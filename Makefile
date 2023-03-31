@@ -49,7 +49,7 @@ init:
 	#
 	@echo Setting up 'bash-it'
 	# Only install $BASH_IT if it's not already setup
-	if [ -z "$BASH_IT" ]; then
+	if [ -z "${BASH_IT}" ]; then
 	  source $RCPATH/bashit_setup.sh
 	fi
 
