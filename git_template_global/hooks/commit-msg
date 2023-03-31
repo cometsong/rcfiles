@@ -1,0 +1,70 @@
+#!/bin/sh
+
+# Also see: https://www.conventionalcommits.org/
+
+# The inspiration found as comments on gist joshbuchea/semantic-commit-messages.md
+# e.g. hook logic begins from HoracioEspinosa:
+#   https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716#gistcomment-3037288
+
+# for testing
+test_msg=(
+  "docx(readme.md): fix too many things"
+  "FeatureX/#11-eleven (readme.md): multiply times 11"
+  "Feature: multiply times 11"
+  "FeatureX/#11-eleven (readme.md): multiply times 11"
+  "Feature: / multiply times 11"
+  "Feature / multiply times 11"
+  "Feature multiply times 11"
+  'feature/#478-make-it-real (logics): make it all real'
+  'feat one other thing'
+  "feat to(o): many things"
+); commit_message="${test_msg[0]}";
+# / for testing
+
+# $1 = .git/COMMIT_EDITMSG
+commit_message=$(<"$1");
+#echo "Commit msg: '${commit_message}'"
+
+# Commit Types:
+# -------------
+commit_types=(
+  WIP         # Work in Progress
+  Feat\(ure\) # A new feature
+  Fix         # A bug fix
+  Doc\(s\)    # Documentation only changes
+  Style\(s\)  # Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+  Refactor    # A code change that neither fixes a bug nor adds a feature
+  Perf\(orm\) # A code change that improves performance
+  Test\(s\)   # Adding missing tests or correcting existing tests
+  Build       # Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+  CI          # Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+  Chore\(s\)  # Other changes that don't modify src or test files
+  Revert      # Reverts a previous commit
+)
+# join array with | delims; append ? after () suffix groups
+commit_types_str=$(echo "${commit_types[*]}" | gawk '{gsub(" ","|",$0);gsub(")",")?");print}')
+#echo "commit_types\|   ${commit_types_str}";
+
+scope_max_chars=25;
+
+commit_regex="("
+commit_regex+="(${commit_types_str})"
+commit_regex+="([\ [:alnum:][:punct:]]*)?"  # e.g. "feature/#480(scope): msg"
+commit_regex+="\ ?(\([[:alnum:][:punct:]]{0,${scope_max_chars}}\))?"
+commit_regex+=")"
+commit_regex+="\:.*\S.*";
+#echo "com_re = '$commit_regex'"
+
+error_msg="Aborting commit. Your commit message format is invalid.
+  Must begin with one of (case insensitive):
+    ${commit_types[*]}.
+  e.g. 'feature/#480-make-it-real (logics): make it all real'
+  or:  'Feature: make it all real'";
+
+if ! grep -iE "$commit_regex" <<<"${commit_message}"; then
+  echo "$error_msg" >&2
+  echo "Mod the original to match!
+  '$commit_message'"
+  exit 1
+fi
+
