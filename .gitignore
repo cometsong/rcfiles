@@ -5,3 +5,4 @@ myclirc
 # override gitignore_global
 !bin/**
 
+**/.DS_Store
