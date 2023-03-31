@@ -1,11 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env sh
 ##### Aliases #####
 
 ##### ls, the common ones I use a lot shortened for rapid fire usage
-alias ls='ls --color=auto --time-style=+"%Y-%m-%d %H:%M:%S"' # date=CCYY-MM-DD HH:MI
+if command ls --help >/dev/null 2>&1; then  # presume GNU 'ls'
+  alias ls='ls --color=auto --time-style=+"%Y-%m-%d %H:%M:%S"' # date=CCYY-MM-DD HH:MI
+else
+  alias ls='ls --color=auto -D=+"%Y-%m-%d %H:%M:%S"' # date=CCYY-MM-DD HH:MI
+fi
 alias l1='ls -1'        # short,1 column
 alias la='ls -A'        # short,show almost all
-alias lsa='la'          # short,show almost all
 alias lla='la -lh'      # long,show almost all,show type,human readable
 alias lsf='ls -FLsh1'   # single col, show human sizes, append slashes
 alias laf='ls -FLAsh1'  # single col, show human sizes, append slashes, almost-all
@@ -36,14 +39,10 @@ alias tm='tmux'
 alias tmn='tmux new -s'     # start a new tmux session with name $1
 alias tma='tmux attach'     # resume most recent tmux session
 alias tmr='tmux attach -t'  # resume a tmux session by name
-alias tmll='tmlists long'   # list out tmux sessions (long format)
 alias tmls='tmlists'        # list out tmux sessions (default format)
+alias tmll='tmlists long'   # list out tmux sessions (long format)
 alias mux='tmuxinator'      # shotcut for tmuxinator wonders
 alias muxls='echo -e "tmuxinator configs:\n-------------------" && ls -1 ~/.tmuxinator/ | sed -e "s;.yml;;"'  # list all mux configs
-
-# Session List of screen and tmux
-alias sessls='sclists; tmlists'
-alias sls=sessls
 
 ##### MariaDB/MySQL #####
 alias my='mysql'
@@ -57,33 +56,25 @@ alias  py=python
 alias py2=python2
 alias py3=python3
 
+##### Venv Project #####
+{ [ -n "$VIRTUAL_ENV" ] && PROJECT_DIR=$(<"$VIRTUAL_ENV/.project"); } \
+|| { command -v pew &>/dev/null && PROJECT_DIR="$(pew getproject)"; }
+[[ -n $PROJECT_DIR ]] && export PROJECT_DIR;
+
 ##### apache2 #####
 alias htc='sudo vim /etc/httpd/conf/httpd.conf'
 alias htr='sudo service httpd restart'
 
-##### qsub #####
-QINFO="'[Jj]ob( Id|_Name|_state)|qtime|[Rr]esource.*(\.mem|\.walltime|\.nodes)|depend|e(user|group)'"
-QNAME='batch'
-alias  qs='qstat -u $USER -n -1 -t'     # qstat showing nodes in one line, plus array (-t) info
-alias  qu='qstat -u $USER'              # qstat specific to user account
-alias  qj="qstat -f | grep -E $QINFO"
-alias quj="qstat -u $USER -f | grep -E $QINFO"
-alias qns="quj | grep '^Job\|Job_Name'" # show user job IDs and names
-alias squ="showq -n -v -u $USER"
-alias qcnts='qur=$(qu -r | tail -n +6 | wc -l);qui=$(qu -i | tail -n +6 | wc -l);echo -n "Running: $qur, idle: $qui, total: "; echo "$qur+$qui"| bc'
-alias  qi='qsub -l walltime=4:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
-alias qi1='qsub -l walltime=1:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
-alias qi2='qsub -l walltime=2:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
-alias qi8='qsub -l walltime=8:00:00,nodes=1:ppn=1 -I -d $PWD -q interactive'
-
 ##### ssh plus hosts #####
 alias ssx='ssh -X'
-for H in $(grep '^Host [a-z]' ~/.ssh/config | cut -d' ' -f2,3,4 | tr '\n' ' '); do alias $H="ssh $H"; done
+for H in $(grep '^Host [A-z]' ~/.ssh/config | cut -d' ' -f2,3,4 | tr '\n' ' '); do alias $H="ssh $H"; done
 
 ##### others #####
 alias dmesg='sudo dmesg'
 alias h='history'
 alias vi='vim'
+# open the vim help in fullscreen; incorporated from https://stackoverflow.com/a/4687513
+alias vimh='${VIM} -c ":h | only"'
 
 alias rg1='rg --max-depth 1'
 alias grep="grep --color"
@@ -108,24 +99,14 @@ alias linelengths='awk '\''BEGIN{print "Lengths of lines:"}{printf("Line %6i: %i
 ##### Mac aliases... #####
 if [[ -n $APPLE ]]; then {
   alias top='top -n40 -ocpu -Orsize'
-  alias macvim='open -a MacVim'
-  alias excel='open -a "Microsoft Excel"'
-  alias libre='open -a "LibreOffice"'
+  alias macvim='open -a MacVim --args'
+  alias excel='open -a "Microsoft Excel" --args'
+  alias libre='open -a "LibreOffice" --args'
   alias finder='open -R'
   alias psx="ps -x -h -o pid,ppid,pcpu,pmem,vsz,cputime,user,command"
   alias psa="ps -x -h -o pid,ppid,pcpu,pmem,vsz,cputime,user,command -a"
   ##### apache2 #####
   alias htc='sudo vim /etc/apache2/httpd.conf'
   alias htr='sudo /etc/init.d/httpd restart'
-
-  # coreutils
-  PATH="/usr/local/opt/coreutils/libexec/gnubin/:$PATH"
-
-  # brew upgrade all apps and reinstall all dev apps
-  alias brew-upgrade="export HOMEBREW_INSTALL_CLEANUP=1 && \
-      export HOMEBREW_UPGRADE_CLEANUP=2 && \
-      brew upgrade --display-times && \
-      for D in \$(find /usr/local/Cellar -type d -name 'HEAD*' | cut -d\/ -f5 | sort -u | tr '\n' ' ');
-      do APP=\$(echo \${D}); echo Upgrading \$APP; brew upgrade \$APP --HEAD ;done"
 }; fi
 
