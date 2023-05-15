@@ -41,8 +41,6 @@ alias tma='tmux attach'     # resume most recent tmux session
 alias tmr='tmux attach -t'  # resume a tmux session by name
 alias tmls='tmlists'        # list out tmux sessions (default format)
 alias tmll='tmlists long'   # list out tmux sessions (long format)
-alias mux='tmuxinator'      # shotcut for tmuxinator wonders
-alias muxls='echo -e "tmuxinator configs:\n-------------------" && ls -1 ~/.tmuxinator/ | sed -e "s;.yml;;"'  # list all mux configs
 
 ##### MariaDB/MySQL #####
 alias my='mysql'
