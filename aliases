@@ -90,7 +90,7 @@ alias ws="w | awk 'NR<3{print} NR>2{s=\"sort\";print|s}'" # show header, then so
 alias linelengths='awk '\''BEGIN{print "Lengths of lines:"}{printf("Line %6i: %i\n", FNR,length($0))}'\'' '
 
 ##### Mac aliases... #####
-if [[ -n $APPLE ]]; then {
+if [[ -n $OSX ]]; then {
   alias top='top -n40 -ocpu -Orsize'
   alias macvim='open -a MacVim --args'
   alias excel='open -a "Microsoft Excel" --args'

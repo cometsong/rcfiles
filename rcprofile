@@ -8,16 +8,12 @@
 source ${HOME}/.rcpath_env
 
 ##### Operating Situations #####
-case $OSTYPE in
-  darwin*) export APPLE=true ;;
-   linux*) export LINUX=true ;;
-        *) export OSUNK=true ;;
-esac
+case $OSTYPE in darwin*) export OSX=1 ;; linux*) export LNX=1 ;; *) export OSUNK=1 ;; esac
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ##### Brews, etc... #####
-if [[ -n $APPLE ]]; then
+if [[ -n $OSX ]]; then
 
   # if /usr/local not writable...
   if [ -d "$HOME/local/homebrew/bin" ]; then
