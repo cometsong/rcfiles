@@ -54,18 +54,13 @@ alias  py=python
 alias py2=python2
 alias py3=python3
 
-##### Venv Project #####
-{ [ -n "$VIRTUAL_ENV" ] && PROJECT_DIR=$(<"$VIRTUAL_ENV/.project"); } \
-|| { command -v pew &>/dev/null && PROJECT_DIR="$(pew getproject)"; }
-[[ -n $PROJECT_DIR ]] && export PROJECT_DIR;
-
 ##### apache2 #####
 alias htc='sudo vim /etc/httpd/conf/httpd.conf'
 alias htr='sudo service httpd restart'
 
 ##### ssh plus hosts #####
 alias ssx='ssh -X'
-for H in $(grep '^Host [A-z]' ~/.ssh/config | cut -d' ' -f2,3,4 | tr '\n' ' '); do alias $H="ssh $H"; done
+for H in $(grep '^Host \w' ~/.ssh/config | cut -d' ' -f2,3,4 | tr '\n' ' '); do alias $H="ssh $H"; done
 
 ##### others #####
 alias dmesg='sudo dmesg'
