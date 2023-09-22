@@ -8,16 +8,16 @@ cache = "${HOME}/.npm"
 init-module = "${HOME}/.npm-init.js"
 editor = "vim"
 
-dev = false
 email = ""
 ignore-scripts = false
 loglevel = "http"
 message = "%s"
 npat = false
 onload-script = false
-optional = true
 
 ; global
 prefix = "/usr/local"
 global = true ; If true, All packages go to {prefix}
+include = optional
+omit = dev
 
